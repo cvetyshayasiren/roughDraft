@@ -1,0 +1,7 @@
+<resources>
+    <string-array name="drafts_names">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+    </string-array>
+</resources>
