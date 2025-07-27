@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -44,6 +45,12 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.landscapist.coil3)
+            implementation(libs.serialization.json)
+            implementation(libs.mapcompose)
+            implementation(compose.materialIconsExtended)
+            implementation(libs.navigation)
+            implementation(libs.bundles.adaptive)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
