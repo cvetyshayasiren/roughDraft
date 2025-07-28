@@ -1,8 +1,8 @@
 {
-  "name":"",
-  "poem":"222LAL 222KEK 222LOL",
-  "prose":"222ALALA 222KEKEKO 222OLOLOL",
+  "poem":"Пора забыться полным счастья сном,\nДовольно нас терзало сладострастье…\nПокой везде. Ты слышишь: за окном\nНам соловей пророчит счастье?\n \n \nТеперь одной любви полны сердца,\nОдной любви и неги сладкой.\nВсю ночь хочу я плакать без конца\nС тобой вдвоем, от всех украдкой.",
+  "prose":"добавлены кнопки переключения каналов для многих аудиофильтров, включая Band Pass, Compressor, Delay, Downmix, Equalizer: 3-Band, Equalizer: 15-Band, Equalizer: Parametric, Expander, Gain/Volume, High Pass, Low Pass, Limiter, Mute, Noise Gate и Notch;",
   "numberOfPhotos":1,
-  "timestamp":1749911481,
-  "coordinates":14
+  "timestamp":1744855899,
+  "latitude":59.945724630806055,
+  "longitude":30.37248322985605
 }

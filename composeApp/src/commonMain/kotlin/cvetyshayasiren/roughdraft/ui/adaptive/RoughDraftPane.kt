@@ -8,7 +8,7 @@ import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import cvetyshayasiren.roughdraft.ui.features.draftList.DraftListView
+import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.draftPage.DraftPageView
 import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 
@@ -39,7 +39,7 @@ fun RoughDraftPaneView(
                 modifier = Modifier
                     .safeContentPadding()
             ) {
-                DraftListView(
+                DraftBookView(
                     modifier = Modifier.coloredBorder(color = Color.Gray),
                     scaffoldNavigator = scaffoldNavigator
                 )

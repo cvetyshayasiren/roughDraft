@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cvetyshayasiren.roughdraft.ui.adaptive.RoughDraftPaneView
-import cvetyshayasiren.roughdraft.ui.features.mapDraftList.MapDraftListView
+import cvetyshayasiren.roughdraft.ui.features.mapDraftBook.MapDraftBookView
 import cvetyshayasiren.roughdraft.ui.features.settings.SettingsView
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
@@ -37,7 +37,7 @@ fun RoughDraftNavigation(modifier: Modifier = Modifier) {
                 )
             }
             composable<RoughDraftDestination.MapDraftList> {
-                MapDraftListView(
+                MapDraftBookView(
                     modifier = Modifier.coloredBorder(Color.Red)
                 )
             }
