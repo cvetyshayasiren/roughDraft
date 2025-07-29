@@ -9,6 +9,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.window.core.layout.WindowSizeClass
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.domain.settings.isDark
 

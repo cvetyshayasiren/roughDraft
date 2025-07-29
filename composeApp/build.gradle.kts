@@ -49,8 +49,9 @@ kotlin {
             implementation(libs.serialization.json)
             implementation(libs.mapcompose)
             implementation(compose.materialIconsExtended)
-            implementation(libs.navigation)
             implementation(libs.bundles.adaptive)
+            implementation(compose.material3AdaptiveNavigationSuite)
+            implementation(libs.colormath.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

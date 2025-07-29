@@ -8,8 +8,8 @@ kotlinx-coroutines = "1.10.2"
 landscapist = "2.5.1"
 serialization-json = "1.9.0"
 mapcompose = "0.10.0"
-navigation = "2.9.0-beta03"
 adaptive = "1.2.0-alpha03"
+colormath = "3.6.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -21,10 +21,10 @@ kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-s
 landscapist-coil3 = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }
 mapcompose = { module = "ovh.plrapps:mapcompose-mp", version.ref = "mapcompose" }
-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "adaptive" }
 adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "adaptive" }
+colormath-compose = { module = "com.github.ajalt.colormath:colormath-ext-jetpack-compose", version.ref = "colormath" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]
