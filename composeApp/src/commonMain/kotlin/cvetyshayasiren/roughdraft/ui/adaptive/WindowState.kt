@@ -1,7 +1,8 @@
-package cvetyshayasiren.roughdraft.ui.window
+package cvetyshayasiren.roughdraft.ui.adaptive
 
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalDensity
 import androidx.window.core.layout.WindowSizeClass
 
 object WindowState {
@@ -11,6 +12,5 @@ object WindowState {
 
     @get:Composable
     val isExpanded: Boolean
-        get() = currentSize.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_EXPANDED_LOWER_BOUND)
+        get() = currentSize.isWidthAtLeastBreakpoint(WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND)
 }
-
