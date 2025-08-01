@@ -39,7 +39,7 @@ fun Typography.title(
     color: Color = Color.Unspecified
 ): TextStyle = TextStyle(
     color = color,
-    fontSize = if(WindowState.isExpanded) 64.sp else 36.sp,
+    fontSize = if(WindowState.isExpanded) 36.sp else 28.sp,
     fontFamily = comfortaaFont
 )
 
@@ -49,7 +49,7 @@ fun Typography.basicText(
     color: Color = Color.Unspecified
 ): TextStyle = TextStyle(
     color = color,
-    fontSize = if(WindowState.isExpanded) 32.sp else 20.sp,
+    fontSize = if(WindowState.isExpanded) 16.sp else 12.sp,
     fontFamily = robotoFlexFont
 )
 

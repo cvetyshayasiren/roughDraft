@@ -1,6 +1,8 @@
 package cvetyshayasiren.roughdraft.domain.draftsInteractions
 
 import cvetyshayasiren.roughdraft.data.DraftBookRepository
+import cvetyshayasiren.roughdraft.domain.settings.SettingsState
+import cvetyshayasiren.roughdraft.ui.test.randomColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,22 +26,23 @@ object DraftBookInteractions {
 
     fun setPage(name: String) {
         _draftBook.value.find { it.name == name }?.let { page ->
-            _currentPage.value = page
+            setPage(page)
         }
     }
 
     fun nextPage() {
         val currentIndex = _draftBook.value.indexOf(_currentPage.value)
         val lastIndex = _draftBook.value.lastIndex
-        _currentPage.value =
-            if(currentIndex < lastIndex) _draftBook.value[currentIndex + 1] else _draftBook.value.first()
-
+        setPage(if(currentIndex < lastIndex) _draftBook.value[currentIndex + 1] else _draftBook.value.first())
     }
 
     fun previousPage() {
         val currentIndex = _draftBook.value.indexOf(_currentPage.value)
-        _currentPage.value =
-            if(currentIndex > 0) _draftBook.value[currentIndex - 1] else _draftBook.value.last()
+        setPage(if(currentIndex > 0) _draftBook.value[currentIndex - 1] else _draftBook.value.last())
+    }
 
+    private fun setPage(page: DraftPageEntity) {
+        _currentPage.value = page
+        SettingsState.setSettings(themeSeedColor = randomColor())
     }
 }

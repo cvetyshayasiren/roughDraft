@@ -1,11 +1,19 @@
 package cvetyshayasiren.roughdraft.ui.theme
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.DarkMode
+import androidx.compose.material.icons.sharp.LightMode
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import com.materialkolor.DynamicMaterialTheme
+import com.materialkolor.PaletteStyle
+import com.materialkolor.scheme.SchemeExpressive
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
-import cvetyshayasiren.roughdraft.domain.settings.isDark
+import cvetyshayasiren.roughdraft.domain.settings.themeMode
 
 private val LightColorScheme = lightColorScheme(
     primary = Primary,
@@ -59,16 +67,29 @@ private val DarkColorScheme = darkColorScheme(
     outline = OutlineDark
 )
 
+enum class ThemeMode(
+    val label: String,
+    val icon: ImageVector
+) {
+    DARK(label = "тёмная", icon = Icons.Sharp.DarkMode),
+    LIGHT(label = "светлая", icon = Icons.Sharp.LightMode);
+
+    fun isDark(): Boolean = this == DARK
+    fun switch(): ThemeMode = if(isDark()) LIGHT else DARK
+}
+
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun RoughDraftExpressiveTheme(
     content: @Composable () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
-    val isDark = SettingsState.isDark(scope = scope).collectAsState()
-    MaterialExpressiveTheme(
-        colorScheme = if(isDark.value) DarkColorScheme else LightColorScheme,
-        motionScheme = MotionScheme.expressive(),
+    val settings = SettingsState.settings.collectAsState()
+
+    DynamicMaterialTheme(
+        seedColor = settings.value.themeSeedColor,
+        useDarkTheme = settings.value.themeMode.isDark(),
+        style = PaletteStyle.Content,
+        animate = true,
         content = content
     )
 }

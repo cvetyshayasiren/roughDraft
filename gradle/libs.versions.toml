@@ -10,6 +10,7 @@ serialization-json = "1.9.0"
 mapcompose = "0.10.0"
 adaptive = "1.2.0-alpha03"
 colormath = "3.6.1"
+materialkolor = "2.0.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -25,6 +26,7 @@ adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", versi
 adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "adaptive" }
 adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "adaptive" }
 colormath-compose = { module = "com.github.ajalt.colormath:colormath-ext-jetpack-compose", version.ref = "colormath" }
+materialkolor = { module = "com.materialkolor:material-kolor", version.ref = "materialkolor" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]

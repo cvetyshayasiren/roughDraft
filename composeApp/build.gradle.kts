@@ -52,6 +52,7 @@ kotlin {
             implementation(libs.bundles.adaptive)
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.colormath.compose)
+            implementation(libs.materialkolor)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
