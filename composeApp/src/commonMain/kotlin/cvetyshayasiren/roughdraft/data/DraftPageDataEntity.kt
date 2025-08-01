@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.data
 
+import androidx.compose.ui.graphics.Color
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
@@ -15,7 +16,8 @@ data class DraftPageDataEntity(
     val numberOfPhotos: Int = 0,
     val timestamp: Long = 0,
     val longitude: Double = 0.0,
-    val latitude: Double = 0.0
+    val latitude: Double = 0.0,
+    val color: String
 ) {
     fun toDraftPageEntity(name: String): DraftPageEntity {
         return DraftPageEntity(
@@ -28,6 +30,7 @@ data class DraftPageDataEntity(
                 lat = Latitude(this.latitude),
                 lon = Longitude(this.longitude)
             ),
+            color = Color(this.color.drop(1).toInt(16)).copy(alpha = 1f),
             iconUri = Res.getUri("files/$name/icon.${Config.IMAGE_EXTENSION}"),
             photoUris = getPhotosByName(name),
             audioUri = Res.getUri("files/$name/audio.${Config.AUDIO_EXTENSION}")

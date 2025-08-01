@@ -9,8 +9,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.materialkolor.DynamicMaterialExpressiveTheme
 import com.materialkolor.DynamicMaterialTheme
 import com.materialkolor.PaletteStyle
+import com.materialkolor.dynamiccolor.ColorSpec
+import com.materialkolor.rememberDynamicMaterialThemeState
 import com.materialkolor.scheme.SchemeExpressive
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.domain.settings.themeMode
@@ -85,11 +88,17 @@ fun RoughDraftExpressiveTheme(
 ) {
     val settings = SettingsState.settings.collectAsState()
 
-    DynamicMaterialTheme(
+    val dynamicThemeState = rememberDynamicMaterialThemeState(
+        isDark = settings.value.themeMode.isDark(),
+        style = PaletteStyle.Vibrant,
+        specVersion = ColorSpec.SpecVersion.SPEC_2025,
         seedColor = settings.value.themeSeedColor,
-        useDarkTheme = settings.value.themeMode.isDark(),
-        style = PaletteStyle.Content,
+    )
+
+    DynamicMaterialExpressiveTheme(
+        state = dynamicThemeState,
+        motionScheme = MotionScheme.expressive(),
         animate = true,
-        content = content
+        content = content,
     )
 }

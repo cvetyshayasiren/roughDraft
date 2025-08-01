@@ -1,7 +1,9 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
@@ -31,32 +33,37 @@ fun DraftPageView(
 ) {
     val currentPage = DraftBookInteractions.currentPage.collectAsState()
     val scope = rememberCoroutineScope()
-    Column(
-        modifier = modifier.verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "DraftPageView")
 
-        CoilImage(
-            modifier = Modifier.size(200.dp),
-            imageModel = { currentPage.value.iconUri }
-        )
+    AnimatedContent(
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        targetState = currentPage.value,
+        contentAlignment = Alignment.TopStart
+    ) { page ->
+        Column(
+            modifier = modifier,
+        ) {
+            Text(text = "DraftPageView")
 
-        Text(currentPage.value.name)
-        HorizontalDivider()
-        Text(currentPage.value.prose)
+            CoilImage(
+                modifier = Modifier.size(200.dp),
+                imageModel = { page.iconUri }
+            )
 
-        if (scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] == PaneAdaptedValue.Hidden) {
-            TextButton(
-                modifier = Modifier.wrapContentSize(),
-                onClick = {
-                    scope.launch {
-                        scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
+            Text(page.name)
+            HorizontalDivider()
+            Text(page.prose)
+
+            if (scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] == PaneAdaptedValue.Hidden) {
+                TextButton(
+                    modifier = Modifier.wrapContentSize(),
+                    onClick = {
+                        scope.launch {
+                            scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Supporting)
+                        }
                     }
+                ) {
+                    Text("Show supporting pane")
                 }
-            ) {
-                Text("Show supporting pane")
             }
         }
     }

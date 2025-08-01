@@ -20,7 +20,7 @@ object DraftBookInteractions {
     init {
         CoroutineScope(Dispatchers.Default).launch {
             _draftBook.value = DraftBookRepository().getSortedDraftBook()
-            _currentPage.value = _draftBook.value.first()
+            setPage(_draftBook.value.first())
         }
     }
 
@@ -43,6 +43,6 @@ object DraftBookInteractions {
 
     private fun setPage(page: DraftPageEntity) {
         _currentPage.value = page
-        SettingsState.setSettings(themeSeedColor = randomColor())
+        SettingsState.setSettings(themeSeedColor = page.color)
     }
 }

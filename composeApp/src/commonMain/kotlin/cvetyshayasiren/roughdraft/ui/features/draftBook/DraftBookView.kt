@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.features.draftBook
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -38,10 +39,7 @@ fun DraftBookView(
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(DesignStyle.defaultPadding()),
-        verticalArrangement = Arrangement.spacedBy(
-            space = DesignStyle.defaultPadding(),
-            alignment = Alignment.CenterVertically
-        ),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
         Text(text = "Список")
@@ -62,7 +60,12 @@ fun DraftBookView(
         }
 
         pages.value.forEach {
-            page -> DraftBookPageCard(page = page)
+            page -> DraftBookPageCard(
+                modifier = Modifier.background(page.color),
+                page = page,
+                scaffoldNavigator = scaffoldNavigator,
+                scope = scope
+            )
         }
     }
 }
