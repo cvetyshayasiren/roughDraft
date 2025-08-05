@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.adaptive.RoughDraftPaneView
+import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.mapDraftBook.MapDraftBookView
 import cvetyshayasiren.roughdraft.ui.features.settings.SettingsView
 

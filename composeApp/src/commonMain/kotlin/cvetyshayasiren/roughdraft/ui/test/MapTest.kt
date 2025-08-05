@@ -13,12 +13,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
+import cvetyshayasiren.roughdraft.domain.map.Latitude
+import cvetyshayasiren.roughdraft.domain.map.Longitude
 import cvetyshayasiren.roughdraft.domain.map.TileCoordinates
 import cvetyshayasiren.roughdraft.domain.map.TileLink
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.io.Buffer
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
@@ -102,6 +108,7 @@ object MapTestViewModel {
     val client = HttpClient()
 
     var currentTileLink: TileLink = TileLink.WaterColors()
+
 
     val tileStreamProvider = TileStreamProvider { y, x, z ->
         println("z $z y $y x $x")

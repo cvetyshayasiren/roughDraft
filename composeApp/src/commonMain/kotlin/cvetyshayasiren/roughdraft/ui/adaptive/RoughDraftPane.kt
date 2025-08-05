@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.adaptive
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
@@ -11,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.draftPage.DraftPageView
 import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
+import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -37,10 +39,12 @@ fun RoughDraftPaneView(
         supportingPane = {
             AnimatedPane(
                 modifier = Modifier
+                    .coloredBorder(color = Color.Red)
                     .safeContentPadding()
             ) {
                 DraftBookView(
-                    modifier = Modifier.coloredBorder(color = Color.Gray),
+                    modifier = Modifier
+                        .coloredBorder(color = Color.Gray),
                     scaffoldNavigator = scaffoldNavigator
                 )
             }

@@ -1,6 +1,8 @@
 package cvetyshayasiren.roughdraft.ui.theme
 
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -13,6 +15,9 @@ object DesignStyle {
     @Composable
     fun bigPadding(): Dp = if(WindowState.isExpanded) 8.dp else 4.dp
 
-    val defaultShape = RoundedCornerShape(12.dp)
-    val defaultElevation = 2.dp
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+    @get:Composable
+    val customShape get() = MaterialShapes.Pill.toShape()
+
+    val shadowElevation = 2.dp
 }

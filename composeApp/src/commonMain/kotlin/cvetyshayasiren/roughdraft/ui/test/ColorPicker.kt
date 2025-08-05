@@ -53,16 +53,18 @@ fun RgbPicker(
     onClick: (color: Color) -> Unit
 ) {
     var alert by remember { mutableStateOf(false) }
+    val defaultShape = remember { RoundedCornerShape(12.dp) }
+    val defaultElevation = remember { 2.dp }
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(DesignStyle.defaultPadding())
-            .shadow(elevation = DesignStyle.defaultElevation, shape = DesignStyle.defaultShape)
-            .clip(DesignStyle.defaultShape)
+            .shadow(elevation = defaultElevation, shape = defaultShape)
+            .clip(defaultShape)
             .background(MaterialTheme.colorScheme.surface)
-            .border(width = DesignStyle.defaultElevation, color = tint, shape = DesignStyle.defaultShape)
+            .border(width = defaultElevation, color = tint, shape = defaultShape)
             .size(120.dp, 48.dp)
             .clickable { alert = true }
     ) {
@@ -99,7 +101,7 @@ fun RgbPicker(
             content = {
                 Column(
                     modifier = Modifier
-                        .clip(DesignStyle.defaultShape)
+                        .clip(defaultShape)
                         .background(tint.copy(alpha = .9f))
                         .padding(DesignStyle.defaultPadding() * 2),
                     verticalArrangement = Arrangement.Center,
@@ -162,7 +164,7 @@ fun RgbPicker(
                                 modifier = Modifier
                                     .padding(DesignStyle.defaultPadding())
                                     .size(DesignStyle.defaultPadding() * 4),
-                                shape = DesignStyle.defaultShape,
+                                shape = defaultShape,
                                 colors = ButtonDefaults.buttonColors(containerColor = color),
                                 onClick = { onClick(color) },
                             ) { }
@@ -200,11 +202,13 @@ fun RgbPicker(
 
 @Composable
 fun MyThumb(value: String? = null, color: Color = MaterialTheme.colorScheme.primary) {
+    val defaultShape = remember { RoundedCornerShape(12.dp) }
+    val defaultElevation = remember { 2.dp }
     Box(
         Modifier
             .size(60.dp, 30.dp)
-            .border(width = 2.dp, color = color, shape = DesignStyle.defaultShape)
-            .clip(DesignStyle.defaultShape)
+            .border(width = 2.dp, color = color, shape = defaultShape)
+            .clip(defaultShape)
             .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center
     ) {

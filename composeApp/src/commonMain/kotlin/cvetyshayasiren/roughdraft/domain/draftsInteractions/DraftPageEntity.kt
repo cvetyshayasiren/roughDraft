@@ -12,6 +12,7 @@ data class DraftPageEntity(
     val prose: String = "",
     val numberOfPhotos: Int = 0,
     val timestamp: Long = 0,
+    val prettyDate: String = "",
     @Contextual
     val coordinates: GeoCoordinates = GeoCoordinates.SAINT_PETERSBURG,
     @Contextual

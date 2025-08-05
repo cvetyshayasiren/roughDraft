@@ -53,6 +53,7 @@ kotlin {
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.colormath.compose)
             implementation(libs.materialkolor)
+            implementation(libs.datetime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -3,6 +3,7 @@ package cvetyshayasiren.roughdraft.domain.settings
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import cvetyshayasiren.roughdraft.domain.map.TileLink
 import cvetyshayasiren.roughdraft.domain.utils.custom
 import cvetyshayasiren.roughdraft.ui.theme.ThemeMode
 import kotlinx.coroutines.CoroutineScope
@@ -17,13 +18,15 @@ object SettingsState {
 
     fun setSettings(
         themeMode: ThemeMode? = null,
-        themeSeedColor: Color? = null
+        themeSeedColor: Color? = null,
+        tileLink: TileLink? = null
     ) {
         val old = _settings.value
         setSettings(
             SettingsEntity(
                 themeMode = themeMode ?: old.themeMode,
-                themeSeedColor = themeSeedColor ?: old.themeSeedColor
+                themeSeedColor = themeSeedColor ?: old.themeSeedColor,
+                tileLink = tileLink ?: old.tileLink
             )
         )
     }

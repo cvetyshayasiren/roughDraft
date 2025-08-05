@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftAdaptiveNavigation
 import cvetyshayasiren.roughdraft.ui.test.ColorSeedTest
+import cvetyshayasiren.roughdraft.ui.test.MapTest
 import cvetyshayasiren.roughdraft.ui.theme.RoughDraftExpressiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -21,6 +22,7 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
+//            MapTest()
             RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
         }
     }
