@@ -24,4 +24,8 @@ sealed interface TileLink {
         override fun getLink(z: Int, x: Int, y: Int): String =
             "https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/$z/$x/$y.jpg"
     }
+
+    companion object {
+        val TILE_LINKS_LIST: List<TileLink> = listOf(StandartOSM(), CyclOSM(), WaterColors())
+    }
 }

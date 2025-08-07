@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
@@ -12,9 +13,11 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.ui.features.mapDraftBook.StaticMiniMapView
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.theme.title
@@ -91,8 +95,15 @@ fun DraftBookPageCard(
             visible = expanded.value
         ) {
             Box(
-                modifier = Modifier.height(400.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clip(MaterialShapes.Square.toShape())
             ) {
+                StaticMiniMapView(
+                    modifier = Modifier.fillMaxSize(),
+                    page = page
+                )
                 Text(text = "MAP", style = MaterialTheme.typography.title())
             }
         }

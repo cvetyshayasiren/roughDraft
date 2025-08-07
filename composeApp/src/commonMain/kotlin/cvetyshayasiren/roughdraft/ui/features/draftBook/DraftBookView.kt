@@ -43,6 +43,7 @@ fun DraftBookView(
     val pages = DraftBookInteractions.draftBook.collectAsState()
     val scope = rememberCoroutineScope()
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {

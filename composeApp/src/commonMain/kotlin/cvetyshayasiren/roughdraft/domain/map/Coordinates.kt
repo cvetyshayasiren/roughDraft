@@ -97,6 +97,8 @@ data class TileCoordinates(
         const val DEFAULT_ZOOM = 12
         val SAINT_PETERSBURG by lazy { GeoCoordinates.SAINT_PETERSBURG.toTileCoordinates(DEFAULT_ZOOM) }
 
+        val defaultMapSize = mapSizeAtZoom()
+
         fun mapSizeAtZoom(
             maxZoom: Int = MAX_ZOOM,
             tileSize: Int = DEFAULT_TILE_SIZE
