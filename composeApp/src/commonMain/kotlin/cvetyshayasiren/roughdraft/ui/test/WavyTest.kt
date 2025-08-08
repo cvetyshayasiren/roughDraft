@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
 import cvetyshayasiren.roughdraft.ui.utils.wavy.wavy
 import kotlinx.coroutines.delay
 
@@ -92,7 +93,7 @@ fun WavyTest() {
                         .weight(.7f)
                         .height(wave.amplitude * 2)
                         .wavy(
-                            width = wave.width,
+                            crest = WavyCrestStructure.FromSize(wave.width),
                             color = wave.color,
                             height = wave.amplitude * 2,
                             strokeWidth = wave.strokeWidth
@@ -117,7 +118,7 @@ fun WavyTest() {
                 .height(24.dp)
                 .wavy(
                     color = color,
-                    width = amplitude,
+                    height = amplitude * 2,
                     strokeWidth = 8.dp,
                 )
         )
@@ -129,6 +130,15 @@ fun WavyTest() {
                     color = MaterialTheme.colorScheme.primary,
                     start = Offset(.2f, .1f),
                     end = Offset(.8f, .8f)
+                )
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(128.dp)
+                .wavy(
+                    crest = WavyCrestStructure.FromCount(5),
+                    color = MaterialTheme.colorScheme.secondary,
                 )
         )
     }

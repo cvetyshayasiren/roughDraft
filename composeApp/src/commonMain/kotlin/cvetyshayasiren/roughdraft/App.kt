@@ -23,8 +23,7 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            WavyTest()
-//            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
+            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
         }
     }
 }
