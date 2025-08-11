@@ -1,13 +1,8 @@
 package cvetyshayasiren.roughdraft.ui.test
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
 import cvetyshayasiren.roughdraft.ui.utils.wavy.wavy
 import kotlinx.coroutines.delay
 
@@ -72,7 +72,7 @@ fun WavyTest() {
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -93,9 +93,9 @@ fun WavyTest() {
                         .weight(.7f)
                         .height(wave.amplitude * 2)
                         .wavy(
-                            crest = WavyCrestStructure.FromSize(wave.width),
+                            crest = WavyCrestStructure.FromLength(wave.width),
                             color = wave.color,
-                            height = wave.amplitude * 2,
+                            thickness = wave.amplitude * 2,
                             strokeWidth = wave.strokeWidth
                         )
                 )
@@ -108,7 +108,7 @@ fun WavyTest() {
                 .height(64.dp)
                 .wavy(
                     color = color,
-                    height = amplitude,
+                    thickness = amplitude,
                     strokeWidth = 8.dp,
                 )
         )
@@ -118,7 +118,7 @@ fun WavyTest() {
                 .height(24.dp)
                 .wavy(
                     color = color,
-                    height = amplitude * 2,
+                    thickness = amplitude * 2,
                     strokeWidth = 8.dp,
                 )
         )
@@ -141,5 +141,14 @@ fun WavyTest() {
                     color = MaterialTheme.colorScheme.secondary,
                 )
         )
+        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth())
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text("LAL")
+            WavyVerticalDivider(modifier = Modifier.width(12.dp).height(128.dp).coloredBorder(Color.Green))
+            Text("LOL")
+        }
     }
 }

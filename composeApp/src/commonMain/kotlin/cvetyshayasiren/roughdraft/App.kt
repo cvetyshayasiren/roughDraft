@@ -23,7 +23,8 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
+            MapTest()
+//            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
         }
     }
 }

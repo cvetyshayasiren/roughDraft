@@ -60,7 +60,7 @@ fun RgbPicker(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(DesignStyle.defaultPadding())
+            .padding(DesignStyle.smallPadding())
             .shadow(elevation = defaultElevation, shape = defaultShape)
             .clip(defaultShape)
             .background(MaterialTheme.colorScheme.surface)
@@ -72,7 +72,7 @@ fun RgbPicker(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize()
-                .padding(start = DesignStyle.defaultPadding() * 2)
+                .padding(start = DesignStyle.smallPadding() * 2)
                 .basicMarquee(),
             text = label,
             fontSize = MaterialTheme.typography.labelSmall.fontSize,
@@ -81,7 +81,7 @@ fun RgbPicker(
         Box(
             modifier = Modifier
                 .weight(1f)
-                .padding(start = DesignStyle.defaultPadding() * 4)
+                .padding(start = DesignStyle.smallPadding() * 4)
                 .fillMaxSize()
                 .clip(
                     RoundedCornerShape(
@@ -103,7 +103,7 @@ fun RgbPicker(
                     modifier = Modifier
                         .clip(defaultShape)
                         .background(tint.copy(alpha = .9f))
-                        .padding(DesignStyle.defaultPadding() * 2),
+                        .padding(DesignStyle.smallPadding() * 2),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -162,8 +162,8 @@ fun RgbPicker(
                         colors.forEach { color ->
                             Button(
                                 modifier = Modifier
-                                    .padding(DesignStyle.defaultPadding())
-                                    .size(DesignStyle.defaultPadding() * 4),
+                                    .padding(DesignStyle.smallPadding())
+                                    .size(DesignStyle.smallPadding() * 4),
                                 shape = defaultShape,
                                 colors = ButtonDefaults.buttonColors(containerColor = color),
                                 onClick = { onClick(color) },

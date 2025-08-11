@@ -58,6 +58,17 @@ fun Typography.basicText(
     fontFamily = robotoFlexFont
 )
 
+@Composable
+fun Typography.smallText(
+    color: Color = Color.Unspecified,
+    fontWeight: FontWeight = FontWeight.Normal
+): TextStyle = TextStyle(
+    color = color,
+    fontSize = if(WindowState.isExpanded) 12.sp else 8.sp,
+    fontWeight = fontWeight,
+    fontFamily = comfortaaFont
+)
+
 
 
 

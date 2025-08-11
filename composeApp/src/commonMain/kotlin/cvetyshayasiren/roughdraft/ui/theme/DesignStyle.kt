@@ -10,7 +10,7 @@ import cvetyshayasiren.roughdraft.ui.adaptive.WindowState
 
 object DesignStyle {
     @Composable
-    fun defaultPadding(): Dp = if(WindowState.isExpanded) 4.dp else 2.dp
+    fun smallPadding(): Dp = if(WindowState.isExpanded) 4.dp else 2.dp
 
     @Composable
     fun bigPadding(): Dp = if(WindowState.isExpanded) 8.dp else 4.dp

@@ -1,34 +1,40 @@
 package cvetyshayasiren.roughdraft.domain.map
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.data.TileLoader
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
-import cvetyshayasiren.roughdraft.domain.settings.SettingsState
+import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
+import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.disableGestures
 import ovh.plrapps.mapcompose.api.scale
-import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.layout.Forced
 import ovh.plrapps.mapcompose.ui.state.MapState
 import kotlin.math.pow
 
 fun getMapState(
-    initialCoordinates: GeoCoordinates = GeoCoordinates.SAINT_PETERSBURG,
-    initialScale: Double = 0.1,
+    initialCoordinates: RelativeCoordinates = RelativeCoordinates.SAINT_PETERSBURG,
+    initialZoom: Int = TileCoordinates.DEFAULT_ZOOM,
     tileLink: () -> TileLink = { TileLink.WaterColors() },
     markers: List<DraftPageEntity> = DraftBookInteractions.draftBook.value,
-    disableGestures: Boolean = false,
-    onApply: () -> Unit = { }
+    disableGestures: Boolean = false
 ): MapState {
     return MapState(
         levelCount = TileCoordinates.MAX_ZOOM + 1,
         fullWidth = TileCoordinates.defaultMapSize,
         fullHeight = TileCoordinates.defaultMapSize,
-        workerCount = 16) {
+        workerCount = 16
+    ) {
         minimumScaleMode(
             minimumScaleMode = Forced(
                 scale = 1 / 2.0.pow(
@@ -36,10 +42,7 @@ fun getMapState(
                 )
             )
         )
-        scroll(
-            x = initialCoordinates.lon.toRelative(),
-            y = initialCoordinates.lat.toRelative(),
-        )
+        scroll(x = initialCoordinates.x, y = initialCoordinates.y)
     }.apply {
         if(disableGestures) { disableGestures() }
         addLayer(
@@ -47,7 +50,7 @@ fun getMapState(
                 TileLoader.loadTileBuffer(tileLink().getLink(z, x, y))
             }
         )
-        scale = initialScale
+        scale = TileCoordinates.zoomLevelToScale(initialZoom)
         markers.forEach { page ->
             addMarker(
                 id = page.name,
@@ -55,9 +58,16 @@ fun getMapState(
                 y = page.coordinates.lat.toRelative(),
                 relativeOffset = Offset(-.5f, -.5f)
             ) {
+                CoilImage(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(shape = DesignStyle.customShape)
+                        .shadow(elevation = DesignStyle.shadowElevation)
+                        .coloredBorder(page.color),
+                    imageModel = { page.iconUri }
+                )
                 Text(text = page.name, color = Color.Black)
             }
         }
-        onApply()
     }
 }

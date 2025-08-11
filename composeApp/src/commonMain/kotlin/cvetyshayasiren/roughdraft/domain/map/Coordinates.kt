@@ -68,11 +68,22 @@ data class GeoCoordinates(
     fun toTileCoordinates(zoom: Int = TileCoordinates.DEFAULT_ZOOM): TileCoordinates =
         TileCoordinates(lon.toTileNumber(zoom), lat.toTileNumber(zoom))
 
+    fun toRelativeCoordinates(): RelativeCoordinates = RelativeCoordinates(lon.toRelative(), lat.toRelative())
+
     companion object {
         val SAINT_PETERSBURG = GeoCoordinates(
             lat = Latitude(59.9390254087881),
             lon = Longitude(30.31576436620898)
         )
+    }
+}
+
+data class RelativeCoordinates(
+    val x: Double,
+    val y: Double
+) {
+    companion object {
+        val SAINT_PETERSBURG = GeoCoordinates.SAINT_PETERSBURG.toRelativeCoordinates()
     }
 }
 
@@ -94,7 +105,7 @@ data class TileCoordinates(
         const val DEFAULT_TILE_SIZE = 256
         const val MIN_ZOOM = 1
         const val MAX_ZOOM = 19
-        const val DEFAULT_ZOOM = 12
+        const val DEFAULT_ZOOM = 16
         val SAINT_PETERSBURG by lazy { GeoCoordinates.SAINT_PETERSBURG.toTileCoordinates(DEFAULT_ZOOM) }
 
         val defaultMapSize = mapSizeAtZoom()
@@ -105,5 +116,23 @@ data class TileCoordinates(
         ): Int {
             return tileSize * 2.0.pow(maxZoom).toInt()
         }
+
+        fun zoomLevelToScale(
+            zoom: Int,
+            maxZoom: Int = MAX_ZOOM,
+            minZoom: Int = MIN_ZOOM
+        ): Double = 1 / 2.0.pow(maxZoom - minZoom) + 1 / 2.0.pow(maxZoom - zoom)
+
+        fun relativeToScale(
+            value: Float,
+            maxZoom: Int = MAX_ZOOM,
+            minZoom: Int = MIN_ZOOM
+        ): Double = zoomLevelToScale((value * (maxZoom - minZoom)).toInt(), maxZoom, minZoom)
+
+        fun scaleToRelative(
+            value: Double,
+            maxZoom: Int = MAX_ZOOM,
+            minZoom: Int = MIN_ZOOM
+        ): Float = value.toFloat() * relativeToScale(1f, maxZoom, minZoom).toFloat()
     }
 }

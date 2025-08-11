@@ -39,15 +39,15 @@ object SettingsState {
 }
 
 @Composable
-fun SettingsState.themeMode(
+fun SettingsState.themeModeIsDark(
     scope: CoroutineScope = CoroutineScope(Dispatchers.Default),
     started: SharingStarted = SharingStarted.custom()
-): StateFlow<ThemeMode> {
+): StateFlow<Boolean> {
     return SettingsState.settings.map {
-        it.themeMode
+        it.themeMode.isDark()
     }.stateIn(
         scope = scope,
         started = started,
-        initialValue = if(isSystemInDarkTheme()) ThemeMode.DARK else ThemeMode.LIGHT
+        initialValue = isSystemInDarkTheme()
     )
 }
