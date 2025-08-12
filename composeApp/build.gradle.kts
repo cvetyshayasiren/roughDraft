@@ -54,6 +54,7 @@ kotlin {
             implementation(libs.colormath.compose)
             implementation(libs.materialkolor)
             implementation(libs.datetime)
+            implementation(libs.kim)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -61,6 +62,9 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+        }
+        wasmJsMain.dependencies {
+            implementation(npm("pako", "2.1.0"))
         }
     }
 }

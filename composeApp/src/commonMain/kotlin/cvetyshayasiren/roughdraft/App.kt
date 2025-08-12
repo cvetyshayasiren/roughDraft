@@ -10,6 +10,7 @@ import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftAdaptiveNavigation
 import cvetyshayasiren.roughdraft.ui.test.ColorSeedTest
 import cvetyshayasiren.roughdraft.ui.test.MapTest
+import cvetyshayasiren.roughdraft.ui.test.MetaDataTest
 import cvetyshayasiren.roughdraft.ui.test.WavyTest
 import cvetyshayasiren.roughdraft.ui.theme.RoughDraftExpressiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -23,7 +24,7 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            MapTest()
+            MetaDataTest()
 //            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
         }
     }

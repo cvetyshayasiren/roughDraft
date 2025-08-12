@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.domain.map
 
+import com.ashampoo.kim.model.GpsCoordinates
 import kotlin.jvm.JvmInline
 import kotlin.math.*
 
@@ -7,8 +8,8 @@ import kotlin.math.*
 @JvmInline
 value class Latitude(val value: Double) {
     init {
-        require(value >= -90 && value <= 90) {
-            "The latitude should be in the range from -90 to 90, and now $value" }
+        require(value >= MIN && value <= MAX) {
+            "The latitude should be in the range from $MIN to $MAX, and now $value" }
     }
 
     fun toRadian(): Double = value.toRadian()
@@ -37,8 +38,8 @@ value class Latitude(val value: Double) {
 @JvmInline
 value class Longitude(val value: Double) {
     init {
-        require(value >= -180 && value <= 180) {
-            "The longitude should be in the range from -180 to 180, and now $value" }
+        require(value >= MIN && value <= MAX) {
+            "The longitude should be in the range from $MIN to $MAX, and now $value" }
     }
 
     fun toRadian(): Double = value.toRadian()
@@ -119,10 +120,18 @@ data class TileCoordinates(
 
         fun zoomLevelToScale(
             zoom: Int,
-            maxZoom: Int = MAX_ZOOM,
-            minZoom: Int = MIN_ZOOM
-        ): Double = (1 / 2.0.pow(maxZoom - zoom)).also {
-            println("zoom = $zoom maxZoom = $maxZoom minZoom = $minZoom result scale = $it")
-        }
+            maxZoom: Int = MAX_ZOOM
+        ): Double = 1 / 2.0.pow(maxZoom - zoom)
+
+        fun zoomLevelToScale(
+            zoom: Double,
+            maxZoom: Int = MAX_ZOOM
+        ): Double = 1 / 2.0.pow(maxZoom - zoom)
     }
 }
+
+fun GpsCoordinates.toGeoCoordinates() =
+    GeoCoordinates(lat = Latitude(latitude), lon = Longitude(longitude))
+
+fun GpsCoordinates.toRelativeCoordinates() =
+    GeoCoordinates(lat = Latitude(latitude), lon = Longitude(longitude)).toRelativeCoordinates()

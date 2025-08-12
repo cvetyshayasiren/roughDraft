@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.adaptive.WindowState
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 object DesignStyle {
     @Composable
     fun smallPadding(): Dp = if(WindowState.isExpanded) 4.dp else 2.dp
@@ -15,9 +16,15 @@ object DesignStyle {
     @Composable
     fun bigPadding(): Dp = if(WindowState.isExpanded) 8.dp else 4.dp
 
-    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
     @get:Composable
     val customShape get() = MaterialShapes.Pill.toShape()
+
+    @get:Composable
+    val markerShape get() = MaterialShapes.Ghostish.toShape()
+
+
+
 
     val shadowElevation = 2.dp
 }

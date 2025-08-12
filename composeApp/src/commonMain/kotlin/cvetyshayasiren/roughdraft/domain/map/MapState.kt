@@ -67,9 +67,8 @@ fun getMapState(
                 CoilImage(
                     modifier = Modifier
                         .size(48.dp)
-                        .clip(shape = DesignStyle.customShape)
-                        .shadow(elevation = DesignStyle.shadowElevation)
-                        .coloredBorder(page.color),
+                        .clip(shape = DesignStyle.markerShape)
+                        .shadow(elevation = DesignStyle.shadowElevation),
                     imageModel = { page.iconUri }
                 )
                 Text(text = page.name, color = Color.Black)

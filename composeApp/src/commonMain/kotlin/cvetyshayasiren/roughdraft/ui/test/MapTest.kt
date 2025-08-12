@@ -27,6 +27,7 @@ import ovh.plrapps.mapcompose.api.reloadTiles
 import ovh.plrapps.mapcompose.api.scrollTo
 import ovh.plrapps.mapcompose.api.visibleBoundingBox
 import ovh.plrapps.mapcompose.ui.MapUI
+import kotlin.math.pow
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -35,14 +36,14 @@ fun MapTest() {
     val initZoom = remember { 16 }
     val mapState = remember {
         getMapState(
-            tileLink = { TileLink.StandartOSM() },
+            tileLink = { settings.value.tileLink },
             initialZoom = initZoom,
             initialCoordinates = GeoCoordinates(Latitude(59.946371), Longitude(30.373957)).toRelativeCoordinates()
         )
     }
     val scope = rememberCoroutineScope()
 
-    val currentLevel = remember { mutableStateOf(initZoom) }
+    val currentLevel = remember { mutableStateOf(initZoom.toFloat() / TileCoordinates.MAX_ZOOM) }
 
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState()),
@@ -66,29 +67,22 @@ fun MapTest() {
             }
         }
 
-        Text("level ${currentLevel.value}")
-        FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(DesignStyle.smallPadding(), Alignment.CenterHorizontally),
-            verticalArrangement = Arrangement.Center
-        ) {
-            repeat(TileCoordinates.MAX_ZOOM - TileCoordinates.MIN_ZOOM + 1) { level ->
-                Button(
-                    onClick = {
-                        currentLevel.value = level + TileCoordinates.MIN_ZOOM
-                        scope.launch {
-                            val box = mapState.visibleBoundingBox()
-                            mapState.scrollTo(
-                                x = box.xLeft + (box.xRight - box.xLeft) / 2,
-                                y = box.yBottom + (box.yTop - box.yBottom) / 2,
-                                destScale = TileCoordinates.zoomLevelToScale(currentLevel.value)
-                            )
-                        }
-                    }
-                ) {
-                    Text("${level + TileCoordinates.MIN_ZOOM}")
+        Text("level ${currentLevel.value * TileCoordinates.MAX_ZOOM}")
+
+        Slider(
+            value = currentLevel.value,
+            onValueChange = { value ->
+                scope.launch {
+                    currentLevel.value = value
+                    val box = mapState.visibleBoundingBox()
+                    mapState.scrollTo(
+                        x = box.xLeft + (box.xRight - box.xLeft) / 2,
+                        y = box.yBottom + (box.yTop - box.yBottom) / 2,
+                        destScale = TileCoordinates.zoomLevelToScale(currentLevel.value * TileCoordinates.MAX_ZOOM.toDouble())
+                    )
                 }
             }
-        }
+        )
 
         MapUI(
             modifier = Modifier
