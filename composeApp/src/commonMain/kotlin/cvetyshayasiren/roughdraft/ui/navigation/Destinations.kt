@@ -18,11 +18,11 @@ enum class RoughDraftDestination(
         icon = Icons.Default.Home,
         contentDescription = "home button"
     ),
-//    DraftBook(
-//        label = "список",
-//        icon = Icons.AutoMirrored.Filled.List,
-//        contentDescription = "list button"
-//    ),
+    DraftBook(
+        label = "список",
+        icon = Icons.AutoMirrored.Filled.List,
+        contentDescription = "list button"
+    ),
     MapDraftBook(
         label = "карта",
         icon = Icons.Default.Map,

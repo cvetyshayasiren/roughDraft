@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffold
+import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,11 +21,9 @@ import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun RoughDraftPaneView(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    scaffoldNavigator: ThreePaneScaffoldNavigator<Any>
 ) {
-    val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
-    val currentPage = DraftBookInteractions.currentPage.collectAsState()
-
     SupportingPaneScaffold(
         modifier = modifier,
         directive = scaffoldNavigator.scaffoldDirective,

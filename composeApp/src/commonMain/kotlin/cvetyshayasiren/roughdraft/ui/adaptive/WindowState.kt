@@ -13,4 +13,7 @@ object WindowState {
     @get:Composable
     val isExpanded: Boolean
         get() = currentSize.isWidthAtLeastBreakpoint(WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND)
+
+    @get:Composable
+    val isNotExpanded: Boolean get() = !isExpanded
 }

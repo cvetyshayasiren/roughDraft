@@ -24,8 +24,7 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            MetaDataTest()
-//            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
+            RoughDraftAdaptiveNavigation(modifier = Modifier.fillMaxSize())
         }
     }
 }
