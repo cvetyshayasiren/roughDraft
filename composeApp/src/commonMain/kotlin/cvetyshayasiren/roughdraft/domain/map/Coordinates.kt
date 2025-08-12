@@ -103,12 +103,12 @@ data class TileCoordinates(
 
     companion object {
         const val DEFAULT_TILE_SIZE = 256
-        const val MIN_ZOOM = 1
+        const val MIN_ZOOM = 0
         const val MAX_ZOOM = 19
         const val DEFAULT_ZOOM = 16
         val SAINT_PETERSBURG by lazy { GeoCoordinates.SAINT_PETERSBURG.toTileCoordinates(DEFAULT_ZOOM) }
 
-        val defaultMapSize = mapSizeAtZoom()
+        val worldMapSize = mapSizeAtZoom()
 
         fun mapSizeAtZoom(
             maxZoom: Int = MAX_ZOOM,
@@ -121,18 +121,8 @@ data class TileCoordinates(
             zoom: Int,
             maxZoom: Int = MAX_ZOOM,
             minZoom: Int = MIN_ZOOM
-        ): Double = 1 / 2.0.pow(maxZoom - minZoom) + 1 / 2.0.pow(maxZoom - zoom)
-
-        fun relativeToScale(
-            value: Float,
-            maxZoom: Int = MAX_ZOOM,
-            minZoom: Int = MIN_ZOOM
-        ): Double = zoomLevelToScale((value * (maxZoom - minZoom)).toInt(), maxZoom, minZoom)
-
-        fun scaleToRelative(
-            value: Double,
-            maxZoom: Int = MAX_ZOOM,
-            minZoom: Int = MIN_ZOOM
-        ): Float = value.toFloat() * relativeToScale(1f, maxZoom, minZoom).toFloat()
+        ): Double = (1 / 2.0.pow(maxZoom - zoom)).also {
+            println("zoom = $zoom maxZoom = $maxZoom minZoom = $minZoom result scale = $it")
+        }
     }
 }

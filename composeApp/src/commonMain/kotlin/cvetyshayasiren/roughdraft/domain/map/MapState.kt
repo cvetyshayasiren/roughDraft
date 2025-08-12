@@ -14,10 +14,16 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteraction
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.disableGestures
 import ovh.plrapps.mapcompose.api.scale
+import ovh.plrapps.mapcompose.api.scrollTo
+import ovh.plrapps.mapcompose.api.visibleBoundingBox
 import ovh.plrapps.mapcompose.ui.layout.Forced
 import ovh.plrapps.mapcompose.ui.state.MapState
 import kotlin.math.pow
@@ -31,8 +37,8 @@ fun getMapState(
 ): MapState {
     return MapState(
         levelCount = TileCoordinates.MAX_ZOOM + 1,
-        fullWidth = TileCoordinates.defaultMapSize,
-        fullHeight = TileCoordinates.defaultMapSize,
+        fullWidth = TileCoordinates.worldMapSize,
+        fullHeight = TileCoordinates.worldMapSize,
         workerCount = 16
     ) {
         minimumScaleMode(
