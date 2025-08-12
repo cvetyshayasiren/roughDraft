@@ -37,11 +37,17 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SweepGradient
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import com.github.ajalt.colormath.calculate.mostContrasting
+import com.github.ajalt.colormath.extensions.android.composecolor.toColormathColor
+import com.github.ajalt.colormath.extensions.android.composecolor.toComposeColor
+import com.github.ajalt.colormath.transform.interpolate
 import com.materialkolor.ktx.darken
+import com.materialkolor.ktx.harmonize
 import com.materialkolor.ktx.lighten
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.domain.settings.themeModeIsDark
+import cvetyshayasiren.roughdraft.ui.features.settings.SettingsView
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.theme.title
@@ -55,7 +61,8 @@ fun DraftBookView(
 ) {
     val pages = DraftBookInteractions.draftBook.collectAsState()
     val scope = rememberCoroutineScope()
-    val isDark = SettingsState.themeModeIsDark(scope = scope).collectAsState()
+
+    val settings = SettingsState.settings.collectAsState()
 
     Column(
         modifier = modifier,
@@ -84,24 +91,35 @@ fun DraftBookView(
             horizontalAlignment = Alignment.Start
         ) {
             pages.value.forEach { page ->
-                val pageColor by animateColorAsState(
-                    if(isDark.value) page.color.darken(1.2f) else page.color.lighten(1.2f)
-                )
-                val pageColor2 by animateColorAsState(
-                    if(isDark.value) page.color.darken(1.8f) else page.color.lighten(1.8f)
-                )
 
                 DraftBookPageCard(
                     modifier = Modifier
-                        .background(brush = Brush.horizontalGradient(listOf(pageColor, pageColor2)))
+                        .background(page.getBrush(scope))
                         .clickable {
                             DraftBookInteractions.setPage(page.name)
                             scope.launch { scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Main) }
                         },
-                    page = page,
+                    page = page
                 )
             }
             Spacer(Modifier.height(DesignStyle.bigPadding()* 4))
+
+            IconButton(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = {
+                    SettingsState
+                        .setSettings(themeMode = settings.value.themeMode.switch())
+                }
+            ) {
+                AnimatedContent(
+                    targetState = settings.value.themeMode
+                ) { state ->
+                    Icon(
+                        imageVector = state.icon,
+                        contentDescription = "${state.label} theme icon"
+                    )
+                }
+            }
         }
     }
 }

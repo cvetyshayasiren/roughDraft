@@ -1,6 +1,8 @@
 package cvetyshayasiren.roughdraft.data
 
-import androidx.compose.ui.graphics.Color
+import com.github.ajalt.colormath.Color
+import com.github.ajalt.colormath.extensions.android.composecolor.toComposeColor
+import com.github.ajalt.colormath.parse
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
@@ -39,7 +41,11 @@ data class DraftPageDataEntity(
                 lat = Latitude(this.latitude),
                 lon = Longitude(this.longitude)
             ),
-            color = Color(this.color.drop(1).toInt(16)).copy(alpha = 1f),
+            color = Color
+                .parse(this.color)
+                .toHSL()
+                .copy(l = .5f)
+                .toComposeColor(),
             iconUri = Res.getUri("files/$name/icon.${Config.IMAGE_EXTENSION}"),
             photoUris = getPhotosByName(name),
             audioUri = Res.getUri("files/$name/audio.${Config.AUDIO_EXTENSION}")

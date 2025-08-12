@@ -21,11 +21,13 @@ import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.coil3.CoilImage
@@ -43,6 +45,8 @@ fun DraftBookPageCard(
 ) {
     val expanded = remember { mutableStateOf(false) }
     val animatedDegree = animateFloatAsState(if(expanded.value) 180f else 0f)
+    val scope = rememberCoroutineScope()
+    val onPageColor = page.getOnColor(scope)
 
     Column(
         modifier = modifier,
@@ -73,13 +77,15 @@ fun DraftBookPageCard(
             ) {
                 Text(
                     text = page.name,
-                    style = MaterialTheme.typography.basicText()
+                    style = MaterialTheme.typography.basicText(),
+                    color = onPageColor
                 )
                 Text(
                     text = page.prettyDate,
                     style = MaterialTheme.typography.smallText(
                         fontWeight = FontWeight.Light
-                    )
+                    ),
+                    color = onPageColor
                 )
             }
             IconButton(
@@ -90,6 +96,7 @@ fun DraftBookPageCard(
             ) {
                 Icon(
                     modifier = Modifier.rotate(animatedDegree.value),
+                    tint = onPageColor,
                     imageVector = Icons.Default.ArrowDropDown,
                     contentDescription = "switch show map icon"
                 )
