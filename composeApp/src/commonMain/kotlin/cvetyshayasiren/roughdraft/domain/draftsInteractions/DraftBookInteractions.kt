@@ -3,7 +3,6 @@ package cvetyshayasiren.roughdraft.domain.draftsInteractions
 import androidx.lifecycle.ViewModel
 import cvetyshayasiren.roughdraft.data.DraftBookRepository
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
-import cvetyshayasiren.roughdraft.ui.test.randomColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

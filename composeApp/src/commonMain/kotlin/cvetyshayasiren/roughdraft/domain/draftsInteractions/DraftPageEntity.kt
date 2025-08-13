@@ -15,7 +15,6 @@ import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.domain.settings.themeModeIsDark
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
@@ -31,8 +30,8 @@ data class DraftPageEntity(
     val coordinates: GeoCoordinates = GeoCoordinates.SAINT_PETERSBURG,
     @Contextual
     val color: Color = Color.Unspecified,
-    val iconUri: String = "",
-    val photoUris: List<String> = listOf(),
+    val iconPath: ImagePath = "",
+    val photoPaths: List<ImagePath> = listOf(),
     val audioUri: String = ""
 ) {
     @Composable

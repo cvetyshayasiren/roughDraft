@@ -1,7 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -46,7 +45,7 @@ fun DraftPageView(
 
             CoilImage(
                 modifier = Modifier.size(200.dp),
-                imageModel = { page.iconUri }
+                imageModel = { page.iconPath }
             )
 
             Text(page.name)

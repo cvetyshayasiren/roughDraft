@@ -7,23 +7,21 @@ import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.window.DialogProperties
 import com.skydoves.landscapist.coil3.CoilImage
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.ImagePath
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import roughdraft.composeapp.generated.resources.Res
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PhotoViewer(
     modifier: Modifier = Modifier,
-    imageUri: String
+    imagePath: ImagePath
 ) {
     val enabled = remember { mutableStateOf(false) }
 
@@ -41,7 +39,7 @@ fun PhotoViewer(
             .clickable {
                 enabled.value = !enabled.value
             },
-        imageModel = { Res.getUri(imageUri) }
+        imageModel = { imagePath.getUri() }
     )
     AnimatedVisibility(
         visible = enabled.value
@@ -65,7 +63,7 @@ fun PhotoViewer(
                         translationY = offset.y
                     )
                     .transformable(state = state),
-                imageModel = { Res.getUri(imageUri) }
+                imageModel = { imagePath.getUri() }
             )
         }
     }

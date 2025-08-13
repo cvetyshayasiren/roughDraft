@@ -12,14 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
+import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.smallText
-import ovh.plrapps.mapcompose.api.ClusterData
+import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewer
 import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addClusterer
 import ovh.plrapps.mapcompose.api.addMarker
@@ -54,7 +56,7 @@ sealed interface CustomMarkers {
                     elevation = DesignStyle.shadowElevation,
                     shape = DesignStyle.markerShape
                 ),
-            imageModel = { page.iconUri }
+            imageModel = { page.iconPath.getUri() }
         )
     }
 
@@ -71,7 +73,6 @@ sealed interface CustomMarkers {
                     state.addClusterer(id = page.name) { ids ->
                         { Cluster(size = ids.size, page = page) }
                     }
-
                     addMarker(
                         id = page.name,
                         x = page.coordinates.lon.toRelative(),
@@ -81,8 +82,26 @@ sealed interface CustomMarkers {
                     ) {
                         View(page)
                     }
-
-
+                    page.photoPaths.forEachIndexed { index, imagePath ->
+                        imagePath.getMetaData { metadata ->
+                            metadata.gpsCoordinates?.toRelativeCoordinates()?.let { coordinates ->
+                                addMarker(
+                                    id = page.name + index,
+                                    x = coordinates.x,
+                                    y = coordinates.y,
+                                    relativeOffset = Offset(-.5f, -.5f),
+                                    renderingStrategy = RenderingStrategy.Clustering(page.name)
+                                ) {
+                                    PhotoViewer(
+                                        modifier = Modifier
+                                            .size(48.dp)
+                                            .coloredBorder(page.color),
+                                        imagePath = imagePath
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -98,7 +117,7 @@ sealed interface CustomMarkers {
                         elevation = DesignStyle.shadowElevation,
                         shape = DesignStyle.markerShape
                     ),
-                imageModel = { page.iconUri }
+                imageModel = { page.iconPath.getUri() }
             )
         }
 

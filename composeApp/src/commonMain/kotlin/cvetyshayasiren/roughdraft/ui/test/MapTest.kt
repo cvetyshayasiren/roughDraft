@@ -4,30 +4,22 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
-import cvetyshayasiren.roughdraft.domain.map.Latitude
-import cvetyshayasiren.roughdraft.domain.map.Longitude
-import cvetyshayasiren.roughdraft.domain.map.TileCoordinates
-import cvetyshayasiren.roughdraft.domain.map.TileLink
-import cvetyshayasiren.roughdraft.domain.map.getMapState
+import cvetyshayasiren.roughdraft.domain.map.*
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
-import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.reloadTiles
 import ovh.plrapps.mapcompose.api.scrollTo
 import ovh.plrapps.mapcompose.api.visibleBoundingBox
 import ovh.plrapps.mapcompose.ui.MapUI
-import kotlin.math.pow
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

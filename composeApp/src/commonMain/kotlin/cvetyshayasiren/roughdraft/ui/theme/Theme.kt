@@ -3,18 +3,15 @@ package cvetyshayasiren.roughdraft.ui.theme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.DarkMode
 import androidx.compose.material.icons.sharp.LightMode
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MotionScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.materialkolor.DynamicMaterialExpressiveTheme
-import com.materialkolor.DynamicMaterialTheme
 import com.materialkolor.PaletteStyle
 import com.materialkolor.dynamiccolor.ColorSpec
 import com.materialkolor.rememberDynamicMaterialThemeState
-import com.materialkolor.scheme.SchemeExpressive
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 
 enum class ThemeMode(

@@ -5,6 +5,7 @@ import com.github.ajalt.colormath.extensions.android.composecolor.toComposeColor
 import com.github.ajalt.colormath.parse
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.ImagePath
 import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
 import cvetyshayasiren.roughdraft.domain.map.Latitude
 import cvetyshayasiren.roughdraft.domain.map.Longitude
@@ -46,15 +47,15 @@ data class DraftPageDataEntity(
                 .toHSL()
                 .copy(l = .5f)
                 .toComposeColor(),
-            iconUri = Res.getUri("files/$name/icon.${Config.IMAGE_EXTENSION}"),
-            photoUris = getPhotosByName(name),
+            iconPath = "files/$name/icon.${Config.IMAGE_EXTENSION}",
+            photoPaths = getPhotosByName(name),
             audioUri = Res.getUri("files/$name/audio.${Config.AUDIO_EXTENSION}")
         )
     }
 
-    private fun getPhotosByName(name: String): List<String> = buildList {
+    private fun getPhotosByName(name: String): List<ImagePath> = buildList {
         repeat(numberOfPhotos) { index ->
-            add(Res.getUri("files/$name/$index.${Config.IMAGE_EXTENSION}"))
+            add("files/$name/$index.${Config.IMAGE_EXTENSION}")
         }
     }
 

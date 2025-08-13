@@ -1,7 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.navigation
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
@@ -21,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.adaptive.RoughDraftPaneView
-import cvetyshayasiren.roughdraft.ui.adaptive.WindowState
 import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.mapDraftBook.MapDraftBookView
 import cvetyshayasiren.roughdraft.ui.features.settings.SettingsView

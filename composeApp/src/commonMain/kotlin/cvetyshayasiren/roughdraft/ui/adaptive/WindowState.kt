@@ -2,7 +2,6 @@ package cvetyshayasiren.roughdraft.ui.adaptive
 
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalDensity
 import androidx.window.core.layout.WindowSizeClass
 
 object WindowState {

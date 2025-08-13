@@ -24,7 +24,7 @@ fun PhotoViewerTest() {
             modifier = Modifier
                 .size(400.dp)
                 .clip(RoundedCornerShape(12.dp)),
-            imageUri = "files/meta.jpg"
+            imagePath = "files/Любашинский сад/0.jpg"
         )
     }
 }

@@ -1,7 +1,8 @@
 <resources>
     <string-array name="drafts_names">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
+        <item>Любашинский сад</item>
+        <item>Медный Всадник</item>
+        <item>Сад Текстильщиков</item>
+		<item>Чёрная речка</item>
     </string-array>
 </resources>

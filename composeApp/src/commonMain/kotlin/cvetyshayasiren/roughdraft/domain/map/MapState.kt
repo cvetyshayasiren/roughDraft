@@ -1,11 +1,7 @@
 package cvetyshayasiren.roughdraft.domain.map
 
-import androidx.compose.ui.geometry.Offset
 import cvetyshayasiren.roughdraft.data.TileLoader
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import ovh.plrapps.mapcompose.api.addLayer
-import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.disableGestures
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.ui.layout.Forced
