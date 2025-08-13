@@ -45,8 +45,7 @@ fun DraftBookPageCard(
 ) {
     val expanded = remember { mutableStateOf(false) }
     val animatedDegree = animateFloatAsState(if(expanded.value) 180f else 0f)
-    val scope = rememberCoroutineScope()
-    val onPageColor = page.getOnColor(scope)
+    val onPageColor = page.getOnColor()
 
     Column(
         modifier = modifier,

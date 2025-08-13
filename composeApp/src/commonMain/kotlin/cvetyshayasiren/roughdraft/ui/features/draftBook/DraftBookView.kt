@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SweepGradient
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.lifecycle.viewModelScope
 import com.github.ajalt.colormath.calculate.mostContrasting
 import com.github.ajalt.colormath.extensions.android.composecolor.toColormathColor
 import com.github.ajalt.colormath.extensions.android.composecolor.toComposeColor
@@ -60,7 +61,7 @@ fun DraftBookView(
     scaffoldNavigator: ThreePaneScaffoldNavigator<Any>
 ) {
     val pages = DraftBookInteractions.draftBook.collectAsState()
-    val scope = rememberCoroutineScope()
+    val scope = DraftBookInteractions.viewModelScope
 
     val settings = SettingsState.settings.collectAsState()
 
@@ -69,32 +70,15 @@ fun DraftBookView(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-
-        if (scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Main] == PaneAdaptedValue.Hidden) {
-            IconButton(
-                onClick = {
-                    scope.launch {
-                        scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Main)
-                    }
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Sharp.ArrowBack,
-                    contentDescription = "Back icon button"
-                )
-            }
-        }
-
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
             pages.value.forEach { page ->
-
                 DraftBookPageCard(
                     modifier = Modifier
-                        .background(page.getBrush(scope))
+                        .background(page.getBrush())
                         .clickable {
                             DraftBookInteractions.setPage(page.name)
                             scope.launch { scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Main) }
@@ -102,7 +86,7 @@ fun DraftBookView(
                     page = page
                 )
             }
-            Spacer(Modifier.height(DesignStyle.bigPadding()* 4))
+            Spacer(Modifier.height(DesignStyle.bigPadding() * 4))
 
             IconButton(
                 modifier = Modifier.align(Alignment.CenterHorizontally),

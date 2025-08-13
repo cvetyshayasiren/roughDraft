@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.domain.draftsInteractions
 
+import androidx.lifecycle.ViewModel
 import cvetyshayasiren.roughdraft.data.DraftBookRepository
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.test.randomColor
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-object DraftBookInteractions {
+object DraftBookInteractions: ViewModel() {
     private val _draftBook: MutableStateFlow<List<DraftPageEntity>> = MutableStateFlow(listOf())
     val draftBook: StateFlow<List<DraftPageEntity>> = _draftBook.asStateFlow()
 

@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import ovh.plrapps.mapcompose.ui.MapUI
 
@@ -18,7 +19,7 @@ fun StaticMiniMapView(
             initialCoordinates = page.coordinates.toRelativeCoordinates(),
             initialZoom = Config.MINI_MAP_LEVEL,
             disableGestures = true,
-            markers = listOf(page)
+            customMarkers = CustomMarkers.StaticMiniMapMarker(listOf(page))
         )
     }
     MapUI(

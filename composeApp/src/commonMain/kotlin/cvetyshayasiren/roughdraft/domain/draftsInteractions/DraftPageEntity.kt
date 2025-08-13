@@ -6,6 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.viewModelScope
 import com.github.ajalt.colormath.extensions.android.composecolor.toColormathColor
 import com.github.ajalt.colormath.extensions.android.composecolor.toComposeColor
 import com.materialkolor.ktx.darken
@@ -35,7 +36,7 @@ data class DraftPageEntity(
     val audioUri: String = ""
 ) {
     @Composable
-    fun getBrush(scope: CoroutineScope = CoroutineScope(Dispatchers.Default)): Brush {
+    fun getBrush(scope: CoroutineScope = DraftBookInteractions.viewModelScope): Brush {
         val isDark = SettingsState.themeModeIsDark(scope = scope).collectAsState()
         val colorFrom by animateColorAsState(
             if(isDark.value) color.darken(1.4f) else color.lighten(2.0f)
@@ -47,7 +48,7 @@ data class DraftPageEntity(
     }
 
     @Composable
-    fun getOnColor(scope: CoroutineScope = CoroutineScope(Dispatchers.Default)): Color {
+    fun getOnColor(scope: CoroutineScope = DraftBookInteractions.viewModelScope): Color {
         val isDark = SettingsState.themeModeIsDark(scope = scope).collectAsState()
         val onPageColor by animateColorAsState(
             color
