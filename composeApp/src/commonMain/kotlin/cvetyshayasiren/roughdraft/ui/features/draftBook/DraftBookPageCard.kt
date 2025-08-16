@@ -2,6 +2,7 @@ package cvetyshayasiren.roughdraft.ui.features.draftBook
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -19,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
-import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.theme.smallText
@@ -51,9 +52,8 @@ fun DraftBookPageCard(
                 modifier = Modifier
                     .weight(.3f)
                     .clip(shape = DesignStyle.customShape)
-                    .shadow(elevation = DesignStyle.shadowElevation)
-                    .coloredBorder(page.color),
-                imageModel = { page.iconPath }
+                    .shadow(elevation = DesignStyle.shadowElevation),
+                imageModel = { page.iconPath.getUri() }
             )
 
             Column(

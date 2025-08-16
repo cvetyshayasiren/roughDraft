@@ -34,7 +34,7 @@ fun getMapState(
         if(disableGestures) { disableGestures() }
         addLayer(
             tileStreamProvider = { y, x, z ->
-                TileLoader.loadTileBuffer(tileLink().getLink(z, x, y))
+                tileLink().loadTileBuffer(z, x, y)
             }
         )
         scale = TileCoordinates.zoomLevelToScale(initialZoom)

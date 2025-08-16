@@ -65,15 +65,13 @@ fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
         ) { state ->
             when(state) {
                 RoughDraftDestination.DraftPane -> RoughDraftPaneView(
-                    modifier = Modifier.coloredBorder(Color.Green),
                     scaffoldNavigator = scaffoldNavigator
                 )
                 RoughDraftDestination.DraftBook -> DraftBookView(
-                    modifier = Modifier.coloredBorder(color = Color.Gray),
                     scaffoldNavigator = scaffoldNavigator
                 )
-                RoughDraftDestination.MapDraftBook -> MapDraftBookView(modifier = Modifier.coloredBorder(Color.Red))
-                RoughDraftDestination.Settings -> SettingsView(modifier = Modifier.coloredBorder(Color.Blue))
+                RoughDraftDestination.MapDraftBook -> MapDraftBookView()
+                RoughDraftDestination.Settings -> SettingsView()
             }
         }
     }

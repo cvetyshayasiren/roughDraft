@@ -23,8 +23,5 @@ object DesignStyle {
     @get:Composable
     val markerShape get() = MaterialShapes.Ghostish.toShape()
 
-
-
-
     val shadowElevation = 2.dp
 }

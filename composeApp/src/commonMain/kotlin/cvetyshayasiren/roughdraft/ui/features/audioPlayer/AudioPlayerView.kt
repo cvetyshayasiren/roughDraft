@@ -23,14 +23,14 @@ import cvetyshayasiren.roughdraft.domain.audioPlayer.isOnProgress
 fun AudioPlayerView(
     modifier: Modifier = Modifier,
     accentColor: Color = Color.White,
-    soundUri: String
+    audioUri: String
 ) {
     val player = remember { AudioPlayer() }
     val state = player.state.collectAsState()
     val volumeExpanded = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        player.prepare(soundUri)
+        player.prepare(audioUri)
     }
 
     Column(

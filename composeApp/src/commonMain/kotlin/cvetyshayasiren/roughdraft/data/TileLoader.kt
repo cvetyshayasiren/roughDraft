@@ -1,30 +1,27 @@
 package cvetyshayasiren.roughdraft.data
 
 import io.ktor.client.*
+import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import kotlinx.io.Buffer
+import roughdraft.composeapp.generated.resources.Res
 
 object TileLoader {
     private val client = HttpClient()
 
-    suspend fun loadTileBuffer(link: String): Buffer? {
+    suspend fun loadTileBuffer(link: String): Buffer {
         val buffer = Buffer()
-        val tile = loadTile(link)
-        tile?.let {
-            buffer.write(it)
-            return buffer
-        }
-        return null
-    }
-
-    private suspend fun loadTile(link: String): ByteArray? {
         try {
-            return client.request(link).readRawBytes()
-
+            val rawRequest = client.request(link).readRawBytes()
+            buffer.write(rawRequest)
         } catch (e: Exception) {
-            println("e ${e.message}")
-            return null
+            println("er ${e.message}")
         }
+        return buffer
     }
 }

@@ -17,6 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.domain.map.TileCoordinates
 import cvetyshayasiren.roughdraft.domain.map.TileLink
@@ -32,10 +36,9 @@ import ovh.plrapps.mapcompose.ui.MapUI
 @Composable
 fun MapDraftBookView(
     modifier: Modifier = Modifier,
+    vm: MapDraftBookViewModel = remember { MapDraftBookViewModel() }
 ) {
-    val settings = SettingsState.settings.collectAsState()
-    val mapState = remember { getMapState(tileLink = { settings.value.tileLink }) }
-    val currentZoom = remember { mutableStateOf(TileCoordinates.DEFAULT_ZOOM) }
+    val currentZoom = vm.currentZoom.collectAsState()
     val enableSettings = remember { mutableStateOf(false) }
 
     Box(
@@ -45,7 +48,7 @@ fun MapDraftBookView(
         MapUI(
             modifier = Modifier
                 .fillMaxSize(),
-            state = mapState
+            state = vm.mapState
         )
 
         Column(
@@ -58,32 +61,15 @@ fun MapDraftBookView(
         ) {
             TextButton(
                 onClick = {
-                    currentZoom.value = (currentZoom.value + 1)
-                        .coerceIn(TileCoordinates.MIN_ZOOM, TileCoordinates.MAX_ZOOM)
-                    mapState.setScale(currentZoom.value)
+                    vm.increaseZoom()
                 }
             ) {
                 Text("+")
             }
 
-            Box(
-                modifier = Modifier
-                    .size(24.dp)
-                    .clip(shape = DesignStyle.customShape)
-                    .background(MaterialTheme.colorScheme.primary),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "${currentZoom.value}",
-                    style = MaterialTheme.typography.smallText(color = MaterialTheme.colorScheme.onPrimary)
-                )
-            }
-
             TextButton(
                 onClick = {
-                    currentZoom.value = (currentZoom.value - 1)
-                        .coerceIn(TileCoordinates.MIN_ZOOM, TileCoordinates.MAX_ZOOM)
-                    mapState.setScale(currentZoom.value)
+                    vm.decreaseZoom()
                 }
             ) {
                 Text("-")
@@ -121,8 +107,7 @@ fun MapDraftBookView(
                             modifier = modifier
                                 .size(200.dp)
                                 .clickable {
-                                    SettingsState.setSettings(tileLink = tileLink)
-                                    mapState.reloadTiles()
+                                    vm.setTileLink(tileLink)
                                 },
                             state = mapStateVariant
                         )

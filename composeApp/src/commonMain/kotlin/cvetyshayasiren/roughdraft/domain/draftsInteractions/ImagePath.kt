@@ -15,15 +15,11 @@ fun ImagePath.getMetaData(
     callBack: (photoMetaData: PhotoMetadata) -> Unit
 ) {
     scope.launch {
-        try {
-            Kim
-                .readMetadata(Res.readBytes(this@getMetaData))
-                ?.convertToPhotoMetadata()?.let { metadata ->
-                    callBack(metadata)
-                }
-        } catch (e: Exception) {
-            println("cause:\n${e.cause}\n\nmessage:\n${e.message}")
-        }
+        Kim
+            .readMetadata(Res.readBytes(this@getMetaData))
+            ?.convertToPhotoMetadata()?.let { metadata ->
+                callBack(metadata)
+            }
     }
 }
 

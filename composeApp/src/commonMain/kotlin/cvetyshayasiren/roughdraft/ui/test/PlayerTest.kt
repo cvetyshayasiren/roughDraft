@@ -29,7 +29,7 @@ fun PlayerTest() {
                 .clip(MaterialShapes.Slanted.toShape())
                 .background(Color(105, 105, 210))
                 .padding(48.dp),
-            soundUri = Res.getUri("files/train.mp3")
+            audioUri = Res.getUri("files/train.mp3")
         )
     }
 }

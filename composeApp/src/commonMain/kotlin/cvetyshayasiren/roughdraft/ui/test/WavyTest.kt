@@ -16,7 +16,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
@@ -134,7 +133,7 @@ fun WavyTest() {
             horizontalArrangement = Arrangement.Center
         ) {
             Text("LAL")
-            WavyVerticalDivider(modifier = Modifier.width(12.dp).height(128.dp).coloredBorder(Color.Green))
+            WavyVerticalDivider(modifier = Modifier.width(12.dp).height(128.dp))
             Text("LOL")
         }
     }

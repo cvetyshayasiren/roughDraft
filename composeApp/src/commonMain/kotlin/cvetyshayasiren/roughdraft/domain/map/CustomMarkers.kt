@@ -18,7 +18,6 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteraction
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
-import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.smallText
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewer
@@ -94,8 +93,7 @@ sealed interface CustomMarkers {
                                 ) {
                                     PhotoViewer(
                                         modifier = Modifier
-                                            .size(48.dp)
-                                            .coloredBorder(page.color),
+                                            .size(48.dp),
                                         imagePath = imagePath
                                     )
                                 }

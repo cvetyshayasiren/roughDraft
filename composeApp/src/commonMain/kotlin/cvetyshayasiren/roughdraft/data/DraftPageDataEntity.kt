@@ -37,7 +37,7 @@ data class DraftPageDataEntity(
             prose = this.prose,
             numberOfPhotos = this.numberOfPhotos,
             timestamp = this.timestamp,
-            prettyDate = timestampToString(this.timestamp),
+            prettyDate = timestampToString(),
             coordinates = GeoCoordinates(
                 lat = Latitude(this.latitude),
                 lon = Longitude(this.longitude)
@@ -60,10 +60,10 @@ data class DraftPageDataEntity(
     }
 
     @OptIn(ExperimentalTime::class, FormatStringsInDatetimeFormats::class)
-    private fun timestampToString(timestamp: Long): String {
-        val instant: Instant = Instant.fromEpochMilliseconds(timestamp)
-        val localDateTime: LocalDateTime = instant.toLocalDateTime(TimeZone.UTC)
-        val formattedString = localDateTime.format(LocalDateTime.Format { byUnicodePattern("MM.dd.yyyy HH:mm") })
+    private fun timestampToString(): String {
+        val instant: Instant = Instant.fromEpochMilliseconds(timestamp * 1000)
+        val localDateTime: LocalDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+        val formattedString = localDateTime.format(LocalDateTime.Format { byUnicodePattern("dd.MM.yyyy HH:mm") })
         return formattedString
     }
  }
