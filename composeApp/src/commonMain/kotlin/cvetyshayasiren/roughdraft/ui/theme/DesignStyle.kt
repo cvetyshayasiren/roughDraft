@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.theme
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.toShape
@@ -22,6 +23,8 @@ object DesignStyle {
 
     @get:Composable
     val markerShape get() = MaterialShapes.Ghostish.toShape()
+
+    val roundedShape = RoundedCornerShape(8.dp)
 
     val shadowElevation = 2.dp
 }

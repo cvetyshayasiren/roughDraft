@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.ui.adaptive.WindowState
-import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.theme.title
 import kotlinx.coroutines.launch

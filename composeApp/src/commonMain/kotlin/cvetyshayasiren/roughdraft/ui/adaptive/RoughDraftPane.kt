@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.draftPage.DraftPageView
-import cvetyshayasiren.roughdraft.ui.navigation.coloredBorder
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)

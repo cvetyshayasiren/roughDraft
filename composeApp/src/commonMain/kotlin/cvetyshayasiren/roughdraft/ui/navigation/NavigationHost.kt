@@ -24,10 +24,6 @@ import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.mapDraftBook.MapDraftBookView
 import cvetyshayasiren.roughdraft.ui.features.settings.SettingsView
 
-fun Modifier.coloredBorder(color: Color): Modifier {
-    return this then Modifier.border(width = 2.dp, color = color)
-}
-
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
