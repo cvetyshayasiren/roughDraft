@@ -19,7 +19,7 @@ fun StaticMiniMapView(
             initialCoordinates = page.coordinates.toRelativeCoordinates(),
             initialZoom = Config.MINI_MAP_LEVEL,
             disableGestures = true,
-            customMarkers = CustomMarkers.StaticMiniMapMarker(listOf(page))
+            customMarkers = CustomMarkers.StaticMiniMapMarker(page)
         )
     }
     MapUI(

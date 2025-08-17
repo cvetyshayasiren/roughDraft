@@ -1,12 +1,15 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -30,6 +33,7 @@ import com.skydoves.landscapist.coil3.CoilImage
 import com.skydoves.landscapist.coil3.LocalCoilImageLoader
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
+import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.ui.features.audioPlayer.AudioPlayerView
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
@@ -39,6 +43,7 @@ import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.SizeMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.coloredBorder
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import org.jetbrains.compose.resources.painterResource
 import ovh.plrapps.mapcompose.ui.MapUI
 import roughdraft.composeapp.generated.resources.Res
@@ -50,44 +55,75 @@ import kotlin.coroutines.CoroutineContext
 fun CompactDraftPageView(
     page: DraftPageEntity
 ) {
+    val brush = page.getBrush()
+    val onColor = page.getOnColor()
+
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(DesignStyle.bigPadding(), alignment = Alignment.Top),
         horizontalAlignment = Alignment.Start
     ) {
-        CoilImage(
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
                 .clip(DesignStyle.roundedShape)
                 .shadow(
                     elevation = DesignStyle.shadowElevation,
                     shape = DesignStyle.roundedShape
                 )
-                .blend(backgroundMode = BackgroundMode.FromColor(page.color)),
-            imageModel = { page.iconPath.getUri() },
-            failure = {
-                Image(
-                    painter = painterResource(Res.drawable.failure),
-                    contentDescription = ""
+            ,
+            contentAlignment = Alignment.Center
+        ) {
+            CoilImage(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                imageModel = { page.iconPath.getUri() },
+                failure = {
+                    Image(
+                        painter = painterResource(Res.drawable.failure),
+                        contentDescription = "on failure result picture"
+                    )
+                }
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .blend(
+                        backgroundMode = BackgroundMode.FromBrush(brush = brush)
+                    )
+                    .align(Alignment.BottomCenter)
+                    .padding(DesignStyle.bigPadding()),
+                verticalArrangement = Arrangement
+                    .spacedBy(space = DesignStyle.bigPadding(), alignment = Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    modifier = Modifier.basicMarquee(),
+                    text = page.name,
+                    style = MaterialTheme.typography.title(color = onColor)
                 )
-            },
+                AudioPlayerView(audioUri = page.audioUri, accentColor = onColor)
+            }
+        }
 
-        )
+        Text(page.poem, style = MaterialTheme.typography.basicText())
 
-        AudioPlayerView(audioUri = page.audioUri)
+        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth())
 
-        Text(page.name, style = MaterialTheme.typography.title())
-        HorizontalDivider()
         Text(page.prose, style = MaterialTheme.typography.basicText())
         MapUI(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
+                .height(200.dp)
+                .blend(
+                    backgroundMode = BackgroundMode.FromColor(page.color),
+                    alpha = .5f
+                ),
             state = remember {
                 getMapState(
                     initialCoordinates = page.coordinates.toRelativeCoordinates(),
                     initialZoom = 15,
+                    customMarkers = CustomMarkers.StaticMiniMapMarker(page),
                     disableGestures = true
                 )
             }

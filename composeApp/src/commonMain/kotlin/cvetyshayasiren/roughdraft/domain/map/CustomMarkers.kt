@@ -59,7 +59,11 @@ sealed interface CustomMarkers {
         )
     }
 
-    class StaticMiniMapMarker(override val pages: List<DraftPageEntity>): CustomMarkers
+    class StaticMiniMapMarkers(override val pages: List<DraftPageEntity>): CustomMarkers
+
+    class StaticMiniMapMarker(page: DraftPageEntity): CustomMarkers {
+        override val pages: List<DraftPageEntity> = listOf(page)
+    }
 
     class EnhancedMapMarker(
         override val pages: List<DraftPageEntity> = DraftBookInteractions.draftBook.value
