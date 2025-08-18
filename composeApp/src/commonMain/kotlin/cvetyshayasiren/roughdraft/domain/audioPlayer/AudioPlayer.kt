@@ -23,14 +23,3 @@ expect class AudioPlayer() {
 
     fun setVolume(value: Float)
 }
-
-data class AudioPlayerState(
-    val isReady: Boolean = false,
-    val isPlaying: Boolean = false,
-    val progress: Float = 0f,
-    val volume: Float = 1f,
-    val duration: Long = 0,
-)
-
-fun AudioPlayerState.isNotReady() = !this.isReady
-fun AudioPlayerState.isOnProgress() = this.progress > 0

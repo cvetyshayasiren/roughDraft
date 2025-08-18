@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,6 +45,10 @@ import cvetyshayasiren.roughdraft.ui.utils.blend.SizeMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.coloredBorder
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
+import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.hazeEffect
+import dev.chrisbanes.haze.hazeSource
+import dev.chrisbanes.haze.rememberHazeState
 import org.jetbrains.compose.resources.painterResource
 import ovh.plrapps.mapcompose.ui.MapUI
 import roughdraft.composeapp.generated.resources.Res
@@ -55,7 +60,7 @@ import kotlin.coroutines.CoroutineContext
 fun CompactDraftPageView(
     page: DraftPageEntity
 ) {
-    val brush = page.getBrush()
+    val hazeState = rememberHazeState()
     val onColor = page.getOnColor()
 
     Column(
@@ -76,7 +81,8 @@ fun CompactDraftPageView(
         ) {
             CoilImage(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .hazeSource(state = hazeState),
                 imageModel = { page.iconPath.getUri() },
                 failure = {
                     Image(
@@ -88,11 +94,10 @@ fun CompactDraftPageView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .blend(
-                        backgroundMode = BackgroundMode.FromBrush(brush = brush)
-                    )
                     .align(Alignment.BottomCenter)
-                    .padding(DesignStyle.bigPadding()),
+                    .hazeEffect(state = hazeState) {
+                        backgroundColor = page.color
+                    },
                 verticalArrangement = Arrangement
                     .spacedBy(space = DesignStyle.bigPadding(), alignment = Alignment.CenterVertically),
                 horizontalAlignment = Alignment.Start
@@ -102,15 +107,21 @@ fun CompactDraftPageView(
                     text = page.name,
                     style = MaterialTheme.typography.title(color = onColor)
                 )
-                AudioPlayerView(audioUri = page.audioUri, accentColor = onColor)
+                AudioPlayerView(
+                    modifier = Modifier.padding(DesignStyle.smallPadding()),
+                    audioUri = page.audioUri,
+                    accentColor = onColor
+                )
             }
         }
 
+        Spacer(modifier = Modifier.height(DesignStyle.bigPadding() * 2))
         Text(page.poem, style = MaterialTheme.typography.basicText())
-
+        Spacer(modifier = Modifier.height(DesignStyle.bigPadding() * 2))
         WavyHorizontalDivider(modifier = Modifier.fillMaxWidth())
-
+        Spacer(modifier = Modifier.height(DesignStyle.bigPadding() * 2))
         Text(page.prose, style = MaterialTheme.typography.basicText())
+        Spacer(modifier = Modifier.height(DesignStyle.bigPadding() * 2))
         MapUI(
             modifier = Modifier
                 .fillMaxWidth()

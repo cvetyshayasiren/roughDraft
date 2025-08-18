@@ -13,6 +13,7 @@ colormath = "3.6.1"
 materialkolor = "3.0.0"
 datetime = "0.7.1"
 kim = "0.26"
+haze = "1.6.10"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -31,6 +32,7 @@ colormath-compose = { module = "com.github.ajalt.colormath:colormath-ext-jetpack
 materialkolor = { module = "com.materialkolor:material-kolor", version.ref = "materialkolor" }
 datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 kim = { module = "com.ashampoo:kim", version.ref = "kim" }
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]
