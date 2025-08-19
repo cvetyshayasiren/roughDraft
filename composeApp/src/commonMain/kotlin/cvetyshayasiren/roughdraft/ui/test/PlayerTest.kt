@@ -28,8 +28,7 @@ fun PlayerTest() {
                 .wrapContentHeight()
                 .clip(MaterialShapes.Slanted.toShape())
                 .background(Color(105, 105, 210))
-                .padding(48.dp),
-            audioUri = Res.getUri("files/train.mp3")
+                .padding(48.dp)
         )
     }
 }

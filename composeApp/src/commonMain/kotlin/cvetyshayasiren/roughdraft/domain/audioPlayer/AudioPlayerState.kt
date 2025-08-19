@@ -1,13 +1,23 @@
 package cvetyshayasiren.roughdraft.domain.audioPlayer
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayCircle
+import androidx.compose.material.icons.filled.StopCircle
+import androidx.compose.ui.graphics.vector.ImageVector
+
 data class AudioPlayerState(
     val isReady: Boolean = false,
     val isPlaying: Boolean = false,
-    val progress: Float = 0f,
-    val volume: Float = 1f,
-    val duration: Long = 0,
-    val playbackOptions: PlaybackOptions = PlaybackOptions.RepeatNext
+    val volume: Double = 0.8,
+    val currentTime: Double = 0.0,
+    val duration: Double = 0.0,
+    val firstInteractionDone: Boolean = false
 )
 
-fun AudioPlayerState.isNotReady() = !this.isReady
-fun AudioPlayerState.isOnProgress() = this.progress > 0
+fun AudioPlayerState.progress(): Double = currentTime / duration
+fun AudioPlayerState.isNotReady() = !isReady
+fun AudioPlayerState.isOnProgress() = progress() > 0 && progress() < 1
+fun AudioPlayerState.isOver() = progress() >= 1f
+fun AudioPlayerState.isFirstInteractionDone() = firstInteractionDone
+fun AudioPlayerState.swaPauseIcon(): ImageVector =
+    if(isPlaying) Icons.Default.StopCircle else Icons.Default.PlayCircle

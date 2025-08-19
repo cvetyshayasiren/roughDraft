@@ -3,6 +3,7 @@ package cvetyshayasiren.roughdraft.domain.settings
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import cvetyshayasiren.roughdraft.domain.audioPlayer.PlaybackOptions
 import cvetyshayasiren.roughdraft.domain.map.TileLink
 import cvetyshayasiren.roughdraft.domain.utils.custom
 import cvetyshayasiren.roughdraft.ui.theme.ThemeMode
@@ -19,14 +20,16 @@ object SettingsState {
     fun setSettings(
         themeMode: ThemeMode? = null,
         themeSeedColor: Color? = null,
-        tileLink: TileLink? = null
+        tileLink: TileLink? = null,
+        playbackOptions: PlaybackOptions? = null
     ) {
         val old = _settings.value
         setSettings(
             SettingsEntity(
                 themeMode = themeMode ?: old.themeMode,
                 themeSeedColor = themeSeedColor ?: old.themeSeedColor,
-                tileLink = tileLink ?: old.tileLink
+                tileLink = tileLink ?: old.tileLink,
+                playbackOptions = playbackOptions ?: old.playbackOptions
             )
         )
     }

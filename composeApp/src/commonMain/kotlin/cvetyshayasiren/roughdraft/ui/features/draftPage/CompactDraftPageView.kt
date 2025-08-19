@@ -1,6 +1,7 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,7 +11,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -26,6 +29,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.PlatformContext
 import coil3.request.ImageRequest
@@ -84,6 +88,9 @@ fun CompactDraftPageView(
                     .fillMaxWidth()
                     .hazeSource(state = hazeState),
                 imageModel = { page.iconPath.getUri() },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.Crop
+                ),
                 failure = {
                     Image(
                         painter = painterResource(Res.drawable.failure),
@@ -102,15 +109,15 @@ fun CompactDraftPageView(
                     .spacedBy(space = DesignStyle.bigPadding(), alignment = Alignment.CenterVertically),
                 horizontalAlignment = Alignment.Start
             ) {
+
                 Text(
                     modifier = Modifier.basicMarquee(),
                     text = page.name,
                     style = MaterialTheme.typography.title(color = onColor)
                 )
+
                 AudioPlayerView(
                     modifier = Modifier.padding(DesignStyle.smallPadding()),
-                    audioUri = page.audioUri,
-                    accentColor = onColor
                 )
             }
         }

@@ -22,30 +22,37 @@ actual class AudioPlayer {
     actual val state: StateFlow<AudioPlayerState> = _state.asStateFlow()
 
     actual fun prepare(uri: String) {
-        getPlayerElement()?.apply { pause(); remove() }
+        getPlayerElement()?.apply { pause(); close() }
         document.body?.appendElement("audio") {
             this as HTMLAudioElement
             this.id = htmlId
             this.src = uri
+            this.volume = _state.value.volume
         }
-        setState(isReady = true)
+        getPlayerElement()?.apply {
+            setState(isReady = true, currentTime = currentTime, duration = duration, isPlaying = false)
+        }
+
     }
 
     actual fun play(
         coroutineScope: CoroutineScope,
         delay: Long
     ) {
-        getPlayerElement()?.play()
-        setState(isPlaying = true)
+        getPlayerElement()?.apply {
+            play()
+            setState(isPlaying = true, firstInteractionDone = true)
 
-        coroutineScope.launch {
-            while(_state.value.isPlaying) {
-                getPlayerElement()?.apply {
-                    setState(progress = (currentTime / duration).toFloat())
+            coroutineScope.launch {
+                while(_state.value.isPlaying) {
+                    getPlayerElement()?.apply {
+                        setState(currentTime = currentTime, duration = duration)
+                    }
+                    delay(delay)
                 }
-                delay(delay)
             }
         }
+
     }
 
     actual fun pause() {
@@ -57,39 +64,47 @@ actual class AudioPlayer {
         getPlayerElement()?.apply {
             pause()
             currentTime = 0.0
-            setState(isPlaying = false, progress = 0f)
+            setState(isPlaying = false, currentTime = currentTime)
         }
     }
 
-    actual fun setProgress(value: Float) {
+    actual fun setProgress(value: Double) {
         getPlayerElement()?.apply {
             currentTime = value * duration
-            setState(progress = value)
+            setState(currentTime = currentTime)
         }
     }
 
-    actual fun setVolume(value: Float) {
+    actual fun setVolume(value: Double) {
         getPlayerElement()?.apply {
-            volume = value.toDouble()
             setState(volume = value)
+        }
+    }
+
+    actual fun close() {
+        getPlayerElement()?.apply {
+            remove()
+            setState(AudioPlayerState())
         }
     }
 
     private fun setState(
         isReady: Boolean? = null,
         isPlaying: Boolean? = null,
-        progress: Float? = null,
-        volume: Float? = null,
-        duration: Long? = null
+        volume: Double? = null,
+        currentTime: Double? = null,
+        duration: Double? = null,
+        firstInteractionDone: Boolean? = null,
     ) {
         val old = _state.value
         setState(
             AudioPlayerState(
                 isReady = isReady ?: old.isReady,
                 isPlaying = isPlaying ?: old.isPlaying,
-                progress = progress ?: old.progress,
                 volume = volume ?: old.volume,
-                duration = duration ?: old.duration
+                currentTime = currentTime ?: old.currentTime,
+                duration = duration ?: old.duration,
+                firstInteractionDone = firstInteractionDone ?: old.firstInteractionDone
             )
         )
     }
