@@ -2,10 +2,7 @@ package cvetyshayasiren.roughdraft.domain.map
 
 import cvetyshayasiren.roughdraft.data.TileLoader
 import kotlinx.io.Buffer
-import ovh.plrapps.mapcompose.ui.layout.Forced
-import ovh.plrapps.mapcompose.ui.layout.MinimumScaleMode
 import roughdraft.composeapp.generated.resources.Res
-import kotlin.math.pow
 
 
 sealed interface TileLink {

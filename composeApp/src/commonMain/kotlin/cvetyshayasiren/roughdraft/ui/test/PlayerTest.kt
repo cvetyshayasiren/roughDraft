@@ -12,7 +12,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.features.audioPlayer.AudioPlayerView
-import roughdraft.composeapp.generated.resources.Res
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

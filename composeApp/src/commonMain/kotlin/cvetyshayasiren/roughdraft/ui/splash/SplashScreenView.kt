@@ -4,9 +4,8 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import cvetyshayasiren.roughdraft.domain.splash.SplashStates
 import cvetyshayasiren.roughdraft.domain.splash.SplashState
-import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftAdaptiveNavigation
+import cvetyshayasiren.roughdraft.domain.splash.SplashStates
 
 @Composable
 fun SplashScreenView(modifier: Modifier = Modifier) {
@@ -19,7 +18,7 @@ fun SplashScreenView(modifier: Modifier = Modifier) {
         when(state) {
             SplashStates.LOADING -> { LoadingScreenView() }
             SplashStates.SALUTE -> { SaluteScreenView() }
-            SplashStates.PREPARED -> { RoughDraftAdaptiveNavigation() }
+            SplashStates.PREPARED -> { PreparedScreenView() }
         }
     }
 }

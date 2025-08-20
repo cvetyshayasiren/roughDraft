@@ -1,6 +1,5 @@
 package cvetyshayasiren.roughdraft.domain.map
 
-import cvetyshayasiren.roughdraft.data.TileLoader
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.disableGestures
 import ovh.plrapps.mapcompose.api.scale

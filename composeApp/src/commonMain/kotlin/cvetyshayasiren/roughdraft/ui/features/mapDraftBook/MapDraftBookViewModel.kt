@@ -1,20 +1,15 @@
 package cvetyshayasiren.roughdraft.ui.features.mapDraftBook
 
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import cvetyshayasiren.roughdraft.domain.map.TileCoordinates
 import cvetyshayasiren.roughdraft.domain.map.TileLink
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.domain.map.setScale
-import cvetyshayasiren.roughdraft.domain.settings.SettingsEntity
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
-import cvetyshayasiren.roughdraft.ui.features.settings.SettingsView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import ovh.plrapps.mapcompose.api.reloadTiles
-import ovh.plrapps.mapcompose.api.scale
 
 class MapDraftBookViewModel: ViewModel() {
     private val settings = SettingsState.settings

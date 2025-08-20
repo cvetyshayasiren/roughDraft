@@ -1,7 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.features.mapDraftBook
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -16,20 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.dropShadow
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.unit.dp
-import cvetyshayasiren.roughdraft.domain.map.TileCoordinates
 import cvetyshayasiren.roughdraft.domain.map.TileLink
 import cvetyshayasiren.roughdraft.domain.map.getMapState
-import cvetyshayasiren.roughdraft.domain.map.setScale
-import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
-import cvetyshayasiren.roughdraft.ui.theme.smallText
-import ovh.plrapps.mapcompose.api.reloadTiles
 import ovh.plrapps.mapcompose.ui.MapUI
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalComposeUiApi::class)

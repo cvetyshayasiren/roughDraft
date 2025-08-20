@@ -1,7 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.navigation
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -17,8 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.adaptive.RoughDraftPaneView
 import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.mapDraftBook.MapDraftBookView
@@ -38,8 +35,11 @@ fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
         state = navigationSuiteScaffoldState,
         navigationSuiteItems = {
             RoughDraftDestination.entries.forEach { destination ->
-                if(destination == RoughDraftDestination.DraftBook &&
-                    scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] == PaneAdaptedValue.Expanded) { return@forEach }
+                if (destination == RoughDraftDestination.DraftBook &&
+                    scaffoldNavigator.scaffoldValue[SupportingPaneScaffoldRole.Supporting] == PaneAdaptedValue.Expanded
+                ) {
+                    return@forEach
+                }
 
                 item(
                     icon = {
@@ -59,13 +59,15 @@ fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize(),
             targetState = currentDestination
         ) { state ->
-            when(state) {
+            when (state) {
                 RoughDraftDestination.DraftPane -> RoughDraftPaneView(
                     scaffoldNavigator = scaffoldNavigator
                 )
+
                 RoughDraftDestination.DraftBook -> DraftBookView(
                     scaffoldNavigator = scaffoldNavigator
                 )
+
                 RoughDraftDestination.MapDraftBook -> MapDraftBookView()
                 RoughDraftDestination.Settings -> SettingsView()
             }

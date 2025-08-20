@@ -1,7 +1,5 @@
 package cvetyshayasiren.roughdraft.domain.draftsInteractions
 
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import cvetyshayasiren.roughdraft.data.DraftBookRepository
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions
@@ -9,12 +7,7 @@ import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.domain.utils.custom
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 object DraftBookInteractions: ViewModel() {

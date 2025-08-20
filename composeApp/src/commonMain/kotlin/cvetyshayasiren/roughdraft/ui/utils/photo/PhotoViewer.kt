@@ -15,7 +15,6 @@ import androidx.compose.ui.window.DialogProperties
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.ImagePath
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
-import roughdraft.composeapp.generated.resources.Res
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
