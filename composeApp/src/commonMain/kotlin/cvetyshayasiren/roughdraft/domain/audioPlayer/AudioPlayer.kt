@@ -1,6 +1,7 @@
 package cvetyshayasiren.roughdraft.domain.audioPlayer
 
 import androidx.lifecycle.viewModelScope
+import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions.player
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.utils.custom
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +30,13 @@ expect class AudioPlayer() {
     fun setVolume(value: Double)
 
     fun close()
+}
+
+fun AudioPlayer.swapPause() {
+    when(state.value.isPlaying) {
+        true -> pause()
+        false -> play()
+    }
 }
 
 fun AudioPlayer.songIsOver(

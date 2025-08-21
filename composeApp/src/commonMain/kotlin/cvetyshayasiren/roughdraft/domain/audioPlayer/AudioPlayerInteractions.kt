@@ -32,12 +32,7 @@ object AudioPlayerInteractions: ViewModel() {
         player.play()
     }
 
-    fun swapPause() = {
-        when(player.state.value.isPlaying) {
-            true -> player.pause()
-            false -> player.play()
-        }
-    }
+    fun swapPause() = player.swapPause()
 
     fun stop() = player.stop()
 

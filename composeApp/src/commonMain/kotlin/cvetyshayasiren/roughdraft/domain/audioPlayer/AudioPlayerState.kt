@@ -14,7 +14,8 @@ data class AudioPlayerState(
     val firstInteractionDone: Boolean = false
 )
 
-fun AudioPlayerState.progress(): Double = currentTime / duration
+fun AudioPlayerState.progress(): Double =
+    if(!duration.isFinite() || duration == 0.0) 0.0 else currentTime / duration
 fun AudioPlayerState.isNotReady() = !isReady
 fun AudioPlayerState.isOnProgress() = progress() > 0 && progress() < 1
 fun AudioPlayerState.isOver() = progress() >= 1f
