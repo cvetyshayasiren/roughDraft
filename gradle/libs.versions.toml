@@ -33,9 +33,11 @@ materialkolor = { module = "com.materialkolor:material-kolor", version.ref = "ma
 datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 kim = { module = "com.ashampoo:kim", version.ref = "kim" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]
+haze = ["haze", "haze-materials"]
 
 [plugins]
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }

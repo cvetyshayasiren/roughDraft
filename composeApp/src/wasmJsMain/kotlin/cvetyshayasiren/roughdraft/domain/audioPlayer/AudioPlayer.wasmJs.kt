@@ -52,7 +52,6 @@ actual class AudioPlayer {
                 }
             }
         }
-
     }
 
     actual fun pause() {
@@ -61,11 +60,8 @@ actual class AudioPlayer {
     }
 
     actual fun stop() {
-        getPlayerElement()?.apply {
-            pause()
-            currentTime = 0.0
-            setState(isPlaying = false, currentTime = currentTime)
-        }
+        pause()
+        setProgress(0.0)
     }
 
     actual fun setProgress(value: Double) {
@@ -77,6 +73,7 @@ actual class AudioPlayer {
 
     actual fun setVolume(value: Double) {
         getPlayerElement()?.apply {
+            volume = value
             setState(volume = value)
         }
     }

@@ -18,6 +18,9 @@ object DesignStyle {
     @Composable
     fun bigPadding(): Dp = if(WindowState.isExpanded) 8.dp else 4.dp
 
+    @Composable
+    fun smallPlusBigPadding(): Dp = smallPadding() + bigPadding()
+
 
     @get:Composable
     val customShape get() = MaterialShapes.Pill.toShape()

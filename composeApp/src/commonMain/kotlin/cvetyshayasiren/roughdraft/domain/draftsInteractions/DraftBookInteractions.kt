@@ -28,20 +28,20 @@ object DraftBookInteractions: ViewModel() {
         _draftBook.value.find { it.name == name }?.let { page ->
             setPage(page)
         }
-        AudioPlayerInteractions.swapPlay()
+        AudioPlayerInteractions.checkPlay()
     }
 
     fun nextPage() {
         val currentIndex = _draftBook.value.indexOf(_currentPage.value)
         val lastIndex = _draftBook.value.lastIndex
         setPage(if(currentIndex < lastIndex) _draftBook.value[currentIndex + 1] else _draftBook.value.first())
-        AudioPlayerInteractions.swapPlay()
+        AudioPlayerInteractions.checkPlay()
     }
 
     fun previousPage() {
         val currentIndex = _draftBook.value.indexOf(_currentPage.value)
         setPage(if(currentIndex > 0) _draftBook.value[currentIndex - 1] else _draftBook.value.last())
-        AudioPlayerInteractions.swapPlay()
+        AudioPlayerInteractions.checkPlay()
     }
 
     private fun setPage(page: DraftPageEntity) {

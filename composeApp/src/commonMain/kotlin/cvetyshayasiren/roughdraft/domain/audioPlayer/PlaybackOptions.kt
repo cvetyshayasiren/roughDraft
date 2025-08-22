@@ -1,7 +1,9 @@
 package cvetyshayasiren.roughdraft.domain.audioPlayer
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AllInclusive
 import androidx.compose.material.icons.filled.MultipleStop
+import androidx.compose.material.icons.filled.PlayDisabled
 import androidx.compose.material.icons.filled.QueuePlayNext
 import androidx.compose.material.icons.filled.RepeatOne
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -12,7 +14,7 @@ enum class PlaybackOptions(
 ) {
     Stoppable(
         label = "остановить",
-        icon = Icons.Default.MultipleStop
+        icon = Icons.Default.PlayDisabled
     ),
     RepeatOne(
         label = "повторять один трек",
@@ -20,7 +22,7 @@ enum class PlaybackOptions(
     ),
     RepeatNext(
         label = "перейти дальше",
-        icon = Icons.Default.QueuePlayNext
+        icon = Icons.Default.AllInclusive
     )
 }
 

@@ -9,5 +9,5 @@ data class SettingsEntity(
     val themeMode: ThemeMode = ThemeMode.DARK,
     val themeSeedColor: Color = Color.Unspecified,
     val tileLink: TileLink = TileLink.WaterColors(),
-    val playbackOptions: PlaybackOptions = PlaybackOptions.RepeatNext
+    val playbackOptions: PlaybackOptions = PlaybackOptions.RepeatOne
 )

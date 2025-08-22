@@ -1,9 +1,10 @@
 package cvetyshayasiren.roughdraft.domain.audioPlayer
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PauseCircle
 import androidx.compose.material.icons.filled.PlayCircle
-import androidx.compose.material.icons.filled.StopCircle
 import androidx.compose.ui.graphics.vector.ImageVector
+import cvetyshayasiren.roughdraft.domain.utils.toPrettyMinSec
 
 data class AudioPlayerState(
     val isReady: Boolean = false,
@@ -20,5 +21,7 @@ fun AudioPlayerState.isNotReady() = !isReady
 fun AudioPlayerState.isOnProgress() = progress() > 0 && progress() < 1
 fun AudioPlayerState.isOver() = progress() >= 1f
 fun AudioPlayerState.isFirstInteractionDone() = firstInteractionDone
-fun AudioPlayerState.swaPauseIcon(): ImageVector =
-    if(isPlaying) Icons.Default.StopCircle else Icons.Default.PlayCircle
+fun AudioPlayerState.swapPauseIcon(): ImageVector =
+    if(isPlaying) Icons.Default.PauseCircle else Icons.Default.PlayCircle
+fun AudioPlayerState.prettyCurrentTime() = currentTime.toPrettyMinSec()
+fun AudioPlayerState.prettyDuration() = duration.toPrettyMinSec()

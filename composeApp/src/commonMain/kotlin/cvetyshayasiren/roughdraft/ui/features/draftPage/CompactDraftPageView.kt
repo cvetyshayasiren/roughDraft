@@ -29,14 +29,18 @@ import cvetyshayasiren.roughdraft.ui.theme.title
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
+import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
+import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
+import dev.chrisbanes.haze.materials.HazeMaterials
 import dev.chrisbanes.haze.rememberHazeState
 import org.jetbrains.compose.resources.painterResource
 import ovh.plrapps.mapcompose.ui.MapUI
 import roughdraft.composeapp.generated.resources.Res
 import roughdraft.composeapp.generated.resources.failure
 
+@OptIn(ExperimentalHazeMaterialsApi::class)
 @Composable
 fun CompactDraftPageView(
     page: DraftPageEntity
@@ -79,9 +83,12 @@ fun CompactDraftPageView(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
-                    .hazeEffect(state = hazeState) {
-                        backgroundColor = page.color
-                    },
+                    .hazeEffect(
+                        state = hazeState,
+                        style = HazeMaterials.thin(
+                            containerColor = page.color
+                        )
+                    ),
                 verticalArrangement = Arrangement
                     .spacedBy(space = DesignStyle.bigPadding(), alignment = Alignment.CenterVertically),
                 horizontalAlignment = Alignment.Start

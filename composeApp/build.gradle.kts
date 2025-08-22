@@ -55,7 +55,7 @@ kotlin {
             implementation(libs.materialkolor)
             implementation(libs.datetime)
             implementation(libs.kim)
-            implementation(libs.haze)
+            implementation(libs.bundles.haze)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

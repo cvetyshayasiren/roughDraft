@@ -18,7 +18,7 @@ object AudioPlayerInteractions: ViewModel() {
                 if(isOver) {
                     when(settings.value.playbackOptions) {
                         PlaybackOptions.Stoppable -> stop()
-                        PlaybackOptions.RepeatOne -> { setProgress(0.0) }
+                        PlaybackOptions.RepeatOne -> { setProgress(0.0); player.play() }
                         PlaybackOptions.RepeatNext -> { DraftBookInteractions.nextPage() }
                     }
                 }
@@ -36,7 +36,7 @@ object AudioPlayerInteractions: ViewModel() {
 
     fun stop() = player.stop()
 
-    fun swapPlay() {
+    fun checkPlay() {
         if(player.state.value.isPlaying) {
             stop()
             prepareAndPplay()
@@ -44,6 +44,8 @@ object AudioPlayerInteractions: ViewModel() {
     }
 
     fun setProgress(value: Double) = player.setProgress(value)
+
+    fun setVolume(value: Double) = player.setVolume(value)
 
     fun nextPlaybackOption() = SettingsState.setSettings(playbackOptions = settings.value.playbackOptions.next())
 }
