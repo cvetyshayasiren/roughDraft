@@ -1,6 +1,8 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,7 +26,11 @@ fun DraftPageView(
         ) { page ->
             when(expanded) {
                 true -> ExpandedDraftPageView(page)
-                false -> CompactDraftPageView(page)
+                false -> CompactDraftPageView(
+                    page = page,
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                )
             }
         }
     }

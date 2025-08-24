@@ -5,7 +5,7 @@ import com.github.ajalt.colormath.extensions.android.composecolor.toComposeColor
 import com.github.ajalt.colormath.parse
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.ImagePath
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.domain.map.GeoCoordinates
 import cvetyshayasiren.roughdraft.domain.map.Latitude
 import cvetyshayasiren.roughdraft.domain.map.Longitude
@@ -53,7 +53,7 @@ data class DraftPageDataEntity(
         )
     }
 
-    private fun getPhotosByName(name: String): List<ImagePath> = buildList {
+    private fun getPhotosByName(name: String): List<PhotoPath> = buildList {
         repeat(numberOfPhotos) { index ->
             add("files/$name/$index.${Config.IMAGE_EXTENSION}")
         }

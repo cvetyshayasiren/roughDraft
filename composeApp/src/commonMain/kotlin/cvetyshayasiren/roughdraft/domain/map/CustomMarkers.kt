@@ -98,7 +98,7 @@ sealed interface CustomMarkers {
                                     PhotoViewer(
                                         modifier = Modifier
                                             .size(48.dp),
-                                        imagePath = imagePath
+                                        photoPath = imagePath
                                     )
                                 }
                             }

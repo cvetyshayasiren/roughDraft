@@ -30,8 +30,8 @@ data class DraftPageEntity(
     val coordinates: GeoCoordinates = GeoCoordinates.SAINT_PETERSBURG,
     @Contextual
     val color: Color = Color.Unspecified,
-    val iconPath: ImagePath = "",
-    val photoPaths: List<ImagePath> = listOf(),
+    val iconPath: PhotoPath = "",
+    val photoPaths: List<PhotoPath> = listOf(),
     val audioUri: String = ""
 ) {
     @Composable

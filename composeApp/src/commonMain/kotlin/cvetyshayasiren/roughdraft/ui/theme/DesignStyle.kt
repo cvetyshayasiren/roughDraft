@@ -21,6 +21,9 @@ object DesignStyle {
     @Composable
     fun smallPlusBigPadding(): Dp = smallPadding() + bigPadding()
 
+    @Composable
+    fun multiBigPadding(multiplyBy: Int = 2): Dp = bigPadding() * multiplyBy
+
 
     @get:Composable
     val customShape get() = MaterialShapes.Pill.toShape()

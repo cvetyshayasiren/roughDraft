@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 fun WavyHorizontalDivider(
     modifier: Modifier,
     crest: WavyCrestStructure = WavyCrestStructure.FromCount(4),
-    height: Dp = 20.dp,
+    thickness: Dp = 20.dp,
     strokeWidth: Dp = 2.dp,
     color: Color = MaterialTheme.colorScheme.onSurface,
     colorFilter: ColorFilter? = null,
@@ -26,9 +26,9 @@ fun WavyHorizontalDivider(
         modifier = modifier
             .wavy(
                 crest = crest,
-                thickness = height,
+                thickness = thickness,
                 strokeWidth = strokeWidth,
-                 color = color,
+                color = color,
                 colorFilter = colorFilter,
                 blendMode = blendMode
             )
@@ -39,7 +39,7 @@ fun WavyHorizontalDivider(
 fun WavyVerticalDivider(
     modifier: Modifier,
     crest: WavyCrestStructure = WavyCrestStructure.FromCount(4),
-    height: Dp = 20.dp,
+    thickness: Dp = 20.dp,
     strokeWidth: Dp = 2.dp,
     color: Color = MaterialTheme.colorScheme.onSurface,
     colorFilter: ColorFilter? = null,
@@ -49,7 +49,7 @@ fun WavyVerticalDivider(
         modifier = modifier
             .wavy(
                 crest = crest,
-                thickness = height,
+                thickness = thickness,
                 strokeWidth = strokeWidth,
                 color = color,
                 colorFilter = colorFilter,

@@ -8,9 +8,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import roughdraft.composeapp.generated.resources.Res
 
-typealias ImagePath = String
+typealias PhotoPath = String
 
-fun ImagePath.getMetaData(
+fun PhotoPath.getMetaData(
     scope: CoroutineScope = DraftBookInteractions.viewModelScope,
     callBack: (photoMetaData: PhotoMetadata) -> Unit
 ) {
@@ -23,4 +23,4 @@ fun ImagePath.getMetaData(
     }
 }
 
-fun ImagePath.getUri(): String = Res.getUri(this)
+fun PhotoPath.getUri(): String = Res.getUri(this)

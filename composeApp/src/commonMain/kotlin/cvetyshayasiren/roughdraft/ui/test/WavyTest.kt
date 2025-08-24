@@ -3,6 +3,7 @@ package cvetyshayasiren.roughdraft.ui.test
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -127,13 +128,13 @@ fun WavyTest() {
                     color = MaterialTheme.colorScheme.secondary,
                 )
         )
-        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth())
+        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth().height(24.dp).background(Color.Green))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Text("LAL")
-            WavyVerticalDivider(modifier = Modifier.width(12.dp).height(128.dp))
+            WavyVerticalDivider(modifier = Modifier.width(12.dp).height(128.dp).background(Color.Green))
             Text("LOL")
         }
     }

@@ -13,14 +13,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.window.DialogProperties
 import com.skydoves.landscapist.coil3.CoilImage
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.ImagePath
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PhotoViewer(
     modifier: Modifier = Modifier,
-    imagePath: ImagePath
+    photoPath: PhotoPath
 ) {
     val enabled = remember { mutableStateOf(false) }
 
@@ -38,7 +38,7 @@ fun PhotoViewer(
             .clickable {
                 enabled.value = !enabled.value
             },
-        imageModel = { imagePath.getUri() }
+        imageModel = { photoPath.getUri() }
     )
     AnimatedVisibility(
         visible = enabled.value
@@ -62,7 +62,7 @@ fun PhotoViewer(
                         translationY = offset.y
                     )
                     .transformable(state = state),
-                imageModel = { imagePath.getUri() }
+                imageModel = { photoPath.getUri() }
             )
         }
     }
