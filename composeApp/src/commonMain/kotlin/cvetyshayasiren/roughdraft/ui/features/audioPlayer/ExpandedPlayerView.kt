@@ -211,11 +211,15 @@ fun ExpandedPlayerView(
                 modifier = Modifier.size(Config.EXPANDED_PLAYER_BIG_BUTTON_SIZE),
                 onClick = { vm.swapPause() }
             ) {
-                Icon(
-                    modifier = Modifier.fillMaxSize(),
-                    imageVector = playerState.value.swapPauseIcon(),
-                    contentDescription = "play/stop button"
-                )
+                AnimatedContent(
+                    targetState = playerState.value
+                ) { state ->
+                    Icon(
+                        modifier = Modifier.fillMaxSize(),
+                        imageVector = state.swapPauseIcon(),
+                        contentDescription = "play/stop button"
+                    )
+                }
             }
 
             IconButton(

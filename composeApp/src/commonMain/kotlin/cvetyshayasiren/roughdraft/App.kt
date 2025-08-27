@@ -21,7 +21,6 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-//            WavyTest()
             SplashScreenView()
         }
     }

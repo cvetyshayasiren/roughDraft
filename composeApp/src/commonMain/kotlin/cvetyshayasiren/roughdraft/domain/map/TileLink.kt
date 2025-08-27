@@ -7,6 +7,7 @@ import roughdraft.composeapp.generated.resources.Res
 
 sealed interface TileLink {
     val label: String
+    val info: String
     val minZoom: Int get() = TileCoordinates.MIN_ZOOM
     val maxZoom: Int get() = TileCoordinates.MAX_ZOOM
 
@@ -18,12 +19,14 @@ sealed interface TileLink {
 
     class StandartOSM(): TileLink {
         override val label: String = "Open Street Map"
+        override val info: String = "Стандартная карта Open Street Map (OSM)"
         override fun getLink(z: Int, x: Int, y: Int): String =
             "https://tile.openstreetmap.org/$z/$x/$y.png"
     }
 
     class CyclOSM(): TileLink {
         override val label: String = "Велодорожки"
+        override val info: String = "Карта Open Street Map с велодорожками. Велодорожки отмечены синим пунктиром"
 
         override fun getLink(z: Int, x: Int, y: Int): String =
             "https://b.tile-cyclosm.openstreetmap.fr/cyclosm/$z/$x/$y.png"
@@ -31,18 +34,13 @@ sealed interface TileLink {
 
     class WaterColors(): TileLink {
         override val label: String = "Акварель"
+        override val info: String = "OSM перерисованная под акварель. " +
+                "Максимальное приближение 16, дальше карта будет автоматически отображаться в стандартном OSM виде"
         override val maxZoom: Int = 16
 
         override fun getLink(z: Int, x: Int, y: Int): String =
-            "https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/$z/$x/$y.jpg"
-
-        override suspend fun loadTileBuffer(z: Int, x: Int, y: Int): Buffer {
-            return if(z > 16) {
-                val buffer = Buffer()
-                buffer.write(Res.readBytes("files/errorTile.jpg"))
-                buffer
-            } else super.loadTileBuffer(z, x, y)
-        }
+            if(z > 16) "https://tile.openstreetmap.org/$z/$x/$y.png"
+            else "https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/$z/$x/$y.jpg"
     }
 
     companion object {

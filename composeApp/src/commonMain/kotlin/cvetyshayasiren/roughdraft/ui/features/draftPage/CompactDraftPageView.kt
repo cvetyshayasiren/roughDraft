@@ -1,24 +1,26 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onLayoutRectChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil3.CoilImage
@@ -29,8 +31,6 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
 import cvetyshayasiren.roughdraft.domain.map.getMapState
-import cvetyshayasiren.roughdraft.domain.settings.SettingsState
-import cvetyshayasiren.roughdraft.ui.features.audioPlayer.AudioPlayerView
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.theme.smallText
@@ -38,15 +38,12 @@ import cvetyshayasiren.roughdraft.ui.theme.title
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
-import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewer
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
-import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
 import dev.chrisbanes.haze.rememberHazeState
-import io.ktor.client.plugins.HttpSend
 import org.jetbrains.compose.resources.painterResource
 import ovh.plrapps.mapcompose.ui.MapUI
 import roughdraft.composeapp.generated.resources.Res
@@ -58,13 +55,21 @@ fun CompactDraftPageView(
     page: DraftPageEntity,
     modifier: Modifier = Modifier
 ) {
+    val density = LocalDensity.current
+    val viewPortWidth = remember { mutableStateOf(0.dp) }
     val hazeState = rememberHazeState()
     val onColor = page.getOnColor()
-    val settings = SettingsState.settings.collectAsState()
+    val playerState = AudioPlayerInteractions.player.state.collectAsState()
+
+    val paddingOne = DesignStyle.multiBigPadding(4)
+    val paddingTwo = DesignStyle.multiBigPadding(8)
 
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(DesignStyle.bigPadding(), alignment = Alignment.Top),
+        modifier = modifier
+            .onLayoutRectChanged { rect ->
+                viewPortWidth.value = with(density) { rect.width.toDp() }
+            },
+        verticalArrangement = Arrangement.spacedBy(paddingOne, alignment = Alignment.Top),
         horizontalAlignment = Alignment.Start
     ) {
         Box(
@@ -77,6 +82,9 @@ fun CompactDraftPageView(
                     .fillMaxWidth()
                     .hazeSource(state = hazeState),
                 imageModel = { page.iconPath.getUri() },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.FillWidth
+                ),
                 failure = {
                     Image(
                         painter = painterResource(Res.drawable.failure),
@@ -93,7 +101,7 @@ fun CompactDraftPageView(
                             containerColor = page.color
                         )
                     )
-                    .padding(horizontal = DesignStyle.multiBigPadding()),
+                    .padding(horizontal = paddingOne, vertical = paddingTwo),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -121,27 +129,31 @@ fun CompactDraftPageView(
 
                     }
                 ) {
-                    Icon(
-                        modifier = Modifier.size(Config.FIRST_PLAY_BUTTON_SIZE),
-                        imageVector = AudioPlayerInteractions.player.state.value.swapPauseIcon(),
-                        contentDescription = "play/pause button"
-                    )
+                    AnimatedContent(
+                        targetState = playerState.value
+                    ) { state ->
+                        Icon(
+                            modifier = Modifier.size(Config.FIRST_PLAY_BUTTON_SIZE),
+                            imageVector = state.swapPauseIcon(),
+                            contentDescription = "play/pause button"
+                        )
+                    }
                 }
             }
         }
 
         Text(
             modifier = Modifier
-                .padding(start = DesignStyle.multiBigPadding(4)),
+                .padding(start = paddingTwo, end = paddingOne),
             text = page.poem,
             style = MaterialTheme.typography.basicText()
         )
 
-        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = DesignStyle.multiBigPadding()))
+        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = paddingOne))
 
         Text(
             modifier = Modifier
-                .padding(start = DesignStyle.multiBigPadding()),
+                .padding(start = paddingOne, end = paddingTwo),
             text = page.prose,
             style = MaterialTheme.typography.basicText()
         )
@@ -149,7 +161,7 @@ fun CompactDraftPageView(
         PhotoPager(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp)
+                .height(viewPortWidth.value)
                 .background(page.color),
             photoPaths = page.photoPaths
         )
@@ -157,7 +169,9 @@ fun CompactDraftPageView(
         MapUI(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(viewPortWidth.value)
+                .padding(paddingOne)
+                .clip(DesignStyle.roundedShape)
                 .blend(
                     backgroundMode = BackgroundMode.FromColor(page.color),
                     alpha = .5f
@@ -171,5 +185,7 @@ fun CompactDraftPageView(
                 )
             }
         )
+        Text("ссылка")
+        Spacer(Modifier.height(Config.TINY_PLAYER_HEIGHT * 2))
     }
 }

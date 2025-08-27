@@ -18,6 +18,7 @@ import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaf
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +48,7 @@ import dev.chrisbanes.haze.rememberHazeState
 @OptIn(ExperimentalMaterial3AdaptiveApi::class, ExperimentalHazeMaterialsApi::class)
 @Composable
 fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
-    var currentDestination: RoughDraftDestination by rememberSaveable {
+    val currentDestination: MutableState<RoughDraftDestination> = rememberSaveable {
         mutableStateOf(RoughDraftDestination.DraftPane)
     }
     val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
@@ -74,17 +75,18 @@ fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
                         )
                     },
                     label = { Text(destination.label) },
-                    selected = destination == currentDestination,
-                    onClick = { currentDestination = destination }
+                    selected = destination == currentDestination.value,
+                    onClick = { currentDestination.value = destination }
                 )
             }
         }
     ) {
         AnimatedContent(
-            modifier = Modifier.fillMaxSize(),
-            targetState = currentDestination
+            targetState = currentDestination.value
         ) { state ->
-            Box {
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
                 val currentPage = DraftBookInteractions.currentPage.collectAsState()
 
                 Box(
@@ -92,11 +94,12 @@ fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
                 ) {
                     when (state) {
                         RoughDraftDestination.DraftPane -> RoughDraftPaneView(
-                            scaffoldNavigator = scaffoldNavigator
+                            scaffoldNavigator = scaffoldNavigator,
+                            currentDestination = currentDestination
                         )
 
                         RoughDraftDestination.DraftBook -> DraftBookView(
-                            scaffoldNavigator = scaffoldNavigator
+                            currentDestination = currentDestination
                         )
 
                         RoughDraftDestination.MapDraftBook -> MapDraftBookView()

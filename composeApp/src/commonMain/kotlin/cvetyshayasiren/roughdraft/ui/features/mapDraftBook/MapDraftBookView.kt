@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.domain.map.TileLink
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
+import cvetyshayasiren.roughdraft.ui.theme.basicText
 import ovh.plrapps.mapcompose.ui.MapUI
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalComposeUiApi::class)
@@ -99,6 +100,10 @@ fun MapDraftBookView(
                                     vm.setTileLink(tileLink)
                                 },
                             state = mapStateVariant
+                        )
+                        Text(
+                            text = tileLink.info,
+                            style = MaterialTheme.typography.basicText()
                         )
                     }
                 }

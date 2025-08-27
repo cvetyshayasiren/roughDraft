@@ -15,12 +15,14 @@ import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewModelScope
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
+import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftDestination
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import kotlinx.coroutines.launch
 
@@ -28,10 +30,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun DraftBookView(
     modifier: Modifier = Modifier,
-    scaffoldNavigator: ThreePaneScaffoldNavigator<Any>
+    currentDestination: MutableState<RoughDraftDestination>
 ) {
     val pages = DraftBookInteractions.draftBook.collectAsState()
-    val scope = DraftBookInteractions.viewModelScope
 
     val settings = SettingsState.settings.collectAsState()
 
@@ -51,12 +52,13 @@ fun DraftBookView(
                         .background(page.getBrush())
                         .clickable {
                             DraftBookInteractions.setPage(page.name)
-                            scope.launch { scaffoldNavigator.navigateTo(SupportingPaneScaffoldRole.Main) }
+                            currentDestination.value = RoughDraftDestination.DraftPane
+
                         },
                     page = page
                 )
             }
-            Spacer(Modifier.height(DesignStyle.bigPadding() * 4))
+            Spacer(Modifier.height(DesignStyle.multiBigPadding(4)))
 
             IconButton(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
