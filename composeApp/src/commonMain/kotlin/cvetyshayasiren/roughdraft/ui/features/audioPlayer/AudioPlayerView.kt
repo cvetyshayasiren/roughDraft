@@ -32,7 +32,7 @@ fun AudioPlayerView(
         visible = playerState.value.isFirstInteractionDone()
     ) {
         AnimatedContent(
-            modifier = Modifier.padding(DesignStyle.smallPadding()),
+            modifier = Modifier.padding(DesignStyle.multiBigPadding()),
             targetState = expandedState.value
         ) { expanded ->
             when(expanded) {

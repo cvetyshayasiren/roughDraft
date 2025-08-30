@@ -17,7 +17,7 @@ object AudioPlayerInteractions: ViewModel() {
             player.songIsOver().collect { isOver ->
                 if(isOver) {
                     when(settings.value.playbackOptions) {
-                        PlaybackOptions.Stoppable -> stop()
+                        PlaybackOptions.Stoppable -> player.stop()
                         PlaybackOptions.RepeatOne -> { setProgress(0.0); player.play() }
                         PlaybackOptions.RepeatNext -> { DraftBookInteractions.nextPage() }
                     }
@@ -26,20 +26,29 @@ object AudioPlayerInteractions: ViewModel() {
         }
     }
 
-    fun prepareAndPplay() {
+    private fun prepare() {
         val audioUri = currentPage.value.audioUri
         player.prepare(audioUri)
+    }
+
+    private fun prepareAndPlay() {
+        prepare()
         player.play()
+    }
+
+    fun firstPlayInteraction() {
+        when(player.state.value.firstInteractionDone) {
+            true -> player.swapPause()
+            false -> prepareAndPlay()
+        }
     }
 
     fun swapPause() = player.swapPause()
 
-    fun stop() = player.stop()
-
-    fun checkPlay() {
-        if(player.state.value.isPlaying) {
-            stop()
-            prepareAndPplay()
+    fun pageSwapped() {
+        when(player.state.value.isPlaying) {
+            true -> prepareAndPlay()
+            false -> prepare()
         }
     }
 

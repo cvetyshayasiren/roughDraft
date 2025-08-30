@@ -2,6 +2,7 @@ package cvetyshayasiren.roughdraft.ui.features.draftBook
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -15,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
@@ -52,20 +55,25 @@ fun DraftBookPageCard(
                     .weight(.3f)
                     .clip(shape = DesignStyle.customShape)
                     .shadow(elevation = DesignStyle.shadowElevation),
-                imageModel = { page.iconPath.getUri() }
+                imageModel = { page.iconPath.getUri() },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.FillHeight
+                )
             )
 
             Column(
-                modifier = Modifier.weight(.6f),
+                modifier = Modifier.weight(.6f).padding(horizontal = DesignStyle.smallPadding()),
                 verticalArrangement = Arrangement.spacedBy(DesignStyle.smallPadding(), Alignment.CenterVertically),
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
+                    modifier = Modifier.basicMarquee(),
                     text = page.name,
                     style = MaterialTheme.typography.basicText(),
                     color = onPageColor
                 )
                 Text(
+                    modifier = Modifier.basicMarquee(),
                     text = page.prettyDate,
                     style = MaterialTheme.typography.smallText(
                         fontWeight = FontWeight.Light

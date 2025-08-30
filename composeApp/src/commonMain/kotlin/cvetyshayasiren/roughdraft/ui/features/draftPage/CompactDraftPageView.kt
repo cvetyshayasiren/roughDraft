@@ -18,18 +18,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.onLayoutRectChanged
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions
+import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerState
 import cvetyshayasiren.roughdraft.domain.audioPlayer.swapPauseIcon
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
+import cvetyshayasiren.roughdraft.domain.map.ThirdPartyMaps
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
@@ -37,6 +38,7 @@ import cvetyshayasiren.roughdraft.ui.theme.smallText
 import cvetyshayasiren.roughdraft.ui.theme.title
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
+import cvetyshayasiren.roughdraft.ui.utils.containerWidthDp
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import dev.chrisbanes.haze.hazeEffect
@@ -55,8 +57,7 @@ fun CompactDraftPageView(
     page: DraftPageEntity,
     modifier: Modifier = Modifier
 ) {
-    val density = LocalDensity.current
-    val viewPortWidth = remember { mutableStateOf(0.dp) }
+    val viewportWidth = remember { mutableStateOf(0.dp) }
     val hazeState = rememberHazeState()
     val onColor = page.getOnColor()
     val playerState = AudioPlayerInteractions.player.state.collectAsState()
@@ -66,9 +67,7 @@ fun CompactDraftPageView(
 
     Column(
         modifier = modifier
-            .onLayoutRectChanged { rect ->
-                viewPortWidth.value = with(density) { rect.width.toDp() }
-            },
+            .containerWidthDp(viewportWidth),
         verticalArrangement = Arrangement.spacedBy(paddingOne, alignment = Alignment.Top),
         horizontalAlignment = Alignment.Start
     ) {
@@ -123,18 +122,15 @@ fun CompactDraftPageView(
 
                 IconButton(
                     onClick = {
-                        if(AudioPlayerInteractions.player.state.value.firstInteractionDone) {
-                            AudioPlayerInteractions.swapPause()
-                        } else AudioPlayerInteractions.prepareAndPplay()
-
+                        AudioPlayerInteractions.firstPlayInteraction()
                     }
                 ) {
                     AnimatedContent(
-                        targetState = playerState.value
-                    ) { state ->
+                        targetState = playerState.value.swapPauseIcon()
+                    ) { icon ->
                         Icon(
                             modifier = Modifier.size(Config.FIRST_PLAY_BUTTON_SIZE),
-                            imageVector = state.swapPauseIcon(),
+                            imageVector = icon,
                             contentDescription = "play/pause button"
                         )
                     }
@@ -161,7 +157,7 @@ fun CompactDraftPageView(
         PhotoPager(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(viewPortWidth.value)
+                .height(viewportWidth.value)
                 .background(page.color),
             photoPaths = page.photoPaths
         )
@@ -169,7 +165,7 @@ fun CompactDraftPageView(
         MapUI(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(viewPortWidth.value)
+                .height(viewportWidth.value)
                 .padding(paddingOne)
                 .clip(DesignStyle.roundedShape)
                 .blend(
@@ -185,7 +181,15 @@ fun CompactDraftPageView(
                 )
             }
         )
-        Text("ссылка")
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(space = DesignStyle.smallPadding()),
+            verticalArrangement = Arrangement.spacedBy(DesignStyle.smallPadding())
+        ) {
+            ThirdPartyMaps.list.forEach { map ->
+                Text(text = map.getLink(page.coordinates))
+            }
+        }
+
         Spacer(Modifier.height(Config.TINY_PLAYER_HEIGHT * 2))
     }
 }

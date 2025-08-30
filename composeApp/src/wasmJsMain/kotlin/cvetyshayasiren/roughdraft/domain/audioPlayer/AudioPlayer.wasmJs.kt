@@ -81,7 +81,12 @@ actual class AudioPlayer {
     actual fun close() {
         getPlayerElement()?.apply {
             remove()
-            setState(AudioPlayerState())
+            setState(
+                AudioPlayerState(
+                    volume = _state.value.volume,
+                    firstInteractionDone = _state.value.firstInteractionDone
+                )
+            )
         }
     }
 

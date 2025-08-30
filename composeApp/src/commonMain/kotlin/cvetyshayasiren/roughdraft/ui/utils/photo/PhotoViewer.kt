@@ -11,7 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.window.DialogProperties
+import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil3.CoilImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
@@ -62,7 +64,10 @@ fun PhotoViewer(
                         translationY = offset.y
                     )
                     .transformable(state = state),
-                imageModel = { photoPath.getUri() }
+                imageModel = { photoPath.getUri() },
+                imageOptions = ImageOptions(
+                    contentScale = ContentScale.FillHeight
+                )
             )
         }
     }

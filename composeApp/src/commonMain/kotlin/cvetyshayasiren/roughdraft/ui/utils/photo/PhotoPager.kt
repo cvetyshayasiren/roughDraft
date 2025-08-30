@@ -1,6 +1,7 @@
 package cvetyshayasiren.roughdraft.ui.utils.photo
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -31,6 +32,7 @@ fun PhotoPager(
         val mess = remember { PhotoMess.random() }
         PhotoViewer(
             modifier = Modifier
+                .fillMaxSize()
                 .clip(mess.shape)
                 .graphicsLayer {
                     val pageOffset = (

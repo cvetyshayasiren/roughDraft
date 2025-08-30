@@ -79,6 +79,7 @@ fun ExpandedPlayerView(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(.38f)
+                .clip(DesignStyle.roundedShape)
                 .clickable { expandedState.value = false },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(
@@ -212,11 +213,11 @@ fun ExpandedPlayerView(
                 onClick = { vm.swapPause() }
             ) {
                 AnimatedContent(
-                    targetState = playerState.value
-                ) { state ->
+                    targetState = playerState.value.swapPauseIcon()
+                ) { icon ->
                     Icon(
                         modifier = Modifier.fillMaxSize(),
-                        imageVector = state.swapPauseIcon(),
+                        imageVector = icon,
                         contentDescription = "play/stop button"
                     )
                 }
