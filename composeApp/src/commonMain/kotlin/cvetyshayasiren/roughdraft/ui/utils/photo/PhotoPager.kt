@@ -26,7 +26,7 @@ fun PhotoPager(
     HorizontalPager(
         state = pagerState,
         modifier = modifier,
-        pageSize = PageSize.Fixed(200.dp),
+        pageSize = PageSize.Fill,
         contentPadding = PaddingValues(horizontal = 64.dp)
     ) { pageNumber ->
         val mess = remember { PhotoMess.random() }
