@@ -14,9 +14,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.window.DialogProperties
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,12 +36,13 @@ fun PhotoViewer(
         offset += offsetChange
     }
 
-    CoilImage(
+    AsyncImage(
         modifier = modifier
             .clickable {
                 enabled.value = !enabled.value
             },
-        imageModel = { photoPath.getUri() }
+        uri = photoPath.getComposeResourceUri(),
+        contentDescription = "photo"
     )
     AnimatedVisibility(
         visible = enabled.value
@@ -51,7 +52,7 @@ fun PhotoViewer(
             onDismissRequest = { enabled.value = false },
             properties = DialogProperties()
         ) {
-            CoilImage(
+            AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
                     .clickable {
@@ -65,10 +66,9 @@ fun PhotoViewer(
                         translationY = offset.y
                     )
                     .transformable(state = state),
-                imageModel = { photoPath.getUri() },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.FillHeight
-                )
+                uri = photoPath.getComposeResourceUri(),
+                contentDescription = "photo",
+                contentScale = ContentScale.FillHeight
             )
         }
     }

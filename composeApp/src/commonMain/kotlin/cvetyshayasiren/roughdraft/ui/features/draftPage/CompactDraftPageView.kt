@@ -21,13 +21,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerState
 import cvetyshayasiren.roughdraft.domain.audioPlayer.swapPauseIcon
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
 import cvetyshayasiren.roughdraft.domain.map.ThirdPartyMaps
@@ -76,20 +76,13 @@ fun CompactDraftPageView(
                 .shadow(elevation = DesignStyle.shadowElevation),
             contentAlignment = Alignment.BottomCenter
         ) {
-            CoilImage(
+            AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
                     .hazeSource(state = hazeState),
-                imageModel = { page.iconPath.getUri() },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.FillWidth
-                ),
-                failure = {
-                    Image(
-                        painter = painterResource(Res.drawable.failure),
-                        contentDescription = "on failure result picture"
-                    )
-                }
+                uri = page.iconPath.getComposeResourceUri(),
+                contentDescription = "draft page image",
+                contentScale = ContentScale.FillWidth
             )
             Row(
                 modifier = Modifier

@@ -5,7 +5,7 @@ composeMultiplatform = "1.9.0-alpha03"
 junit = "4.13.2"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
-landscapist = "2.5.1"
+landscapist = "2.5.2"
 serialization-json = "1.9.0"
 mapcompose = "0.10.0"
 adaptive = "1.2.0-alpha03"
@@ -14,6 +14,8 @@ materialkolor = "3.0.0"
 datetime = "0.7.1"
 kim = "0.26"
 haze = "1.6.10"
+sketch = "4.4.0-alpha01"
+fuel = "3.0.0-alpha04"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -34,10 +36,14 @@ datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "d
 kim = { module = "com.ashampoo:kim", version.ref = "kim" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
+sketch = { module = "io.github.panpf.sketch4:sketch-compose", version.ref = "sketch" }
+sketch-res = { module = "io.github.panpf.sketch4:sketch-compose-resources", version.ref = "sketch" }
+fuel = { module = "com.github.kittinunf.fuel:fuel", version.ref = "fuel" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]
 haze = ["haze", "haze-materials"]
+sketch = ["sketch", "sketch-res"]
 
 [plugins]
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }

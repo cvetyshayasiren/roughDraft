@@ -12,7 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
+import com.github.panpf.sketch.fetch.newComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.domain.map.toRelativeCoordinates
@@ -40,11 +41,12 @@ fun MetaDataTest() {
                         x = coordinates.x,
                         y = coordinates.y,
                     ) {
-                        CoilImage(
+                        AsyncImage(
                             modifier = Modifier
                                 .size(48.dp)
                                 .clip(DesignStyle.customShape),
-                            imageModel = { Res.getUri(imagePath) }
+                            uri = newComposeResourceUri(Res.getUri(imagePath)),
+                            contentDescription = null
                         )
                         Text(coordinates.toString(), color = Color.Black)
                     }

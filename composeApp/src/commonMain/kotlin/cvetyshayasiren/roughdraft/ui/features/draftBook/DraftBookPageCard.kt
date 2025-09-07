@@ -19,9 +19,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
@@ -50,15 +50,14 @@ fun DraftBookPageCard(
                 alignment = Alignment.Start
             )
         ) {
-            CoilImage(
+            AsyncImage(
                 modifier = Modifier
                     .weight(.3f)
                     .clip(shape = DesignStyle.customShape)
                     .shadow(elevation = DesignStyle.shadowElevation),
-                imageModel = { page.iconPath.getUri() },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.FillHeight
-                )
+                uri = page.iconPath.getComposeResourceUri(),
+                contentDescription = "draft book page image",
+                contentScale = ContentScale.FillHeight
             )
 
             Column(

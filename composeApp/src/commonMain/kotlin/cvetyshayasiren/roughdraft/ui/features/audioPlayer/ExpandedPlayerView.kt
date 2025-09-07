@@ -45,7 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions
 import cvetyshayasiren.roughdraft.domain.audioPlayer.PlaybackOptions
@@ -53,6 +53,7 @@ import cvetyshayasiren.roughdraft.domain.audioPlayer.prettyCurrentTime
 import cvetyshayasiren.roughdraft.domain.audioPlayer.prettyDuration
 import cvetyshayasiren.roughdraft.domain.audioPlayer.swapPauseIcon
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
@@ -87,11 +88,12 @@ fun ExpandedPlayerView(
                 alignment = Alignment.Start
             )
         ) {
-            CoilImage(
+            AsyncImage(
                 modifier = Modifier
                     .fillMaxHeight()
                     .clip(DesignStyle.customShape),
-                imageModel = { currentPage.value.iconPath.getUri() }
+                uri = currentPage.value.iconPath.getComposeResourceUri(),
+                contentDescription = "player image"
             )
             Column(
                 verticalArrangement = Arrangement.Center,

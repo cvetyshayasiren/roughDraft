@@ -13,9 +13,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
@@ -47,7 +48,7 @@ sealed interface CustomMarkers {
 
     @Composable
     fun View(page: DraftPageEntity) {
-        CoilImage(
+        AsyncImage(
             modifier = Modifier
                 .size(48.dp)
                 .clip(shape = DesignStyle.markerShape)
@@ -55,7 +56,8 @@ sealed interface CustomMarkers {
                     elevation = DesignStyle.shadowElevation,
                     shape = DesignStyle.markerShape
                 ),
-            imageModel = { page.iconPath.getUri() }
+            uri = page.iconPath.getComposeResourceUri(),
+            contentDescription = "marker image"
         )
     }
 
@@ -110,7 +112,7 @@ sealed interface CustomMarkers {
 
         @Composable
         override fun View(page: DraftPageEntity) {
-            CoilImage(
+            AsyncImage(
                 modifier = Modifier
                     .size(48.dp)
                     .clip(shape = DesignStyle.markerShape)
@@ -119,7 +121,8 @@ sealed interface CustomMarkers {
                         elevation = DesignStyle.shadowElevation,
                         shape = DesignStyle.markerShape
                     ),
-                imageModel = { page.iconPath.getUri() }
+                uri = page.iconPath.getComposeResourceUri(),
+                contentDescription = "marker image"
             )
         }
 

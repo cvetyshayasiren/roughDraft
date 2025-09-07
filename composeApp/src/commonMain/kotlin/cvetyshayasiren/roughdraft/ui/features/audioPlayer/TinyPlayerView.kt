@@ -14,10 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
-import com.skydoves.landscapist.coil3.CoilImage
+import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions
 import cvetyshayasiren.roughdraft.domain.audioPlayer.swapPauseIcon
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
@@ -36,13 +37,13 @@ fun TinyPlayerView(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        CoilImage(
+        AsyncImage(
             modifier = Modifier
                 .fillMaxHeight()
                 .clip(DesignStyle.customShape),
-            imageModel = { currentPage.value.iconPath.getUri() }
+            uri = currentPage.value.iconPath.getComposeResourceUri(),
+            contentDescription = "tiny player image"
         )
-
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,

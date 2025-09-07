@@ -45,7 +45,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.landscapist.coil3)
             implementation(libs.serialization.json)
             implementation(libs.mapcompose)
             implementation(compose.materialIconsExtended)
@@ -56,6 +55,8 @@ kotlin {
             implementation(libs.datetime)
             implementation(libs.kim)
             implementation(libs.bundles.haze)
+            implementation(libs.bundles.sketch)
+            implementation(libs.fuel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.ashampoo.kim.Kim
 import com.ashampoo.kim.common.convertToPhotoMetadata
 import com.ashampoo.kim.model.PhotoMetadata
+import com.github.panpf.sketch.fetch.newComposeResourceUri
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import roughdraft.composeapp.generated.resources.Res
@@ -24,3 +25,5 @@ fun PhotoPath.getMetaData(
 }
 
 fun PhotoPath.getUri(): String = Res.getUri(this)
+
+fun PhotoPath.getComposeResourceUri(): String = newComposeResourceUri(getUri())
