@@ -55,8 +55,7 @@ fun DraftBookPageCard(
                     .clip(shape = DesignStyle.customShape)
                     .shadow(elevation = DesignStyle.shadowElevation),
                 uri = page.iconPath.getComposeResourceUri(),
-                contentDescription = "draft book page image",
-                contentScale = ContentScale.FillHeight
+                contentDescription = "draft book page image"
             )
 
             Column(

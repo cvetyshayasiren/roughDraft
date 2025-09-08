@@ -144,6 +144,7 @@ fun CompactDraftPageView(
                 .fillMaxWidth()
                 .height(viewportWidth.value)
                 .background(page.color),
+            pageSize = viewportWidth.value * .6f,
             photoPaths = page.photoPaths
         )
 

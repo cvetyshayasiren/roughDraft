@@ -21,7 +21,8 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUr
 @Composable
 fun PhotoViewer(
     modifier: Modifier = Modifier,
-    photoPath: PhotoPath
+    photoPath: PhotoPath,
+    contentScale: ContentScale = ContentScale.Fit
 ) {
     val enabled = remember { mutableStateOf(false) }
 
@@ -40,7 +41,8 @@ fun PhotoViewer(
                 enabled.value = !enabled.value
             },
         uri = photoPath.getComposeResourceUri(),
-        contentDescription = "photo"
+        contentDescription = "photo",
+        contentScale = contentScale,
     )
     AnimatedVisibility(
         visible = enabled.value

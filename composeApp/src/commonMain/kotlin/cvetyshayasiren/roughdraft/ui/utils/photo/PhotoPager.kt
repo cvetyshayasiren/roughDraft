@@ -10,14 +10,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
+import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import kotlin.math.absoluteValue
 
 @Composable
 fun PhotoPager(
     modifier: Modifier = Modifier,
+    pageSize: Dp,
     photoPaths: List<PhotoPath>
 ) {
     val pagerState = rememberPagerState(pageCount = { photoPaths.size })
@@ -25,14 +29,14 @@ fun PhotoPager(
     HorizontalPager(
         state = pagerState,
         modifier = modifier,
-        pageSize = PageSize.Fill,
-        contentPadding = PaddingValues(horizontal = 64.dp)
+        pageSize = PageSize.Fixed(pageSize),
+        contentPadding = PaddingValues(DesignStyle.bigPadding())
     ) { pageNumber ->
         val mess = remember { PhotoMess.random() }
         PhotoViewer(
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
-                .clip(mess.shape)
                 .graphicsLayer {
                     val pageOffset = (
                             (pagerState.currentPage - pageNumber) + pagerState
@@ -65,8 +69,8 @@ fun PhotoPager(
                         stop = 1f,
                         fraction = fraction
                     )
-                    clip = false
-                },
+                }
+                .clip(mess.shape),
             photoPath = photoPaths[pageNumber]
         )
     }

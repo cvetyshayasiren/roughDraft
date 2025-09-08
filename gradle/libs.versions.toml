@@ -15,7 +15,6 @@ datetime = "0.7.1"
 kim = "0.26"
 haze = "1.6.10"
 sketch = "4.4.0-alpha01"
-ksp = "2.2.10-2.0.2"
 ktorfit = "2.6.4"
 
 [libraries]
@@ -52,5 +51,3 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }

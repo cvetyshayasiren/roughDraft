@@ -9,7 +9,7 @@ import kotlinx.io.Buffer
 import kotlinx.io.InternalIoApi
 
 object TileLoader {
-    val client = HttpClient()
+    private val client = HttpClient()
 
     @OptIn(InternalIoApi::class, InternalAPI::class)
     suspend fun loadTileBuffer(link: String): Buffer {
