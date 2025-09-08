@@ -18,7 +18,6 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteraction
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.smallText
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewer

@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.serialization)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.ktorfit)
 }
 
 kotlin {
@@ -56,7 +58,7 @@ kotlin {
             implementation(libs.kim)
             implementation(libs.bundles.haze)
             implementation(libs.bundles.sketch)
-            implementation(libs.fuel)
+            implementation(libs.ktorfit)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

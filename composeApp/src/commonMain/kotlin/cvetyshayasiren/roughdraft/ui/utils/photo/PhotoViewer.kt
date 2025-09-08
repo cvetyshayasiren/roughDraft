@@ -7,7 +7,6 @@ import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -17,7 +16,6 @@ import androidx.compose.ui.window.DialogProperties
 import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

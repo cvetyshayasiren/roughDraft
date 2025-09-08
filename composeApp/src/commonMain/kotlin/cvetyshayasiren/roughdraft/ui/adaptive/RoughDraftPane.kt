@@ -1,6 +1,5 @@
 package cvetyshayasiren.roughdraft.ui.adaptive
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
@@ -12,7 +11,6 @@ import androidx.compose.ui.Modifier
 import cvetyshayasiren.roughdraft.ui.features.draftBook.DraftBookView
 import cvetyshayasiren.roughdraft.ui.features.draftPage.DraftPageView
 import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftDestination
-import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable

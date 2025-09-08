@@ -1,7 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
@@ -18,17 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.Config
 import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerInteractions
-import cvetyshayasiren.roughdraft.domain.audioPlayer.AudioPlayerState
 import cvetyshayasiren.roughdraft.domain.audioPlayer.swapPauseIcon
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
 import cvetyshayasiren.roughdraft.domain.map.ThirdPartyMaps
 import cvetyshayasiren.roughdraft.domain.map.getMapState
@@ -46,10 +41,7 @@ import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
 import dev.chrisbanes.haze.rememberHazeState
-import org.jetbrains.compose.resources.painterResource
 import ovh.plrapps.mapcompose.ui.MapUI
-import roughdraft.composeapp.generated.resources.Res
-import roughdraft.composeapp.generated.resources.failure
 
 @OptIn(ExperimentalHazeMaterialsApi::class)
 @Composable

@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getUri
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.theme.smallText

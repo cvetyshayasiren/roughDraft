@@ -2,7 +2,6 @@ package cvetyshayasiren.roughdraft.domain.map
 
 import cvetyshayasiren.roughdraft.data.TileLoader
 import kotlinx.io.Buffer
-import roughdraft.composeapp.generated.resources.Res
 
 
 sealed interface TileLink {

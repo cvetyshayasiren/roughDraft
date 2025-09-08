@@ -12,19 +12,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
-import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewModelScope
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftDestination
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable

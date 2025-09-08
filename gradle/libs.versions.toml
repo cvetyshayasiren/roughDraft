@@ -15,7 +15,8 @@ datetime = "0.7.1"
 kim = "0.26"
 haze = "1.6.10"
 sketch = "4.4.0-alpha01"
-fuel = "3.0.0-alpha04"
+ksp = "2.2.10-2.0.2"
+ktorfit = "2.6.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -38,7 +39,7 @@ haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
 sketch = { module = "io.github.panpf.sketch4:sketch-compose", version.ref = "sketch" }
 sketch-res = { module = "io.github.panpf.sketch4:sketch-compose-resources", version.ref = "sketch" }
-fuel = { module = "com.github.kittinunf.fuel:fuel", version.ref = "fuel" }
+ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]
@@ -51,3 +52,5 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
