@@ -1,11 +1,14 @@
 package cvetyshayasiren.roughdraft.ui.utils.photo
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,9 +33,10 @@ fun PhotoPager(
         state = pagerState,
         modifier = modifier,
         pageSize = PageSize.Fixed(pageSize),
-        contentPadding = PaddingValues(DesignStyle.bigPadding())
+        contentPadding = PaddingValues(horizontal = DesignStyle.multiBigPadding(4))
     ) { pageNumber ->
         val mess = remember { PhotoMess.random() }
+        val borderAlpha = remember { mutableStateOf(0f) }
         PhotoViewer(
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -43,6 +47,7 @@ fun PhotoPager(
                                 .currentPageOffsetFraction
                             ).absoluteValue
                     val fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    borderAlpha.value = fraction
 
                     translationX = lerp(
                         start = mess.offset.x,
@@ -70,7 +75,12 @@ fun PhotoPager(
                         fraction = fraction
                     )
                 }
-                .clip(mess.shape),
+                .clip(mess.shape)
+                .border(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = borderAlpha.value),
+                    shape = mess.shape
+                ),
             photoPath = photoPaths[pageNumber]
         )
     }

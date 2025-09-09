@@ -14,8 +14,9 @@ data class PhotoMess(
 ) {
     companion object {
         const val MAX_OFFSET = 64
-        const val MAX_ROTATION_ANGLE = 45
-        const val MAX_SCALE_DEVIATION = 0.2
+        const val MAX_ROTATION_ANGLE = 25
+        const val MAX_SCALE_DEVIATION = 0.3
+        const val MIN_ROUNDED = 8
         const val MAX_ROUNDED = 36
 
         fun random(): PhotoMess = PhotoMess(
@@ -25,7 +26,7 @@ data class PhotoMess(
             ),
             rotation = (-MAX_ROTATION_ANGLE..MAX_ROTATION_ANGLE).random().toFloat(),
             scale = Random.nextDouble(from = 1.0 - MAX_SCALE_DEVIATION, until = 1.0 + MAX_SCALE_DEVIATION).toFloat(),
-            shape = RoundedCornerShape(size = (0..MAX_ROUNDED).random().dp)
+            shape = RoundedCornerShape(size = (MIN_ROUNDED..MAX_ROUNDED).random().dp)
         )
     }
 }
