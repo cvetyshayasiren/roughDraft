@@ -56,11 +56,12 @@ fun CompactDraftPageView(
 
     val paddingOne = DesignStyle.multiBigPadding(4)
     val paddingTwo = DesignStyle.multiBigPadding(8)
+    val paddingThree = DesignStyle.multiBigPadding(16)
 
     Column(
         modifier = modifier
             .containerWidthDp(viewportWidth),
-        verticalArrangement = Arrangement.spacedBy(paddingOne, alignment = Alignment.Top),
+        verticalArrangement = Arrangement.spacedBy(paddingThree, alignment = Alignment.Top),
         horizontalAlignment = Alignment.Start
     ) {
         Box(
@@ -129,9 +130,7 @@ fun CompactDraftPageView(
             text = page.poem,
             style = MaterialTheme.typography.basicText()
         )
-
         WavyHorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = paddingOne))
-
         Text(
             modifier = Modifier
                 .padding(start = paddingOne, end = paddingTwo),
