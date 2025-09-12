@@ -5,25 +5,49 @@ import com.ashampoo.kim.Kim
 import com.ashampoo.kim.common.convertToPhotoMetadata
 import com.ashampoo.kim.model.PhotoMetadata
 import com.github.panpf.sketch.fetch.newComposeResourceUri
+import com.github.panpf.sketch.util.SystemCallbacks
+import cvetyshayasiren.roughdraft.domain.map.RelativeCoordinates
+import cvetyshayasiren.roughdraft.domain.map.toRelativeCoordinates
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import roughdraft.composeapp.generated.resources.Res
 
 typealias PhotoPath = String
 
-fun PhotoPath.getMetaData(
-    scope: CoroutineScope = DraftBookInteractions.viewModelScope,
-    callBack: (photoMetaData: PhotoMetadata) -> Unit
-) {
-    scope.launch {
-        Kim
-            .readMetadata(Res.readBytes(this@getMetaData))
-            ?.convertToPhotoMetadata()?.let { metadata ->
-                callBack(metadata)
-            }
-    }
+suspend fun PhotoPath.getPhotoMetaData(): PhotoMetadata? {
+    Kim
+        .readMetadata(Res.readBytes(this@getPhotoMetaData))
+        ?.convertToPhotoMetadata()?.let { metadata ->
+            return metadata
+        }
+    return null
 }
 
 fun PhotoPath.getUri(): String = Res.getUri(this)
 
 fun PhotoPath.getComposeResourceUri(): String = newComposeResourceUri(getUri())
+
+suspend fun PhotoPath.getStringPhotoMetaData(): String =
+    buildString {
+        getPhotoMetaData()?.let { photoMetaData ->
+            photoMetaData.takenDate?.let {
+                appendLine(
+                    "time $it"
+                )
+            }
+            photoMetaData.gpsCoordinates?.let { gps ->
+                appendLine("gps ${gps.latLongString}")
+            }
+        }
+    }
+
+fun PhotoPath.getCoordinatesMetaData(
+    scope: CoroutineScope = DraftBookInteractions.viewModelScope,
+    callback: (coordinates: RelativeCoordinates) -> Unit
+) {
+    scope.launch {
+        getPhotoMetaData()?.gpsCoordinates?.toRelativeCoordinates()?.let { relativeCoordinates ->
+            callback(relativeCoordinates)
+        }
+    }
+}

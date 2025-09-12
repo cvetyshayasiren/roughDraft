@@ -14,7 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.fetch.newComposeResourceUri
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getCoordinatesMetaData
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getPhotoMetaData
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.domain.map.toRelativeCoordinates
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
@@ -34,22 +35,20 @@ fun MetaDataTest() {
         val mapState = remember { getMapState() }
 
         LaunchedEffect(Unit) {
-            imagePath.getMetaData { photoMetaData ->
-                photoMetaData.gpsCoordinates?.toRelativeCoordinates()?.let { coordinates ->
-                    mapState.addMarker(
-                        id = coordinates.toString(),
-                        x = coordinates.x,
-                        y = coordinates.y,
-                    ) {
-                        AsyncImage(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(DesignStyle.customShape),
-                            uri = newComposeResourceUri(Res.getUri(imagePath)),
-                            contentDescription = null
-                        )
-                        Text(coordinates.toString(), color = Color.Black)
-                    }
+            imagePath.getCoordinatesMetaData { coordinates ->
+                mapState.addMarker(
+                    id = coordinates.toString(),
+                    x = coordinates.x,
+                    y = coordinates.y,
+                ) {
+                    AsyncImage(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(DesignStyle.customShape),
+                        uri = newComposeResourceUri(Res.getUri(imagePath)),
+                        contentDescription = null
+                    )
+                    Text(coordinates.toString(), color = Color.Black)
                 }
             }
         }

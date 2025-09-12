@@ -141,8 +141,8 @@ fun CompactDraftPageView(
         PhotoPager(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(viewportWidth.value)
-                .background(page.color),
+                .aspectRatio(1f)
+                .background(MaterialTheme.colorScheme.surfaceBright),
             pageSize = viewportWidth.value * .6f,
             photoPaths = page.photoPaths
         )
@@ -150,7 +150,7 @@ fun CompactDraftPageView(
         MapUI(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(viewportWidth.value)
+                .aspectRatio(1f)
                 .padding(paddingOne)
                 .clip(DesignStyle.roundedShape)
                 .blend(

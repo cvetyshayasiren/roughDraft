@@ -17,7 +17,8 @@ import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getMetaData
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getCoordinatesMetaData
+import cvetyshayasiren.roughdraft.domain.draftsInteractions.getPhotoMetaData
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.smallText
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewer
@@ -87,21 +88,19 @@ sealed interface CustomMarkers {
                         View(page)
                     }
                     page.photoPaths.forEachIndexed { index, imagePath ->
-                        imagePath.getMetaData { metadata ->
-                            metadata.gpsCoordinates?.toRelativeCoordinates()?.let { coordinates ->
-                                addMarker(
-                                    id = page.name + index,
-                                    x = coordinates.x,
-                                    y = coordinates.y,
-                                    relativeOffset = Offset(-.5f, -.5f),
-                                    renderingStrategy = RenderingStrategy.Clustering(page.name)
-                                ) {
-                                    PhotoViewer(
-                                        modifier = Modifier
-                                            .size(48.dp),
-                                        photoPath = imagePath
-                                    )
-                                }
+                        imagePath.getCoordinatesMetaData { coordinates ->
+                            addMarker(
+                                id = page.name + index,
+                                x = coordinates.x,
+                                y = coordinates.y,
+                                relativeOffset = Offset(-.5f, -.5f),
+                                renderingStrategy = RenderingStrategy.Clustering(page.name)
+                            ) {
+                                PhotoViewer(
+                                    modifier = Modifier
+                                        .size(48.dp),
+                                    photoPath = imagePath
+                                )
                             }
                         }
                     }
