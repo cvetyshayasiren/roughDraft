@@ -15,9 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import com.github.panpf.sketch.fetch.newComposeResourceUri
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getCoordinatesMetaData
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.getPhotoMetaData
 import cvetyshayasiren.roughdraft.domain.map.getMapState
-import cvetyshayasiren.roughdraft.domain.map.toRelativeCoordinates
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.ui.MapUI

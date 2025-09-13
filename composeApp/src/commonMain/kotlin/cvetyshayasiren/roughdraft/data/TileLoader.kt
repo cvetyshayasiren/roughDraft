@@ -1,10 +1,9 @@
 package cvetyshayasiren.roughdraft.data
 
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.statement.readRawBytes
-import io.ktor.client.statement.request
-import io.ktor.utils.io.InternalAPI
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.utils.io.*
 import kotlinx.io.Buffer
 import kotlinx.io.InternalIoApi
 

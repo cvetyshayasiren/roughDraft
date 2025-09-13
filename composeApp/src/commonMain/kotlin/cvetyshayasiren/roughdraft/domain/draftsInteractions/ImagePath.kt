@@ -5,7 +5,6 @@ import com.ashampoo.kim.Kim
 import com.ashampoo.kim.common.convertToPhotoMetadata
 import com.ashampoo.kim.model.PhotoMetadata
 import com.github.panpf.sketch.fetch.newComposeResourceUri
-import com.github.panpf.sketch.util.SystemCallbacks
 import cvetyshayasiren.roughdraft.domain.map.RelativeCoordinates
 import cvetyshayasiren.roughdraft.domain.map.toRelativeCoordinates
 import kotlinx.coroutines.CoroutineScope

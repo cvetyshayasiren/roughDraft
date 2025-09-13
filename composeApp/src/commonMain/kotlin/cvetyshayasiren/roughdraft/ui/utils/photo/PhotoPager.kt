@@ -1,58 +1,47 @@
 package cvetyshayasiren.roughdraft.ui.utils.photo
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.OverscrollEffect
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.snapping.SnapPosition
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberOverscrollEffect
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowLeft
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
-import androidx.compose.material.icons.filled.ArrowLeft
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.onPointerEvent
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import androidx.compose.ui.zIndex
-import androidx.lifecycle.viewModelScope
-import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
+import cvetyshayasiren.roughdraft.ui.utils.onHorizontalDrag
+import cvetyshayasiren.roughdraft.ui.utils.onMouseScroll
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PhotoPager(
     modifier: Modifier = Modifier,
@@ -66,7 +55,22 @@ fun PhotoPager(
 
     HorizontalPager(
         state = pagerState,
-        modifier = modifier,
+        modifier = modifier
+            .onHorizontalDrag { isForward, _ ->
+                val pageToScroll = if(isForward) 1 else -1
+                scope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage + pageToScroll)
+                }
+            }
+            .onMouseScroll { isForward, change ->
+                if(pagerState.canScrollBackward && pagerState.canScrollForward) {
+                    change.consume()
+                }
+                val pageToScroll = if(isForward) 1 else -1
+                scope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage + pageToScroll)
+                }
+            },
         pageSize = PageSize.Fixed(pageSize),
         contentPadding = PaddingValues(
             start = pagerPadding,

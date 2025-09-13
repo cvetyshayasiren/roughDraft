@@ -1,7 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.utils.photo
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import kotlin.random.Random
