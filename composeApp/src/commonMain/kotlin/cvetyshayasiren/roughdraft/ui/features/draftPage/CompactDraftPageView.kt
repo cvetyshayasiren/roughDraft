@@ -49,18 +49,13 @@ fun CompactDraftPageView(
     page: DraftPageEntity,
     modifier: Modifier = Modifier
 ) {
-    val viewportWidth = remember { mutableStateOf(0.dp) }
     val hazeState = rememberHazeState()
-    val onColor = page.getOnColor()
-    val playerState = AudioPlayerInteractions.player.state.collectAsState()
-
     val paddingOne = DesignStyle.multiBigPadding(4)
     val paddingTwo = DesignStyle.multiBigPadding(8)
     val paddingThree = DesignStyle.multiBigPadding(16)
 
     Column(
-        modifier = modifier
-            .containerWidthDp(viewportWidth),
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(paddingThree, alignment = Alignment.Top),
         horizontalAlignment = Alignment.Start
     ) {
@@ -77,7 +72,7 @@ fun CompactDraftPageView(
                 contentDescription = "draft page image",
                 contentScale = ContentScale.FillWidth
             )
-            Row(
+            PlayerCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .hazeEffect(
@@ -87,41 +82,8 @@ fun CompactDraftPageView(
                         )
                     )
                     .padding(horizontal = paddingOne, vertical = paddingTwo),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(DesignStyle.bigPadding()),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Text(
-                        modifier = Modifier.basicMarquee(),
-                        text = page.name,
-                        style = MaterialTheme.typography.title(color = onColor)
-                    )
-                    Text(
-                        modifier = Modifier.basicMarquee(),
-                        text = page.prettyDate,
-                        style = MaterialTheme.typography.smallText(color = onColor)
-                    )
-                }
-
-                IconButton(
-                    onClick = {
-                        AudioPlayerInteractions.firstPlayInteraction()
-                    }
-                ) {
-                    AnimatedContent(
-                        targetState = playerState.value.swapPauseIcon()
-                    ) { icon ->
-                        Icon(
-                            modifier = Modifier.size(Config.FIRST_PLAY_BUTTON_SIZE),
-                            imageVector = icon,
-                            contentDescription = "play/pause button"
-                        )
-                    }
-                }
-            }
+                page = page
+            )
         }
 
         Text(
@@ -143,7 +105,7 @@ fun CompactDraftPageView(
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(MaterialTheme.colorScheme.surfaceBright),
-            pageSize = viewportWidth.value * .6f,
+            pageSizeFraction = .6f,
             photoPaths = page.photoPaths
         )
 

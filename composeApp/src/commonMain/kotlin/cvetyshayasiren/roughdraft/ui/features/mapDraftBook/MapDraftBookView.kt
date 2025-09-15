@@ -18,8 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.domain.map.TileLink
 import cvetyshayasiren.roughdraft.domain.map.getMapState
+import cvetyshayasiren.roughdraft.domain.map.setScale
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
+import cvetyshayasiren.roughdraft.ui.utils.onMouseScroll
+import ovh.plrapps.mapcompose.api.scrollTo
 import ovh.plrapps.mapcompose.ui.MapUI
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalComposeUiApi::class)
@@ -28,7 +31,6 @@ fun MapDraftBookView(
     modifier: Modifier = Modifier,
     vm: MapDraftBookViewModel = remember { MapDraftBookViewModel() }
 ) {
-    val currentZoom = vm.currentZoom.collectAsState()
     val enableSettings = remember { mutableStateOf(false) }
 
     Box(

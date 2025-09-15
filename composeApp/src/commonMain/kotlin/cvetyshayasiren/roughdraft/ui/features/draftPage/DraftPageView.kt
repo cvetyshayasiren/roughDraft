@@ -22,14 +22,15 @@ fun DraftPageView(
         targetState = isExpanded
     ) { expanded ->
         AnimatedContent(
+            modifier = Modifier.verticalScroll(rememberScrollState()),
             targetState = currentPage.value
         ) { page ->
             when(expanded) {
-                true -> ExpandedDraftPageView(page)
+                true -> ExpandedDraftPageView(
+                    page = page
+                )
                 false -> CompactDraftPageView(
-                    page = page,
-                    modifier = Modifier
-                        .verticalScroll(rememberScrollState())
+                    page = page
                 )
             }
         }

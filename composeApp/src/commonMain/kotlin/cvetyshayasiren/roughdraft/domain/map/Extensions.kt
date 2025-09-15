@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.domain.map
 
+import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.viewModelScope
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
 import kotlinx.coroutines.CoroutineScope
@@ -7,6 +8,32 @@ import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.scrollTo
 import ovh.plrapps.mapcompose.api.visibleBoundingBox
 import ovh.plrapps.mapcompose.ui.state.MapState
+
+fun MapState.setScale(
+    zoom: Double = TileCoordinates.DEFAULT_ZOOM.toDouble(),
+    x: Double,
+    y: Double,
+    scope: CoroutineScope = DraftBookInteractions.viewModelScope
+) {
+    scope.launch {
+        scrollTo(
+            x = x,
+            y = y,
+            destScale = TileCoordinates.zoomLevelToScale(zoom)
+        )
+    }
+}
+
+fun MapState.setScale(
+    zoom: Double = TileCoordinates.DEFAULT_ZOOM.toDouble(),
+    position: Offset,
+    scope: CoroutineScope = DraftBookInteractions.viewModelScope
+) = setScale(
+    zoom = zoom,
+    x = position.x.toDouble(),
+    y = position.y.toDouble(),
+    scope = scope
+)
 
 fun MapState.setScale(
     zoom: Double = TileCoordinates.DEFAULT_ZOOM.toDouble(),

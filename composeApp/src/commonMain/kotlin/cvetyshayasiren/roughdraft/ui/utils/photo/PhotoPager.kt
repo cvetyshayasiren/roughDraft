@@ -1,6 +1,8 @@
 package cvetyshayasiren.roughdraft.ui.utils.photo
 
+import androidx.annotation.FloatRange
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.snapping.SnapPosition
@@ -17,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -32,9 +35,11 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
+import cvetyshayasiren.roughdraft.ui.utils.containerWidthDp
 import cvetyshayasiren.roughdraft.ui.utils.onHorizontalDrag
 import cvetyshayasiren.roughdraft.ui.utils.onMouseScroll
 import kotlinx.coroutines.CoroutineScope
@@ -45,10 +50,13 @@ import kotlin.math.absoluteValue
 @Composable
 fun PhotoPager(
     modifier: Modifier = Modifier,
-    pageSize: Dp,
+    @FloatRange(0.0, 1.0)
+    pageSizeFraction: Float = .6f,
     photoPaths: List<PhotoPath>,
     scope: CoroutineScope = rememberCoroutineScope()
 ) {
+    val viewportWidth = remember { mutableStateOf(0.dp) }
+    val pageSize = animateDpAsState(viewportWidth.value * pageSizeFraction)
     val pagerState = rememberPagerState(pageCount = { photoPaths.size })
     val messes = remember { List(photoPaths.size) { PhotoMess.random() } }
     val pagerPadding = DesignStyle.multiBigPadding(4)
@@ -56,25 +64,17 @@ fun PhotoPager(
     HorizontalPager(
         state = pagerState,
         modifier = modifier
+            .containerWidthDp(viewportWidth)
             .onHorizontalDrag { isForward, _ ->
                 val pageToScroll = if(isForward) 1 else -1
                 scope.launch {
                     pagerState.animateScrollToPage(pagerState.currentPage + pageToScroll)
                 }
-            }
-            .onMouseScroll { isForward, change ->
-                if(pagerState.canScrollBackward && pagerState.canScrollForward) {
-                    change.consume()
-                }
-                val pageToScroll = if(isForward) 1 else -1
-                scope.launch {
-                    pagerState.animateScrollToPage(pagerState.currentPage + pageToScroll)
-                }
             },
-        pageSize = PageSize.Fixed(pageSize),
+        pageSize = PageSize.Fixed(pageSize.value),
         contentPadding = PaddingValues(
             start = pagerPadding,
-            end = pageSize
+            end = pageSize.value
         ),
         snapPosition = SnapPosition.Start,
         pageSpacing = pagerPadding
