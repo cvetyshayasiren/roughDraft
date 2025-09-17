@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,8 +23,11 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUr
 import cvetyshayasiren.roughdraft.domain.map.CustomMarkers
 import cvetyshayasiren.roughdraft.domain.map.getMapState
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
+import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
+import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
@@ -36,16 +43,19 @@ fun ExpandedDraftPageView(
 
 ) {
     val hazeState = rememberHazeState()
-    val padding = DesignStyle.multiBigPadding(8)
+    val paddingOne = DesignStyle.multiBigPadding()
+    val paddingTwo = DesignStyle.multiBigPadding(2)
+    val paddingThree = DesignStyle.multiBigPadding(4)
+
     Column(
-        verticalArrangement = Arrangement.spacedBy(space = padding, alignment = Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(space = paddingThree, alignment = Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier
-                .hazeSource(state = hazeState)
-        ) {
-           Row {
+        Box {
+           Row(
+               modifier = Modifier
+                   .hazeSource(state = hazeState)
+           ) {
                AsyncImage(
                    modifier = Modifier.weight(1f),
                    uri = page.iconPath.getComposeResourceUri(),
@@ -72,15 +82,47 @@ fun ExpandedDraftPageView(
            }
             PlayerCard(
                 modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(horizontal = paddingThree, vertical = paddingTwo)
+                    .clip(DesignStyle.roundedShape)
                     .fillMaxWidth()
                     .hazeEffect(
                         state = hazeState,
                         style = HazeMaterials.thin(
                             containerColor = page.color
                         )
-                    ),
+                    )
+                    .padding(horizontal = paddingTwo, vertical = paddingOne),
                 page = page
             )
         }
+        Row(
+
+        ) {
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = paddingTwo, end = paddingOne),
+                text = page.poem,
+                style = MaterialTheme.typography.basicText()
+            )
+            VerticalDivider(modifier = Modifier.weight(.1f))
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = paddingOne, end = paddingTwo),
+                text = page.prose,
+                style = MaterialTheme.typography.basicText()
+            )
+        }
+
+        PhotoPager(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .background(MaterialTheme.colorScheme.surfaceBright),
+            pageSizeFraction = .4f,
+            photoPaths = page.photoPaths
+        )
     }
 }

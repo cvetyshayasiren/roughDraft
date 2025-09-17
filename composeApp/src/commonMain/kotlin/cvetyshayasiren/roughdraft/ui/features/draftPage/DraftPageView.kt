@@ -26,12 +26,8 @@ fun DraftPageView(
             targetState = currentPage.value
         ) { page ->
             when(expanded) {
-                true -> ExpandedDraftPageView(
-                    page = page
-                )
-                false -> CompactDraftPageView(
-                    page = page
-                )
+                true -> ExpandedDraftPageView(page = page)
+                false -> CompactDraftPageView(page = page)
             }
         }
     }
