@@ -14,8 +14,8 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 fun Modifier.wavy(
-    crest: WavyCrestStructure = WavyCrestStructure.FromLength(100.dp),
-    thickness: Dp = 40.dp,
+    crest: WavyCrestStructure = WavyCrestStructure.FromLength(),
+    thickness: WavyThickness = WavyThickness.FromDp(),
     strokeWidth: Dp = 4.dp,
     color: Color = Color.Green,
     start: Offset = Offset(0f, .5f),
@@ -25,8 +25,8 @@ fun Modifier.wavy(
 ) = this then WavyElement(crest, thickness, strokeWidth, color, start, end, colorFilter, blendMode)
 
 private data class WavyElement(
-    val crest: WavyCrestStructure = WavyCrestStructure.FromLength(100.dp),
-    val thickness: Dp = 40.dp,
+    val crest: WavyCrestStructure = WavyCrestStructure.FromLength(),
+    val thickness: WavyThickness = WavyThickness.FromDp(),
     val strokeWidth: Dp = 4.dp,
     val color: Color = Color.Green,
     val start: Offset = Offset(0f, .5f),
@@ -49,8 +49,8 @@ private data class WavyElement(
 }
 
 private class WavyNode(
-    var crest: WavyCrestStructure = WavyCrestStructure.FromLength(100.dp),
-    var thickness: Dp = 40.dp,
+    var crest: WavyCrestStructure = WavyCrestStructure.FromLength(),
+    var thickness: WavyThickness = WavyThickness.FromDp(),
     var strokeWidth: Dp = 4.dp,
     var color: Color = Color.Green,
     var start: Offset = Offset(0f, .5f),
@@ -77,7 +77,11 @@ private class WavyNode(
 
         if(waveLength == 0f) { return }
 
-        val waveThickness = thickness.toPx()
+        val waveThickness = when(thickness) {
+            is WavyThickness.FromDp -> (thickness as WavyThickness.FromDp).value.toPx()
+            is WavyThickness.FromHeight -> (thickness as WavyThickness.FromHeight).fraction * size.height
+            is WavyThickness.FromWidth -> (thickness as WavyThickness.FromWidth).fraction * size.width
+        }
         val waveAmplitude = waveThickness / 2
         val strokeWidth = strokeWidth.toPx()
 
@@ -113,6 +117,12 @@ private class WavyNode(
 }
 
 sealed class WavyCrestStructure {
-    class FromLength(val value: Dp): WavyCrestStructure()
-    class FromCount(val value: Int): WavyCrestStructure()
+    class FromLength(val value: Dp = 100.dp): WavyCrestStructure()
+    class FromCount(val value: Int = 5): WavyCrestStructure()
+}
+
+sealed class WavyThickness {
+    class FromDp(val value: Dp = 40.dp): WavyThickness()
+    class FromHeight(val fraction: Float = 1f): WavyThickness()
+    class FromWidth(val fraction: Float = 1f): WavyThickness()
 }

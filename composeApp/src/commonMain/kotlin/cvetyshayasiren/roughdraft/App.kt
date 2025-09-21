@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.splash.SplashScreenView
+import cvetyshayasiren.roughdraft.ui.test.WavyDividerTest
 import cvetyshayasiren.roughdraft.ui.theme.RoughDraftExpressiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -20,7 +21,8 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            SplashScreenView()
+            WavyDividerTest()
+//            SplashScreenView()
         }
     }
 }

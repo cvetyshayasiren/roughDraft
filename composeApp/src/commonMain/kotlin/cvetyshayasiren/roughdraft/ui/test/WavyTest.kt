@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyThickness
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
 import cvetyshayasiren.roughdraft.ui.utils.wavy.wavy
 import kotlinx.coroutines.delay
@@ -82,7 +83,7 @@ fun WavyTest() {
                         .wavy(
                             crest = WavyCrestStructure.FromLength(wave.width),
                             color = wave.color,
-                            thickness = wave.amplitude * 2,
+                            thickness = WavyThickness.FromDp(wave.amplitude * 2),
                             strokeWidth = wave.strokeWidth
                         )
                 )
@@ -95,7 +96,7 @@ fun WavyTest() {
                 .height(64.dp)
                 .wavy(
                     color = color,
-                    thickness = amplitude,
+                    thickness = WavyThickness.FromDp(amplitude),
                     strokeWidth = 8.dp,
                 )
         )
@@ -105,7 +106,7 @@ fun WavyTest() {
                 .height(24.dp)
                 .wavy(
                     color = color,
-                    thickness = amplitude * 2,
+                    thickness = WavyThickness.FromDp(amplitude * 2),
                     strokeWidth = 8.dp,
                 )
         )

@@ -6,8 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -16,7 +21,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftPageEntity
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUri
@@ -27,7 +35,10 @@ import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
+import cvetyshayasiren.roughdraft.ui.utils.wavy.wavy
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
@@ -97,7 +108,10 @@ fun ExpandedDraftPageView(
             )
         }
         Row(
-
+            modifier = Modifier.wavy(
+                start = Offset(.5f, 0f),
+                end = Offset(.5f, 1f)
+            )
         ) {
             Text(
                 modifier = Modifier
@@ -106,7 +120,6 @@ fun ExpandedDraftPageView(
                 text = page.poem,
                 style = MaterialTheme.typography.basicText()
             )
-            VerticalDivider(modifier = Modifier.weight(.1f))
             Text(
                 modifier = Modifier
                     .weight(1f)
