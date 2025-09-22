@@ -77,22 +77,21 @@ private class WavyNode(
 
         if(waveLength == 0f) { return }
 
-        val waveThickness = when(thickness) {
+        val waveAmplitude = when(thickness) {
             is WavyThickness.FromDp -> (thickness as WavyThickness.FromDp).value.toPx()
             is WavyThickness.FromHeight -> (thickness as WavyThickness.FromHeight).fraction * size.height
             is WavyThickness.FromWidth -> (thickness as WavyThickness.FromWidth).fraction * size.width
         }
-        val waveAmplitude = waveThickness / 2
         val strokeWidth = strokeWidth.toPx()
+        val halfStrokeWidth = strokeWidth / 2
 
         val somePath = Path().apply {
-            moveTo(0f, 0f)
-            quadraticTo(waveLength / 4, -waveAmplitude, waveLength / 2, 0f)
-            quadraticTo(waveLength / 4 * 3, waveAmplitude, waveLength, 0f)
-            lineTo(waveLength, 0f - strokeWidth)
-            quadraticTo(waveLength / 4 * 3, waveAmplitude - strokeWidth,waveLength / 2, 0f - strokeWidth)
-            quadraticTo(waveLength / 4, -waveAmplitude - strokeWidth,0f, 0f - strokeWidth)
-            translate(Offset(0f, strokeWidth / 2))
+            moveTo(0f, 0f + halfStrokeWidth)
+            quadraticTo(waveLength / 4, -waveAmplitude + strokeWidth, waveLength / 2, 0f + halfStrokeWidth)
+            quadraticTo(waveLength / 4 * 3, waveAmplitude, waveLength, 0f + halfStrokeWidth)
+            lineTo(waveLength, 0f - halfStrokeWidth)
+            quadraticTo(waveLength / 4 * 3, waveAmplitude - strokeWidth,waveLength / 2, 0f - halfStrokeWidth)
+            quadraticTo(waveLength / 4, -waveAmplitude,0f, 0f - halfStrokeWidth)
         }
 
         val pathEffect = PathEffect.stampedPathEffect(

@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.utils.coloredBorder
+import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
 import kotlinx.serialization.builtins.ArraySerializer

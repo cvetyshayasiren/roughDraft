@@ -59,6 +59,7 @@ fun ExpandedDraftPageView(
     val paddingThree = DesignStyle.multiBigPadding(4)
 
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(space = paddingThree, alignment = Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -107,18 +108,18 @@ fun ExpandedDraftPageView(
                 page = page
             )
         }
-        Row(
-            modifier = Modifier.wavy(
-                start = Offset(.5f, 0f),
-                end = Offset(.5f, 1f)
-            )
-        ) {
+        Row {
             Text(
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = paddingTwo, end = paddingOne),
                 text = page.poem,
                 style = MaterialTheme.typography.basicText()
+            )
+            WavyVerticalDivider(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(paddingOne)
             )
             Text(
                 modifier = Modifier

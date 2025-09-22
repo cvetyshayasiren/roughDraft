@@ -92,7 +92,12 @@ fun CompactDraftPageView(
             text = page.poem,
             style = MaterialTheme.typography.basicText()
         )
-        WavyHorizontalDivider(modifier = Modifier.fillMaxWidth().padding(vertical = paddingOne))
+        WavyHorizontalDivider(
+            modifier = Modifier
+                .padding(vertical = paddingOne)
+                .fillMaxWidth()
+                .height(paddingOne)
+        )
         Text(
             modifier = Modifier
                 .padding(start = paddingOne, end = paddingTwo),

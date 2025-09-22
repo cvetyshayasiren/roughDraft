@@ -1,6 +1,11 @@
 package cvetyshayasiren.roughdraft.ui.utils.wavy
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -15,11 +20,12 @@ import androidx.compose.ui.layout.onLayoutRectChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.utils.containerWidthDp
 
 @Composable
 fun WavyHorizontalDivider(
-    modifier: Modifier,
+    modifier: Modifier = Modifier.fillMaxWidth().height(DesignStyle.bigPadding()),
     crest: WavyCrestStructure = WavyCrestStructure.FromCount(),
     thickness: WavyThickness = WavyThickness.FromHeight(),
     strokeWidth: Dp = 2.dp,
@@ -27,7 +33,7 @@ fun WavyHorizontalDivider(
     colorFilter: ColorFilter? = null,
     blendMode: BlendMode = DefaultBlendMode
 ) {
-    Box(
+    Spacer(
         modifier = modifier
             .wavy(
                 crest = crest,
@@ -42,7 +48,7 @@ fun WavyHorizontalDivider(
 
 @Composable
 fun WavyVerticalDivider(
-    modifier: Modifier,
+    modifier: Modifier = Modifier.fillMaxHeight().width(DesignStyle.bigPadding()),
     crest: WavyCrestStructure = WavyCrestStructure.FromCount(),
     thickness: WavyThickness = WavyThickness.FromWidth(),
     strokeWidth: Dp = 2.dp,
@@ -50,7 +56,7 @@ fun WavyVerticalDivider(
     colorFilter: ColorFilter? = null,
     blendMode: BlendMode = DefaultBlendMode
 ) {
-    Box(
+    Spacer(
         modifier = modifier
             .wavy(
                 crest = crest,
