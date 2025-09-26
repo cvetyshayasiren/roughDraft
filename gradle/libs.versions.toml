@@ -1,7 +1,7 @@
 [versions]
 androidx-lifecycle = "2.9.1"
 composeHotReload = "1.0.0-alpha11"
-composeMultiplatform = "1.9.0-alpha03"
+composeMultiplatform = "1.9.0"
 junit = "4.13.2"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
@@ -16,6 +16,7 @@ kim = "0.26"
 haze = "1.6.10"
 sketch = "4.4.0-alpha01"
 ktorfit = "2.6.4"
+material3 = "1.9.0-beta06"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -39,6 +40,7 @@ haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = 
 sketch = { module = "io.github.panpf.sketch4:sketch-compose", version.ref = "sketch" }
 sketch-res = { module = "io.github.panpf.sketch4:sketch-compose-resources", version.ref = "sketch" }
 ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]

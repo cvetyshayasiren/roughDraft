@@ -34,8 +34,8 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            TestR()
-//            SplashScreenView()
+//            TestR()
+            SplashScreenView()
         }
     }
 }
