@@ -9,7 +9,6 @@ import androidx.compose.material3.adaptive.layout.PaneAdaptedValue
 import androidx.compose.material3.adaptive.layout.SupportingPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.rememberSupportingPaneScaffoldNavigator
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -39,13 +38,10 @@ fun RoughDraftAdaptiveNavigation(modifier: Modifier = Modifier) {
         mutableStateOf(RoughDraftDestination.DraftPane)
     }
     val scaffoldNavigator = rememberSupportingPaneScaffoldNavigator()
-    val navigationSuiteScaffoldState = rememberNavigationSuiteScaffoldState()
-
     val hazeState = rememberHazeState()
 
     NavigationSuiteScaffold(
         modifier = modifier,
-        state = navigationSuiteScaffoldState,
         navigationSuiteItems = {
             RoughDraftDestination.entries.forEach { destination ->
                 if (destination == RoughDraftDestination.DraftBook &&
