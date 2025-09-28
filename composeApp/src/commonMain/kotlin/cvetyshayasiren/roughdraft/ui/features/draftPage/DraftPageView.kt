@@ -1,6 +1,12 @@
 package cvetyshayasiren.roughdraft.ui.features.draftPage
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.OverscrollEffect
+import androidx.compose.foundation.OverscrollFactory
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
@@ -22,7 +28,9 @@ fun DraftPageView(
         targetState = isExpanded
     ) { expanded ->
         AnimatedContent(
-            modifier = Modifier.verticalScroll(rememberScrollState()),
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+            ,
             targetState = currentPage.value
         ) { page ->
             when(expanded) {

@@ -16,6 +16,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onLayoutRectChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,24 @@ fun Modifier.containerWidthDp(dpStateToWrite: MutableState<Dp>): Modifier {
     return this then Modifier
         .onLayoutRectChanged { rect ->
             with(density) { dpStateToWrite.value = rect.width.toDp() }
+        }
+}
+
+@Composable
+fun Modifier.containerHeightDp(dpStateToWrite: MutableState<Dp>): Modifier {
+    val density = LocalDensity.current
+    return this then Modifier
+        .onLayoutRectChanged { rect ->
+            with(density) { dpStateToWrite.value = rect.height.toDp() }
+        }
+}
+
+@Composable
+fun Modifier.containerSizeDp(dpStateToWrite: MutableState<DpSize>): Modifier {
+    val density = LocalDensity.current
+    return this then Modifier
+        .onLayoutRectChanged { rect ->
+            with(density) { dpStateToWrite.value = DpSize(width = rect.width.toDp(), height = rect.height.toDp()) }
         }
 }
 

@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +35,7 @@ import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
+import cvetyshayasiren.roughdraft.ui.utils.containerHeightDp
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
@@ -53,6 +55,7 @@ fun ExpandedDraftPageView(
     modifier: Modifier = Modifier
 
 ) {
+    val wavyHeight = remember { mutableStateOf(0.dp) }
     val hazeState = rememberHazeState()
     val paddingOne = DesignStyle.multiBigPadding()
     val paddingTwo = DesignStyle.multiBigPadding(2)
@@ -108,7 +111,9 @@ fun ExpandedDraftPageView(
                 page = page
             )
         }
-        Row {
+        Row(
+            modifier = Modifier.containerHeightDp(wavyHeight)
+        ) {
             Text(
                 modifier = Modifier
                     .weight(1f)
@@ -118,7 +123,7 @@ fun ExpandedDraftPageView(
             )
             WavyVerticalDivider(
                 modifier = Modifier
-                    .fillMaxHeight()
+                    .height(paddingThree * 5)
                     .width(paddingOne)
             )
             Text(
