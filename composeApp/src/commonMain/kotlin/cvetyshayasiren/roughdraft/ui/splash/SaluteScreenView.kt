@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.domain.splash.SplashState
@@ -16,19 +18,26 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun SaluteScreenView(modifier: Modifier = Modifier) {
+fun SaluteScreenView(
+    text: String = "ЧЕРНОВИК",
+    modifier: Modifier = Modifier
+) = SaluteScreenView(text = buildAnnotatedString { append(text) }, modifier = modifier)
 
-    LaunchedEffect(Unit) {
-        delay(1000)
-        SplashState.nextState()
-    }
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+fun SaluteScreenView(
+    text: AnnotatedString,
+    modifier: Modifier = Modifier
+) {
 
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "ЧЕРНОВИК",
+            text = text,
             style = MaterialTheme.typography.title(
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold
