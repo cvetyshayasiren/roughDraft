@@ -15,24 +15,21 @@ import androidx.compose.ui.draw.alpha
 import cvetyshayasiren.roughdraft.domain.splash.SplashState
 import cvetyshayasiren.roughdraft.domain.splash.SplashStates
 import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftAdaptiveNavigation
+import cvetyshayasiren.roughdraft.ui.utils.splash.Splash
+import cvetyshayasiren.roughdraft.ui.utils.splash.delayThenHide
+import cvetyshayasiren.roughdraft.ui.utils.splash.rememberSplashState
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreenView(modifier: Modifier = Modifier) {
-    val splashState = SplashState.state.collectAsState()
-
+    val splashState = rememberSplashState()
     LaunchedEffect(Unit) {
-        delay(1000)
-        SplashState.toPrepared()
+        splashState.delayThenHide()
     }
 
-    Box(modifier = modifier) {
+    Splash(
+        state = splashState
+    ) {
         RoughDraftAdaptiveNavigation()
-        AnimatedVisibility(
-            visible = splashState.value.isSalute(),
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
-        ) {
-            SaluteScreenView()
-        }
     }
 }

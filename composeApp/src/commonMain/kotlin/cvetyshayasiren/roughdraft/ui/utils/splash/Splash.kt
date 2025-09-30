@@ -1,5 +1,6 @@
 package cvetyshayasiren.roughdraft.ui.utils.splash
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -13,9 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftAdaptiveNavigation
 import cvetyshayasiren.roughdraft.ui.splash.SaluteScreenView
+import cvetyshayasiren.roughdraft.ui.test.SplashTest
 
 @Composable
 fun Splash(
@@ -33,7 +36,8 @@ fun Splash(
         AnimatedVisibility(
             visible = isSplash.value,
             enter = enter,
-            exit = exit
+            exit = exit,
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
         ) {
             splashContent()
         }
