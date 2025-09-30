@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.innerShadow
 import androidx.compose.ui.unit.dp
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
 import cvetyshayasiren.roughdraft.ui.splash.SplashScreenView
+import cvetyshayasiren.roughdraft.ui.test.SplashTest
 import cvetyshayasiren.roughdraft.ui.test.WavyDividerTest
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.RoughDraftExpressiveTheme
@@ -51,7 +52,8 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            SplashScreenView()
+            SplashTest()
+//            SplashScreenView()
         }
     }
 }
