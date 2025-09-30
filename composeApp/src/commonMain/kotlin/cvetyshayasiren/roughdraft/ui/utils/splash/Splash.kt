@@ -1,24 +1,13 @@
 package cvetyshayasiren.roughdraft.ui.utils.splash
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.expandIn
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkOut
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cvetyshayasiren.roughdraft.ui.navigation.RoughDraftAdaptiveNavigation
-import cvetyshayasiren.roughdraft.ui.splash.SaluteScreenView
-import cvetyshayasiren.roughdraft.ui.test.SplashTest
 
 @Composable
 fun Splash(

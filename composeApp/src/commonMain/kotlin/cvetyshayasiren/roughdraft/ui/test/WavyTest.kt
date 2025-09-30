@@ -17,11 +17,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyCrestStructure
-import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
-import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyThickness
-import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
-import cvetyshayasiren.roughdraft.ui.utils.wavy.wavy
+import cvetyshayasiren.roughdraft.ui.utils.wavy.*
 import kotlinx.coroutines.delay
 
 data class WavyOpt(

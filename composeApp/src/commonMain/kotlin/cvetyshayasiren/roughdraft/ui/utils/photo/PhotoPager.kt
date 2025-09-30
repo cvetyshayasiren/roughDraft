@@ -4,7 +4,6 @@ import androidx.annotation.FloatRange
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -30,18 +29,13 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.PointerEventType
-import androidx.compose.ui.input.pointer.onPointerEvent
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.utils.containerWidthDp
 import cvetyshayasiren.roughdraft.ui.utils.onHorizontalDrag
-import cvetyshayasiren.roughdraft.ui.utils.onMouseScroll
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue

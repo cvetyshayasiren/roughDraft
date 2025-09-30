@@ -1,12 +1,10 @@
 package cvetyshayasiren.roughdraft.ui.utils.splash
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewModelScope
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
-import cvetyshayasiren.roughdraft.ui.test.SplashTest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
