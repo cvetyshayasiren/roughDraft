@@ -20,7 +20,6 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-//            SplashTest()
             SplashScreenView()
         }
     }

@@ -22,6 +22,7 @@ import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
+import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoCarousel
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import dev.chrisbanes.haze.hazeEffect
@@ -93,14 +94,22 @@ fun CompactDraftPageView(
             style = MaterialTheme.typography.basicText()
         )
 
-        PhotoPager(
+        PhotoCarousel(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(MaterialTheme.colorScheme.surfaceBright),
-            pageSizeFraction = .6f,
             photoPaths = page.photoPaths
         )
+
+//        PhotoPager(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .aspectRatio(1f)
+//                .background(MaterialTheme.colorScheme.surfaceBright),
+//            pageSizeFraction = .6f,
+//            photoPaths = page.photoPaths
+//        )
 
         MapUI(
             modifier = Modifier
