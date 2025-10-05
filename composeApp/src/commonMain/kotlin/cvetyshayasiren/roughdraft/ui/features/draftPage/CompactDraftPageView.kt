@@ -102,15 +102,6 @@ fun CompactDraftPageView(
             photoPaths = page.photoPaths
         )
 
-//        PhotoPager(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .aspectRatio(1f)
-//                .background(MaterialTheme.colorScheme.surfaceBright),
-//            pageSizeFraction = .6f,
-//            photoPaths = page.photoPaths
-//        )
-
         MapUI(
             modifier = Modifier
                 .fillMaxWidth()

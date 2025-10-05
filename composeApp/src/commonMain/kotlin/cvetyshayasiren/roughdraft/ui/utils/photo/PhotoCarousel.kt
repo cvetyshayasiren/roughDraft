@@ -5,6 +5,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,12 +18,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowLeft
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.carousel.CarouselState
 import androidx.compose.material3.carousel.HorizontalCenteredHeroCarousel
+import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
+import androidx.compose.material3.carousel.HorizontalUncontainedCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -35,6 +41,7 @@ import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.PhotoPath
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
@@ -54,70 +61,72 @@ fun PhotoCarousel(
     val messes = remember { List(photoPaths.size) { PhotoMess.random() } }
     val carouselState = rememberCarouselState(itemCount = {photoPaths.size})
 
-    HorizontalCenteredHeroCarousel(
-        modifier = modifier
-            .onHorizontalDrag { isForward, _ ->
-                val pageToScroll = if(isForward) 1 else -1
-                scope.launch {
-                    carouselState.animateScrollToItem(carouselState.currentItem + pageToScroll)
-                }
-            },
-        state = carouselState,
-        itemSpacing = DesignStyle.bigPadding(),
-        contentPadding = PaddingValues(DesignStyle.smallPadding())
-    ) {pageNumber ->
-        val mess = remember { messes[pageNumber] }
-        PhotoViewer(
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .maskClip(mess.shape),
-            photoPath = photoPaths[pageNumber]
-        )
-    }
-
-    Row(
-        Modifier
-            .wrapContentHeight()
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement
-            .spacedBy(
-                space = DesignStyle.smallPadding(),
-                alignment = Alignment.CenterHorizontally
-            )
-    ) {
-        IconButton(
-            onClick = {
-                scope.launch { carouselState.animateScrollToPreviousPage() }
-            }
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowLeft,
-                contentDescription = "previous image"
-            )
-        }
-        repeat(photoPaths.size) { iteration ->
-            val color = animateColorAsState(
-                if(carouselState.currentItem == iteration)
-                    MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.tertiary
-            )
-            Box(
+    Column {
+        HorizontalCenteredHeroCarousel(
+            modifier = modifier
+                .onHorizontalDrag { isForward, _ ->
+                    val pageToScroll = if(isForward) 1 else -1
+                    scope.launch {
+                        carouselState.animateScrollToItem(carouselState.currentItem + pageToScroll)
+                    }
+                },
+            state = carouselState,
+            itemSpacing = DesignStyle.bigPadding(),
+            contentPadding = PaddingValues(DesignStyle.smallPadding())
+        ) {pageNumber ->
+            val mess = remember { messes[pageNumber] }
+            PhotoViewer(
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .clip(CircleShape)
-                    .background(color.value)
-                    .size(DesignStyle.multiBigPadding(4))
+                    .fillMaxSize()
+                    .maskClip(mess.shape),
+                photoPath = photoPaths[pageNumber]
             )
         }
-        IconButton(
-            onClick = {
-                scope.launch { carouselState.animateScrollToNextPage() }
-            }
+
+        Row(
+            Modifier
+                .wrapContentHeight()
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement
+                .spacedBy(
+                    space = DesignStyle.smallPadding(),
+                    alignment = Alignment.CenterHorizontally
+                )
         ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowRight,
-                contentDescription = "next image"
-            )
+            IconButton(
+                onClick = {
+                    scope.launch { carouselState.animateScrollToPreviousPage() }
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                    contentDescription = "previous image"
+                )
+            }
+            repeat(photoPaths.size) { iteration ->
+                val color = animateColorAsState(
+                    if(carouselState.currentItem == iteration)
+                        MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.tertiary
+                )
+                Box(
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .background(color.value)
+                        .size(DesignStyle.multiBigPadding(2))
+                )
+            }
+            IconButton(
+                onClick = {
+                    scope.launch { carouselState.animateScrollToNextPage() }
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = "next image"
+                )
+            }
         }
     }
 }
