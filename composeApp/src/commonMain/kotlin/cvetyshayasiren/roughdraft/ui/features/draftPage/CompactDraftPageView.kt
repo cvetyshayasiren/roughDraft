@@ -23,7 +23,6 @@ import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoCarousel
-import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyHorizontalDivider
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
@@ -102,33 +101,31 @@ fun CompactDraftPageView(
             photoPaths = page.photoPaths
         )
 
-        MapUI(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
                 .padding(paddingOne)
-                .clip(DesignStyle.roundedShape)
-                .blend(
-                    backgroundMode = BackgroundMode.FromColor(page.color),
-                    alpha = .5f
-                ),
-            state = remember {
-                getMapState(
-                    initialCoordinates = page.coordinates.toRelativeCoordinates(),
-                    initialZoom = 15,
-                    customMarkers = CustomMarkers.StaticMiniMapMarker(page),
-                    disableGestures = true
-                )
-            }
-        )
-        FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(space = DesignStyle.smallPadding()),
-            verticalArrangement = Arrangement.spacedBy(DesignStyle.smallPadding())
         ) {
-            ThirdPartyMaps.list.forEach { map ->
-                Text(text = map.getLink(page.coordinates))
-            }
+            MapUI(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(DesignStyle.roundedShape)
+                    .blend(
+                        backgroundMode = BackgroundMode.FromColor(page.color),
+                        alpha = .5f
+                    ),
+                state = remember {
+                    getMapState(
+                        initialCoordinates = page.coordinates.toRelativeCoordinates(),
+                        initialZoom = 15,
+                        customMarkers = CustomMarkers.StaticMiniMapMarker(page),
+                        disableGestures = true
+                    )
+                }
+            )
+            MapLinksView(coordinates = page.coordinates)
         }
+
 
         Spacer(Modifier.height(Config.TINY_PLAYER_HEIGHT * 2))
     }

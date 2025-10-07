@@ -22,7 +22,7 @@ import cvetyshayasiren.roughdraft.ui.theme.basicText
 import cvetyshayasiren.roughdraft.ui.utils.blend.BackgroundMode
 import cvetyshayasiren.roughdraft.ui.utils.blend.blend
 import cvetyshayasiren.roughdraft.ui.utils.containerHeightDp
-import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoPager
+import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoCarousel
 import cvetyshayasiren.roughdraft.ui.utils.wavy.WavyVerticalDivider
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
@@ -118,12 +118,11 @@ fun ExpandedDraftPageView(
             )
         }
 
-        PhotoPager(
+        PhotoCarousel(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(MaterialTheme.colorScheme.surfaceBright),
-            pageSizeFraction = .4f,
             photoPaths = page.photoPaths
         )
     }
