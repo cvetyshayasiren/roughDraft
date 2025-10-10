@@ -20,7 +20,7 @@ fun MapLinksView(
         verticalArrangement = Arrangement.spacedBy(DesignStyle.smallPadding())
     ) {
         ThirdPartyMaps.list.forEach { map ->
-            Text(text = map.getLink(coordinates))
+            Text(text = map.getAnnotatedStringLink(coordinates))
         }
     }
 }
