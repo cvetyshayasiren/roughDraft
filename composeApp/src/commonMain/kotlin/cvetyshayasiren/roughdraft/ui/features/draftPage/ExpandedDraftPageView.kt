@@ -77,6 +77,14 @@ fun ExpandedDraftPageView(
                        )
                    }
                )
+
+               PhotoCarousel(
+                   modifier = Modifier
+                       .weight(1f)
+                       .aspectRatio(1f)
+                       .background(MaterialTheme.colorScheme.surfaceBright),
+                   photoPaths = page.photoPaths
+               )
            }
             PlayerCard(
                 modifier = Modifier
@@ -121,7 +129,7 @@ fun ExpandedDraftPageView(
         PhotoCarousel(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .aspectRatio(2f)
                 .background(MaterialTheme.colorScheme.surfaceBright),
             photoPaths = page.photoPaths
         )

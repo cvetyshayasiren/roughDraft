@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.PagerState
@@ -64,9 +65,10 @@ fun PhotoCarousel(
     val messes = remember { List(photoPaths.size) { PhotoMess.random() } }
     val carouselState = rememberCarouselState(itemCount = {photoPaths.size})
 
-    Column {
+    Column(modifier = modifier) {
         HorizontalCenteredHeroCarousel(
-            modifier = modifier
+            modifier = Modifier
+                .weight(.9f)
                 .onHorizontalDrag { isForward, _ ->
                     val pageToScroll = if(isForward) 1 else -1
                     scope.launch {
@@ -89,7 +91,7 @@ fun PhotoCarousel(
 
         Row(
             Modifier
-                .wrapContentHeight()
+                .weight(.1f)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement

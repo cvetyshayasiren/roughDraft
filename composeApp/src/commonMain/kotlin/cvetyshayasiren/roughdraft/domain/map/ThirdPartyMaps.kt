@@ -41,7 +41,7 @@ sealed interface ThirdPartyMaps {
         private val blue = Color(66, 133, 244)
         private val red = Color(219, 68, 55)
         private val yellow = Color(244, 160, 0)
-        private val green= Color(15, 157, 88)
+        private val green = Color(15, 157, 88)
 
         @get:Composable
         override val annotatedStringLabel: AnnotatedString
@@ -67,8 +67,8 @@ sealed interface ThirdPartyMaps {
         @get:Composable
         override val annotatedStringLabel: AnnotatedString
             get() = buildAnnotatedString {
-                withStyle(style = getSpanStyle(orange)) { append("Y") }
-                withStyle(style = getSpanStyle(black)) { append("andex") }
+                withStyle(style = getSpanStyle(orange)) { append("Я") }
+                withStyle(style = getSpanStyle(black)) { append("ндекс") }
             }
 
         override fun getUrl(coordinates: GeoCoordinates): String =
