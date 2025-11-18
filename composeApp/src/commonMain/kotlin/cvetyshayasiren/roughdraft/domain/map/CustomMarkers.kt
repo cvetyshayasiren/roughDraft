@@ -1,17 +1,22 @@
 package cvetyshayasiren.roughdraft.domain.map
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.DraftBookInteractions
@@ -20,7 +25,7 @@ import cvetyshayasiren.roughdraft.domain.draftsInteractions.getComposeResourceUr
 import cvetyshayasiren.roughdraft.domain.draftsInteractions.getCoordinatesMetaData
 import cvetyshayasiren.roughdraft.ui.theme.DesignStyle
 import cvetyshayasiren.roughdraft.ui.theme.smallText
-import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewer
+import cvetyshayasiren.roughdraft.ui.utils.photo.PhotoViewerDialog
 import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addClusterer
 import ovh.plrapps.mapcompose.api.addMarker
@@ -86,19 +91,30 @@ sealed interface CustomMarkers {
                     ) {
                         View(page)
                     }
-                    page.photoPaths.forEachIndexed { index, imagePath ->
-                        imagePath.getCoordinatesMetaData { coordinates ->
+                    page.photoPaths.forEachIndexed { photoIndex, photoPath ->
+                        photoPath.getCoordinatesMetaData { coordinates ->
                             addMarker(
-                                id = page.name + index,
+                                id = page.name + photoIndex,
                                 x = coordinates.x,
                                 y = coordinates.y,
                                 relativeOffset = Offset(-.5f, -.5f),
                                 renderingStrategy = RenderingStrategy.Clustering(page.name)
                             ) {
-                                PhotoViewer(
+                                val expandDialog = remember { mutableStateOf(false) }
+                                AsyncImage(
                                     modifier = Modifier
-                                        .size(48.dp),
-                                    photoPath = imagePath
+                                        .size(48.dp)
+                                        .clip(CircleShape)
+                                        .clickable { expandDialog.value = !expandDialog.value },
+                                    uri = photoPath.getComposeResourceUri(),
+                                    contentDescription = "photo",
+                                    contentScale = ContentScale.Crop
+                                )
+                                PhotoViewerDialog(
+                                    expandDialog = expandDialog,
+                                    photoPaths = page.photoPaths,
+                                    initialPhotoIndex = photoIndex,
+                                    onDismissRequest = { expandDialog.value = false }
                                 )
                             }
                         }

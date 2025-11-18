@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.github.panpf.sketch.AsyncImage
@@ -36,10 +37,7 @@ import ovh.plrapps.mapcompose.ui.MapUI
 fun ExpandedDraftPageView(
     page: DraftPageEntity,
     modifier: Modifier = Modifier
-
 ) {
-    val wavyHeight = remember { mutableStateOf(0.dp) }
-    val hazeState = rememberHazeState()
     val paddingOne = DesignStyle.multiBigPadding()
     val paddingTwo = DesignStyle.multiBigPadding(2)
     val paddingThree = DesignStyle.multiBigPadding(4)
@@ -49,62 +47,37 @@ fun ExpandedDraftPageView(
         verticalArrangement = Arrangement.spacedBy(space = paddingThree, alignment = Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box {
-           Row(
-               modifier = Modifier
-                   .hazeSource(state = hazeState)
-           ) {
-               AsyncImage(
-                   modifier = Modifier.weight(1f),
-                   uri = page.iconPath.getComposeResourceUri(),
-                   contentDescription = "draft page image",
-                   contentScale = ContentScale.FillWidth
-               )
-               MapUI(
-                   modifier = Modifier
-                       .weight(1f)
-                       .aspectRatio(1f)
-                       .blend(
-                           backgroundMode = BackgroundMode.FromColor(page.color),
-                           alpha = .5f
-                       ),
-                   state = remember {
-                       getMapState(
-                           initialCoordinates = page.coordinates.toRelativeCoordinates(),
-                           initialZoom = 15,
-                           customMarkers = CustomMarkers.StaticMiniMapMarker(page),
-                           disableGestures = true
-                       )
-                   }
-               )
-
-               PhotoCarousel(
-                   modifier = Modifier
-                       .weight(1f)
-                       .aspectRatio(1f)
-                       .background(MaterialTheme.colorScheme.surfaceBright),
-                   photoPaths = page.photoPaths
-               )
-           }
+        Row {
             PlayerCard(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
+                    .weight(1f)
+                    .aspectRatio(1f),
+                playCardModifier = Modifier
                     .padding(horizontal = paddingThree, vertical = paddingTwo)
                     .clip(DesignStyle.roundedShape)
                     .fillMaxWidth()
-                    .hazeEffect(
-                        state = hazeState,
-                        style = HazeMaterials.thin(
-                            containerColor = page.color
-                        )
-                    )
                     .padding(horizontal = paddingTwo, vertical = paddingOne),
                 page = page
             )
+            MapUI(
+                modifier = Modifier
+                    .weight(2f)
+                    .aspectRatio(2f)
+                    .blend(
+                        backgroundMode = BackgroundMode.FromColor(page.color),
+                        alpha = .5f
+                    ),
+                state = remember {
+                    getMapState(
+                        initialCoordinates = page.coordinates.toRelativeCoordinates(),
+                        initialZoom = 15,
+                        customMarkers = CustomMarkers.StaticMiniMapMarker(page),
+                        disableGestures = true
+                    )
+                }
+            )
         }
-        Row(
-            modifier = Modifier.containerHeightDp(wavyHeight)
-        ) {
+        Row {
             Text(
                 modifier = Modifier
                     .weight(1f)
@@ -112,26 +85,24 @@ fun ExpandedDraftPageView(
                 text = page.poem,
                 style = MaterialTheme.typography.basicText()
             )
-            WavyVerticalDivider(
-                modifier = Modifier
-                    .height(paddingThree * 5)
-                    .width(paddingOne)
-            )
-            Text(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = paddingOne, end = paddingTwo),
-                text = page.prose,
-                style = MaterialTheme.typography.basicText()
-            )
-        }
 
-        PhotoCarousel(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(2f)
-                .background(MaterialTheme.colorScheme.surfaceBright),
-            photoPaths = page.photoPaths
-        )
+            Column(
+                modifier = Modifier
+                    .weight(2f)
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(start = paddingOne, end = paddingTwo),
+                    text = page.prose,
+                    style = MaterialTheme.typography.basicText()
+                )
+                PhotoCarousel(
+                    modifier = Modifier
+                        .aspectRatio(2f)
+                        .background(MaterialTheme.colorScheme.surfaceBright),
+                    photoPaths = page.photoPaths
+                )
+            }
+        }
     }
 }

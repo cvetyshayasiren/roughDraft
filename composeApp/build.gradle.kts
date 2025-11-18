@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.bundles.haze)
             implementation(libs.bundles.sketch)
             implementation(libs.ktorfit)
+            implementation(libs.telephoto)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

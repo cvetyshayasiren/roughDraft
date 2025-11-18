@@ -13,6 +13,7 @@ fun main() = application {
             position = WindowPosition(Alignment.Center)
         ),
         title = "roughDraft",
+        alwaysOnTop = true
     ) {
         App()
     }

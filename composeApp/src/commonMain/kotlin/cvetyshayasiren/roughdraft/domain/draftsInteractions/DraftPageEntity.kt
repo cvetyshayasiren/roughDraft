@@ -32,7 +32,7 @@ data class DraftPageEntity(
     @Contextual
     val color: Color = Color.Unspecified,
     val iconPath: PhotoPath = "",
-    val photoPaths: List<PhotoPath> = listOf(),
+    val photoPaths: PhotoPaths = listOf(),
     val audioUri: String = ""
 ) {
     @Composable

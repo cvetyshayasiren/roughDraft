@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import roughdraft.composeapp.generated.resources.Res
 
 typealias PhotoPath = String
+typealias PhotoPaths = List<PhotoPath>
 
 suspend fun PhotoPath.getPhotoMetaData(): PhotoMetadata? {
     Kim
@@ -50,3 +51,6 @@ fun PhotoPath.getCoordinatesMetaData(
         }
     }
 }
+
+fun<T> List<T>.nextIndexLooped(currentIndex: Int): Int = if(currentIndex < lastIndex) currentIndex + 1 else 0
+fun<T> List<T>.previousIndexLooped(currentIndex: Int): Int = if(currentIndex > 0) currentIndex - 1 else lastIndex

@@ -38,7 +38,6 @@ fun CompactDraftPageView(
     page: DraftPageEntity,
     modifier: Modifier = Modifier
 ) {
-    val hazeState = rememberHazeState()
     val paddingOne = DesignStyle.multiBigPadding(4)
     val paddingTwo = DesignStyle.multiBigPadding(8)
     val paddingThree = DesignStyle.multiBigPadding(16)
@@ -48,32 +47,12 @@ fun CompactDraftPageView(
         verticalArrangement = Arrangement.spacedBy(paddingThree, alignment = Alignment.Top),
         horizontalAlignment = Alignment.Start
     ) {
-        Box(
-            modifier = Modifier
-                .shadow(elevation = DesignStyle.shadowElevation),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .hazeSource(state = hazeState),
-                uri = page.iconPath.getComposeResourceUri(),
-                contentDescription = "draft page image",
-                contentScale = ContentScale.FillWidth
-            )
-            PlayerCard(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .hazeEffect(
-                        state = hazeState,
-                        style = HazeMaterials.thin(
-                            containerColor = page.color
-                        )
-                    )
-                    .padding(horizontal = paddingOne, vertical = paddingTwo),
-                page = page
-            )
-        }
+        PlayerCard(
+            modifier = Modifier.shadow(elevation = DesignStyle.shadowElevation),
+            playCardModifier = Modifier
+                .fillMaxWidth(),
+            page = page
+        )
 
         Text(
             modifier = Modifier

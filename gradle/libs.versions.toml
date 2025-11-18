@@ -1,6 +1,6 @@
 [versions]
 androidx-lifecycle = "2.9.1"
-composeHotReload = "1.0.0-alpha11"
+composeHotReload = "1.0.0-rc04"
 composeMultiplatform = "1.9.0"
 junit = "4.13.2"
 kotlin = "2.2.0"
@@ -17,6 +17,7 @@ haze = "1.6.10"
 sketch = "4.4.0-alpha01"
 ktorfit = "2.6.4"
 material3AlphaExpressive = "1.9.0-alpha04"
+telephoto = "0.18.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -41,6 +42,7 @@ sketch = { module = "io.github.panpf.sketch4:sketch-compose", version.ref = "ske
 sketch-res = { module = "io.github.panpf.sketch4:sketch-compose-resources", version.ref = "sketch" }
 ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
 material3AlphaExpressive = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3AlphaExpressive" }
+telephoto = { module = "me.saket.telephoto:zoomable", version.ref = "telephoto" }
 
 [bundles]
 adaptive = ["adaptive", "adaptive-layout", "adaptive-navigation"]
