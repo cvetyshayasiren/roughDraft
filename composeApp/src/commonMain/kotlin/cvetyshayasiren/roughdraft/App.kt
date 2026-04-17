@@ -7,7 +7,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cvetyshayasiren.roughdraft.domain.settings.SettingsState
-import cvetyshayasiren.roughdraft.ui.splash.SplashScreenView
+import cvetyshayasiren.roughdraft.ui.test.NeumorphicTest
 import cvetyshayasiren.roughdraft.ui.theme.RoughDraftExpressiveTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -20,7 +20,8 @@ fun App() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            SplashScreenView()
+            NeumorphicTest()
+//            SplashScreenView()
         }
     }
 }

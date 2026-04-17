@@ -61,4 +61,6 @@ data class DraftPageEntity(
         )
         return remember { onPageColor }
     }
+
+    fun getPhotoWithIcon(): PhotoPaths = photoPaths + iconPath
 }

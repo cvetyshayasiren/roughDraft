@@ -54,3 +54,5 @@ fun SettingsState.themeModeIsDark(
         initialValue = isSystemInDarkTheme()
     )
 }
+
+fun SettingsState.switchThemeMode() = setSettings(themeMode = settings.value.themeMode.switch())

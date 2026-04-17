@@ -47,7 +47,7 @@ data class DraftPageDataEntity(
                 .toHSL()
                 .copy(l = .5f)
                 .toComposeColor(),
-            iconPath = "files/$name/icon.${Config.IMAGE_EXTENSION}",
+            iconPath = getIconByName(name),
             photoPaths = getPhotosByName(name),
             audioUri = Res.getUri("files/$name/audio.${Config.AUDIO_EXTENSION}")
         )
@@ -58,6 +58,8 @@ data class DraftPageDataEntity(
             add("files/$name/$index.${Config.IMAGE_EXTENSION}")
         }
     }
+
+    private fun getIconByName(name: String): PhotoPath = "files/$name/icon.${Config.IMAGE_EXTENSION}"
 
     @OptIn(ExperimentalTime::class, FormatStringsInDatetimeFormats::class)
     private fun timestampToString(): String {
